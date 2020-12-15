@@ -1,6 +1,6 @@
-package com.george.domain;
+package com.george.ports;
 
-import com.george.ports.InputReader;
+import com.george.domain.InputReader;
 
 import java.util.Scanner;
 

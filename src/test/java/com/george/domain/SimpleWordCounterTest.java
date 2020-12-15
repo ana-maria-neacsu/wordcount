@@ -1,10 +1,11 @@
-import com.george.domain.WordCounter;
+package com.george.domain;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-public class WordCounterTest {
+public class SimpleWordCounterTest {
 
-    private WordCounter counter = new WordCounter();
+    private WordCounter counter = new SimpleWordCounter();
 
     @Test
     public void shouldReturn0WhenNoWordIsInformed() {

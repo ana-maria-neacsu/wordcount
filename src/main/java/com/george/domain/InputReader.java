@@ -1,4 +1,4 @@
-package com.george.ports;
+package com.george.domain;
 
 public interface InputReader {
 
