@@ -102,4 +102,5 @@ Number of words: 14, unique: 10; average word length: 5.63 characters
 - There is no requirement for extreme precision on decimals, meaning it's ok to go with Double.
 - The average should be calculated for unique words.
 - The average should be 0 if no word is found
+- The Domain object stores all decimal places, but the presentation shows only 2
   
