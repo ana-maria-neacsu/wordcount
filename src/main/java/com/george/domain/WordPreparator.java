@@ -16,35 +16,24 @@ public class WordPreparator {
     public List<String> prepare(String word) {
         String[] splitBySpaces = word.split(" ");
 
-        List<String> splitByDashes = splitByDashes(splitBySpaces);
-        List<String> withoutDots = removeTrailingDots(splitByDashes);
+        List<String> withoutDots = removeTrailingDots(Arrays.asList(splitBySpaces));
 
         return withoutDots.stream()
-                .filter(s -> s.matches("[a-zA-Z]+"))
+                .filter(s -> s.matches("[a-zA-Z\\-]+"))
                 .filter(s -> !stopWords.contains(s))
                 .collect(Collectors.toList());
     }
 
-    private List<String> removeTrailingDots(List<String> withoutDashes) {
+    private List<String> removeTrailingDots(List<String> word) {
         List<String> withoutDots = new ArrayList<>();
-        for (String s : withoutDashes) {
+        for (String s : word) {
+            if (s.endsWith("-") || s.startsWith("-")) continue;
             if (s.endsWith(".")) {
                 s = s.substring(0, s.length() - 1);
             }
             withoutDots.add(s);
         }
         return withoutDots;
-    }
-
-    private List<String> splitByDashes(String[] splitBySpaces) {
-        List<String> splitByDashes = new ArrayList<>();
-
-        for (String s : splitBySpaces) {
-            if (s.endsWith("-") || s.startsWith("-")) continue;
-            final String[] split = s.split("-");
-            splitByDashes.addAll(Arrays.asList(split));
-        }
-        return splitByDashes;
     }
 
 }

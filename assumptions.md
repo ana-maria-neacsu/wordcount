@@ -60,7 +60,7 @@ lamb
 - The user will always provide the file name as the first argument.
 - THe user will provide the file name with the extension. (eg. input.txt)
 
-# 4 - Lampe
+# 4 - Lampe + Vaclav
 
 ## Sample input
 Enter text: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
@@ -80,3 +80,15 @@ Dumpty
 had
 great 
 fall
+
+# 5 - Markus
+
+## Sampple Input
+Enter text: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+Number of words: 7, unique: 6
+
+## Assumptions
+- Is this the only way it should be done from now on? -> yes
+- I should consider composite words with one or more dashes separating the two sides.
+  - eg: a-b is valid and a---b is also valid
+  

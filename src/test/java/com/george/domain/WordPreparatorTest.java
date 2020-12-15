@@ -22,9 +22,9 @@ public class WordPreparatorTest {
     }
 
     @Test
-    public void shouldSplitAWordSeparatedByDashesInto2Words() {
+    public void shouldNotSplitAWordSeparatedByOneDashInto2Words() {
         List<String> prepare = preparator.prepare("some-word");
-        Assert.assertEquals(2, prepare.size());
+        Assert.assertEquals(1, prepare.size());
     }
 
     @Test
@@ -33,4 +33,21 @@ public class WordPreparatorTest {
         Assert.assertEquals(0, prepare.size());
     }
 
+    @Test
+    public void shouldNotSplitAWordSeparatedByMoreThanOneDashInto2Words() {
+        List<String> prepare = preparator.prepare("some----word");
+        Assert.assertEquals(1, prepare.size());
+    }
+
+    @Test
+    public void shouldNotConsiderWordsMadeOnlyByDashes() {
+        List<String> prepare = preparator.prepare("----");
+        Assert.assertEquals(0, prepare.size());
+    }
+
+    @Test
+    public void shouldNotConsiderWordsMadeOnlyByDots() {
+        List<String> prepare = preparator.prepare("...");
+        Assert.assertEquals(0, prepare.size());
+    }
 }
