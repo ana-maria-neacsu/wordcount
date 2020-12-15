@@ -9,17 +9,17 @@ import java.util.Scanner;
 
 public class FileReader implements InputReader {
 
-    private final String stopWordsFile;
+    private final String fileName;
 
-    public FileReader(String stopWordsFile){
-        this.stopWordsFile = stopWordsFile;
+    public FileReader(String fileName){
+        this.fileName = fileName;
     }
 
     @Override
     public String read() {
 
         StringBuilder allWords = new StringBuilder();
-        File file = new File(stopWordsFile);
+        File file = new File(fileName);
 
         try {
             Scanner scanner = new Scanner(file);

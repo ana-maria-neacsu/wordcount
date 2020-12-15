@@ -2,15 +2,22 @@ package com.george.app;
 
 import com.george.domain.filebasedcounter.FileConditionedWordCounter;
 import com.george.ports.ConsoleInputReader;
-import com.george.domain.consolebasedcounter.SimpleWordCounter;
+import com.george.ports.FileReader;
 
 public class Starter {
 
-    public static void main(String[] args) {
-        String input = new ConsoleInputReader().read();
-        System.out.println(new SimpleWordCounter().count(input));
+    private static final String STOP_WORDS = "stopwords.txt";
 
-        System.out.println(new FileConditionedWordCounter("stopwords.txt").count(input));
+    public static void main(String[] args) {
+        String input = "";
+
+        if (args.length > 0) {
+            input = new FileReader(args[0]).read();
+        } else
+            input = new ConsoleInputReader().read();
+
+        final String stopWords = new FileReader(STOP_WORDS).read();
+        System.out.println(new FileConditionedWordCounter(stopWords).count(input));
 
     }
 }
