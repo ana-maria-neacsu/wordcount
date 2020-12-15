@@ -59,3 +59,24 @@ lamb
 - If no arg is provided, then the app request a manual input from the user.
 - The user will always provide the file name as the first argument.
 - THe user will provide the file name with the extension. (eg. input.txt)
+
+# 4 - Lampe
+
+## Sample input
+Enter text: Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.
+Number of words: 9, unique: 7
+
+## Assumptions
+- Character like dash and dot should be striped, but not influence in the count.
+- Dashes between words mean these words should be split.
+- A dot at the end of a word means end of sentence and this word should count.
+
+Humpty
+Dumpty 
+sat
+wall
+Humpty
+Dumpty 
+had
+great 
+fall

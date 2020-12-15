@@ -1,12 +1,12 @@
 package com.george.domain;
 
-import com.george.domain.filebasedcounter.FileConditionedWordCounter;
+import com.george.domain.filebasedcounter.StopWordsConditionedWordCounter;
 import com.george.ports.FileReader;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class FileConditionedWordCounterTest {
+public class StopWordsConditionedWordCounterTest {
 
     private final InputReader reader = new FileReader("stopwords.txt");
     private WordCounter counter;
@@ -15,7 +15,7 @@ public class FileConditionedWordCounterTest {
     @Before
     public void setUp(){
         stopWords = reader.read();
-        counter = new FileConditionedWordCounter(stopWords);
+        counter = new StopWordsConditionedWordCounter(stopWords);
     }
 
     @Test

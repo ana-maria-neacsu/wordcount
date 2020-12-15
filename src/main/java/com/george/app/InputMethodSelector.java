@@ -2,7 +2,7 @@ package com.george.app;
 
 import com.george.domain.InputReader;
 import com.george.domain.WordCounter;
-import com.george.domain.filebasedcounter.FileConditionedWordCounter;
+import com.george.domain.filebasedcounter.StopWordsConditionedWordCounter;
 
 public class InputMethodSelector {
 
@@ -11,7 +11,7 @@ public class InputMethodSelector {
 
     public InputMethodSelector(InputReader reader, String stopWords){
         this.reader = reader;
-        counter = new FileConditionedWordCounter(stopWords);
+        counter = new StopWordsConditionedWordCounter(stopWords);
     }
 
     public long apply() {
