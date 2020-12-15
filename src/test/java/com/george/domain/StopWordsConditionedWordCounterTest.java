@@ -1,6 +1,5 @@
 package com.george.domain;
 
-import com.george.domain.filebasedcounter.StopWordsConditionedWordCounter;
 import com.george.ports.FileReader;
 import org.junit.Assert;
 import org.junit.Before;
@@ -57,14 +56,12 @@ public class StopWordsConditionedWordCounterTest {
 
     }
 
-
     @Test
     public void shouldReturn9TotalWordsAnd7UniqueWordsForSampleInput(){
         String word = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
         CountResult result = counter.count(word);
         Assert.assertEquals(9, result.getTotalWords());
         Assert.assertEquals(7, result.getUniqueWords());
-
     }
 
 }

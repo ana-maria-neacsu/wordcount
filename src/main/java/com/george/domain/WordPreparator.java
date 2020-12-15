@@ -1,35 +1,19 @@
-package com.george.domain.filebasedcounter;
-
-import com.george.domain.CountResult;
-import com.george.domain.WordCounter;
+package com.george.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class StopWordsConditionedWordCounter implements WordCounter {
+public class WordPreparator {
 
     private final String stopWords;
 
-    public StopWordsConditionedWordCounter(String stopWords) {
+    public WordPreparator(String stopWords) {
         this.stopWords = stopWords;
     }
 
-    public CountResult count(String word) {
-
-        List<String> preparedList = prepareWord(word);
-        long wordsCount = preparedList.size();
-        long uniqueWordsCount = new HashSet<>(preparedList).size();
-
-        return new CountResult(wordsCount, uniqueWordsCount);
-
-    }
-
-    private List<String> prepareWord(String word) {
+    public List<String> prepare(String word) {
         String[] splitBySpaces = word.split(" ");
 
         List<String> splitByDashes = splitByDashes(splitBySpaces);
@@ -56,13 +40,11 @@ public class StopWordsConditionedWordCounter implements WordCounter {
         List<String> splitByDashes = new ArrayList<>();
 
         for (String s : splitBySpaces) {
+            if (s.endsWith("-") || s.startsWith("-")) continue;
             final String[] split = s.split("-");
             splitByDashes.addAll(Arrays.asList(split));
         }
         return splitByDashes;
     }
-}
 
-//1 - split by space " "
-//2 - split again the ones have a dash
-//3 - strip trailing dots
+}

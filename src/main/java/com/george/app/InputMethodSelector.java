@@ -3,7 +3,7 @@ package com.george.app;
 import com.george.domain.CountResult;
 import com.george.domain.InputReader;
 import com.george.domain.WordCounter;
-import com.george.domain.filebasedcounter.StopWordsConditionedWordCounter;
+import com.george.domain.StopWordsConditionedWordCounter;
 
 public class InputMethodSelector {
 
