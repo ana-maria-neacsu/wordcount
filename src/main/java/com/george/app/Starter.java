@@ -23,7 +23,8 @@ public class Starter {
 
         CountResult wordsCount = new InputMethodSelector(inputReader, stopWords).apply();
 
-        System.out.println("Number of words: " + wordsCount.getTotalWords() + ", unique: " + wordsCount.getUniqueWords());
+        System.out.println("Number of words: " + wordsCount.getTotalWords() + ", unique: " + wordsCount.getUniqueWords()
+        + "; average word length: " + wordsCount.getAverage() + " characters");
 
     }
 }

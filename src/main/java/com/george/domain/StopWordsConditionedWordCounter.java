@@ -15,7 +15,9 @@ public class StopWordsConditionedWordCounter implements WordCounter {
 
         List<String> preparedList = preparator.prepare(word);
         long wordsCount = preparedList.size();
-        long uniqueWordsCount = new HashSet<>(preparedList).size();
+        HashSet<String> uniqueWords = new HashSet<>(preparedList);
+        long uniqueWordsCount = uniqueWords.size();
+        Double average = calculateAverage
 
         return new CountResult(wordsCount, uniqueWordsCount);
 

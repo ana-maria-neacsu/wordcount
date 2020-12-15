@@ -92,3 +92,13 @@ Number of words: 7, unique: 6
 - I should consider composite words with one or more dashes separating the two sides.
   - eg: a-b is valid and a---b is also valid
   
+# 6 - Markus
+
+## Sample input
+Number of words: 14, unique: 10; average word length: 5.63 characters
+
+## Assumptions
+- There should be 2 decimal cases in the calculated average.
+- There is no requirement for extreme precision on decimals, meaning it's ok to go with Double.
+- The average should be calculated for unique words.
+  
