@@ -11,7 +11,6 @@ public class WordCounterTest {
 
         String word = "";
         long result = counter.count(word);
-
         Assert.assertEquals(0, result);
 
     }
