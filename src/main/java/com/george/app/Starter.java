@@ -1,23 +1,28 @@
 package com.george.app;
 
-import com.george.domain.filebasedcounter.FileConditionedWordCounter;
+import com.george.domain.InputReader;
 import com.george.ports.ConsoleInputReader;
 import com.george.ports.FileReader;
+import com.george.ports.UserInteractor;
+
+import java.util.Scanner;
 
 public class Starter {
 
     private static final String STOP_WORDS = "stopwords.txt";
 
     public static void main(String[] args) {
-        String input = "";
-
-        if (args.length > 0) {
-            input = new FileReader(args[0]).read();
-        } else
-            input = new ConsoleInputReader().read();
+        InputReader inputReader;
 
         final String stopWords = new FileReader(STOP_WORDS).read();
-        System.out.println(new FileConditionedWordCounter(stopWords).count(input));
+        if (args.length > 0) {
+            inputReader = new FileReader(args[0]);
+        } else
+            inputReader = new ConsoleInputReader(new UserInteractor(new Scanner(System.in)));
+
+        long wordsCount = new InputMethodSelector(inputReader, stopWords).apply();
+
+        System.out.println(wordsCount);
 
     }
 }

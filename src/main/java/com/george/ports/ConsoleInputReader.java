@@ -2,15 +2,16 @@ package com.george.ports;
 
 import com.george.domain.InputReader;
 
-import java.util.Scanner;
-
 public class ConsoleInputReader implements InputReader {
+
+    private final UserInteractor userInteractor;
+
+    public ConsoleInputReader(UserInteractor interactor){
+        this.userInteractor = interactor;
+    }
 
     @Override
     public String read() {
-        System.out.print("Enter text: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-
+        return userInteractor.requestInput();
     }
 }
