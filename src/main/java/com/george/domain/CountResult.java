@@ -4,12 +4,12 @@ public class CountResult {
 
     private final long totalWords;
     private final long uniqueWords;
-    private final Double average;
+    private final Double averageLength;
 
-    public CountResult(long totalWords, long uniqueWords) {
+    public CountResult(long totalWords, long uniqueWords, Double average) {
         this.totalWords = totalWords;
         this.uniqueWords = uniqueWords;
-        average = (Double.valueOf(totalWords) + Double.valueOf(uniqueWords) / 2);
+        averageLength = average;
 
     }
 
@@ -21,6 +21,6 @@ public class CountResult {
         return uniqueWords;
     }
 
-    public Double getAverage() { return average; }
+    public Double getAverageLength() { return averageLength; }
 
 }

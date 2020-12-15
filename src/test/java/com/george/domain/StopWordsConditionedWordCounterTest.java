@@ -57,11 +57,11 @@ public class StopWordsConditionedWordCounterTest {
     }
 
     @Test
-    public void shouldReturn9TotalWordsAnd7UniqueWordsForSampleInput(){
+    public void shouldReturn7TotalWordsAnd7UniqueWordsForSampleInput(){
         String word = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
         CountResult result = counter.count(word);
-        Assert.assertEquals(9, result.getTotalWords());
-        Assert.assertEquals(7, result.getUniqueWords());
+        Assert.assertEquals(7, result.getTotalWords());
+        Assert.assertEquals(6, result.getUniqueWords());
     }
 
 }

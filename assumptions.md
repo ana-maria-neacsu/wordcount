@@ -101,4 +101,5 @@ Number of words: 14, unique: 10; average word length: 5.63 characters
 - There should be 2 decimal cases in the calculated average.
 - There is no requirement for extreme precision on decimals, meaning it's ok to go with Double.
 - The average should be calculated for unique words.
+- The average should be 0 if no word is found
   

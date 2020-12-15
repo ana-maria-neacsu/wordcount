@@ -17,9 +17,18 @@ public class StopWordsConditionedWordCounter implements WordCounter {
         long wordsCount = preparedList.size();
         HashSet<String> uniqueWords = new HashSet<>(preparedList);
         long uniqueWordsCount = uniqueWords.size();
-        Double average = calculateAverage
+        Double average = calculateAverage(uniqueWords);
 
-        return new CountResult(wordsCount, uniqueWordsCount);
+        return new CountResult(wordsCount, uniqueWordsCount, average);
 
+    }
+
+    private Double calculateAverage(HashSet<String> uniqueWords) {
+        if (uniqueWords.isEmpty()) return 0.00;
+        int totalLength = 0;
+        for (String s : uniqueWords){
+            totalLength += s.length();
+        }
+        return (double) totalLength / uniqueWords.size();
     }
 }

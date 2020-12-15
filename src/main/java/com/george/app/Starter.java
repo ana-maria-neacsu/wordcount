@@ -6,11 +6,16 @@ import com.george.ports.ConsoleInputReader;
 import com.george.ports.FileReader;
 import com.george.ports.UserInteractor;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Starter {
 
     private static final String STOP_WORDS = "stopwords.txt";
+    private static DecimalFormat df = new DecimalFormat("0.00", DecimalFormatSymbols.getInstance(Locale.US));
+
 
     public static void main(String[] args) {
         InputReader inputReader;
@@ -24,7 +29,7 @@ public class Starter {
         CountResult wordsCount = new InputMethodSelector(inputReader, stopWords).apply();
 
         System.out.println("Number of words: " + wordsCount.getTotalWords() + ", unique: " + wordsCount.getUniqueWords()
-        + "; average word length: " + wordsCount.getAverage() + " characters");
+        + "; average word length: " + df.format(wordsCount.getAverageLength()) + " characters");
 
     }
 }
