@@ -1,5 +1,6 @@
 package com.george.domain;
 
+import com.george.domain.consolebasedcounter.SimpleWordCounter;
 import org.junit.Assert;
 import org.junit.Test;
 

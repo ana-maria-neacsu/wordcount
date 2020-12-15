@@ -1,5 +1,6 @@
 package com.george.domain;
 
+import com.george.domain.filebasedcounter.FileConditionedWordCounter;
 import com.george.ports.FileReader;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,7 +8,7 @@ import org.junit.Test;
 
 public class FileConditionedWordCounterTest {
 
-    private final InputReader reader = new FileReader();
+    private final InputReader reader = new FileReader("stopwords.txt");
     private WordCounter counter;
     private String stopWords;
 

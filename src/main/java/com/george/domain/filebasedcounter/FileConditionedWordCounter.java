@@ -1,6 +1,6 @@
-package com.george.domain;
+package com.george.domain.filebasedcounter;
 
-import com.george.ports.FileReader;
+import com.george.domain.WordCounter;
 
 import java.util.Arrays;
 

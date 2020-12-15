@@ -1,4 +1,6 @@
-package com.george.domain;
+package com.george.domain.consolebasedcounter;
+
+import com.george.domain.WordCounter;
 
 import java.util.Arrays;
 

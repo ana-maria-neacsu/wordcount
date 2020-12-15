@@ -2,6 +2,6 @@ package com.george.domain;
 
 public interface InputReader {
 
-    String read();
+    String read() throws InputUnreachableException;
 
 }
