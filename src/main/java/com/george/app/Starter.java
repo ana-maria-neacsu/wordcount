@@ -1,5 +1,6 @@
 package com.george.app;
 
+import com.george.domain.CountResult;
 import com.george.domain.InputReader;
 import com.george.ports.ConsoleInputReader;
 import com.george.ports.FileReader;
@@ -20,9 +21,9 @@ public class Starter {
         } else
             inputReader = new ConsoleInputReader(new UserInteractor(new Scanner(System.in)));
 
-        long wordsCount = new InputMethodSelector(inputReader, stopWords).apply();
+        CountResult wordsCount = new InputMethodSelector(inputReader, stopWords).apply();
 
-        System.out.println(wordsCount);
+        System.out.println("Number of words: " + wordsCount.getTotalWords() + ", unique: " + wordsCount.getUniqueWords());
 
     }
 }

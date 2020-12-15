@@ -22,8 +22,8 @@ public class StopWordsConditionedWordCounterTest {
     public void shouldReturn0WhenNoWordIsInformed() {
 
         String word = "";
-        long result = counter.count(word);
-        Assert.assertEquals(0, result);
+        CountResult result = counter.count(word);
+        Assert.assertEquals(0, result.getTotalWords());
 
     }
 
@@ -31,9 +31,9 @@ public class StopWordsConditionedWordCounterTest {
     public void shouldReturn4WhenFiveWordSentenceIsInformedWithOneStopWord() {
 
         String word = "Mary had a little lamb";
-        long result = counter.count(word);
+        CountResult result= counter.count(word);
 
-        Assert.assertEquals(4, result);
+        Assert.assertEquals(4, result.getTotalWords());
 
     }
 
@@ -41,9 +41,9 @@ public class StopWordsConditionedWordCounterTest {
     public void shouldReturn3WhenFiveWordSentenceIsInformedButOneWordIsInvalidAndOneStopWordIsPresent() {
 
         String word = "Mary had a little lamb*";
-        long result = counter.count(word);
+        CountResult result = counter.count(word);
 
-        Assert.assertEquals(3, result);
+        Assert.assertEquals(3, result.getTotalWords());
 
     }
 
@@ -51,9 +51,19 @@ public class StopWordsConditionedWordCounterTest {
     public void shouldReturn0WhenFiveWordSentenceIsInformedButOneStopWordIsPresentAndOthersAreAllInvalid() {
 
         String word = "Mar3y ha4d a litt1le lamb*";
-        long result = counter.count(word);
+        CountResult result = counter.count(word);
 
-        Assert.assertEquals(0, result);
+        Assert.assertEquals(0, result.getTotalWords());
+
+    }
+
+
+    @Test
+    public void shouldReturn9TotalWordsAnd7UniqueWordsForSampleInput(){
+        String word = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+        CountResult result = counter.count(word);
+        Assert.assertEquals(9, result.getTotalWords());
+        Assert.assertEquals(7, result.getUniqueWords());
 
     }
 

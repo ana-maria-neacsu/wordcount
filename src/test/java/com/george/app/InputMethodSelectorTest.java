@@ -1,5 +1,6 @@
 package com.george.app;
 
+import com.george.domain.CountResult;
 import com.george.ports.ConsoleInputReader;
 import com.george.ports.FileReader;
 import com.george.ports.UserInteractor;
@@ -13,14 +14,12 @@ public class InputMethodSelectorTest {
 
     private InputMethodSelector selector;
 
-
-
     @Test
     public void shouldReadFromFileWhenFileReaderIsProvidedAndGenerateCorrectOutput(){
         selector = new InputMethodSelector(new FileReader("mytext.txt"), "a");
-        long count = selector.apply();
+        CountResult result = selector.apply();
 
-        Assert.assertEquals(4, count);
+        Assert.assertEquals(4, result.getTotalWords());
     }
 
     @Test
@@ -29,9 +28,9 @@ public class InputMethodSelectorTest {
         UserInteractor userInteractor = new UserInteractor(new Scanner(System.in));
         //TODO I would mock userInteractor.requestInput()
         selector = new InputMethodSelector(new ConsoleInputReader(userInteractor), "a");
-        long count = selector.apply();
+        CountResult result = selector.apply();
 
-        Assert.assertEquals(4, count);
+        Assert.assertEquals(4, result.getTotalWords());
 
     }
 
