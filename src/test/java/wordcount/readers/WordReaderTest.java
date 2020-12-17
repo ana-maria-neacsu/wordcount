@@ -1,3 +1,5 @@
+package wordcount.readers;
+
 import org.junit.Test;
 import wordcount.readers.WordReader;
 

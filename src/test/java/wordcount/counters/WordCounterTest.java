@@ -1,3 +1,5 @@
+package wordcount.counters;
+
 import org.junit.Test;
 import wordcount.counters.WordCounter;
 
@@ -18,12 +20,11 @@ public class WordCounterTest {
     }
 
     @Test
-    public void testCountWithEmptyArray() {
+    public void testCountWithEmptyInput() {
         List<String> input = new LinkedList<>();
 
         int count = wordCounter.countWords(input);
 
         assert count == 0;
     }
-
 }
