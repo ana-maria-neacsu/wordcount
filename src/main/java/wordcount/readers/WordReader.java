@@ -15,7 +15,15 @@ public class WordReader implements Reader {
 
     @Override
     public Collection<String> read() {
-        Scanner scanner = new Scanner(inputStream).useDelimiter("[^a-zA-Z]");
+        if (inputStream==System.in) { // we do not want to close stdin
+            return collect(new Scanner(inputStream).useDelimiter("[^a-zA-Z]"));
+        }
+        try (Scanner scanner = new Scanner(inputStream).useDelimiter("[^a-zA-Z]")) {
+            return collect(scanner);
+        }
+    }
+
+    private Collection<String> collect(Scanner scanner) {
         List<String> words = new LinkedList<>();
         while (scanner.hasNext()) {
             String next = scanner.next();

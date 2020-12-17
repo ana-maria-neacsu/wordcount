@@ -29,9 +29,7 @@ public class CountApp {
         CountApp countApp;
 
         if (args.length != 0) {
-            try (InputStream input = new FileInputStream(new File(args[0]))) {
-                countApp = new CountApp(new WordReader(input), new StopWordCounter(new StopWordReader("stopwords.txt")));
-            }
+            countApp = new CountApp(new WordReader(new FileInputStream(new File(args[0]))), new StopWordCounter(new StopWordReader("stopwords.txt")));
         } else {
             System.out.println("Enter text:");
             countApp = new CountApp(new WordReader(System.in), new StopWordCounter(new StopWordReader("stopwords.txt")));
