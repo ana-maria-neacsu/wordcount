@@ -2,7 +2,6 @@ package wordcount;
 
 import org.junit.Test;
 import wordcount.counters.StopWordCounter;
-import wordcount.counters.UniqueCounter;
 import wordcount.counters.WordCounter;
 import wordcount.readers.StopWordReader;
 import wordcount.readers.WordReader;
@@ -14,7 +13,7 @@ public class CountAppTest {
     @Test
     public void testWordCount() {
         InputStream inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
-        CountApp countApp = new CountApp(new WordReader(inputStream), new WordCounter(), new UniqueCounter());
+        CountApp countApp = new CountApp(new WordReader(inputStream), new WordCounter());
 
         int count = countApp.count();
 
@@ -26,8 +25,7 @@ public class CountAppTest {
         InputStream inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
         CountApp countApp = new CountApp(
             new WordReader(inputStream),
-            new StopWordCounter(Arrays.asList("a", "on", "off", "the")),
-            new UniqueCounter()
+            new StopWordCounter(Arrays.asList("a", "on", "off", "the"))
         );
 
         int count = countApp.count();
@@ -39,8 +37,7 @@ public class CountAppTest {
     public void testWordCountWithStopWordsFromFile() throws FileNotFoundException {
         CountApp countApp = new CountApp(
             new WordReader(new FileInputStream(new File("src\\test\\resources\\input.txt"))),
-            new StopWordCounter(new StopWordReader("stopwords.txt")),
-            new UniqueCounter()
+            new StopWordCounter(new StopWordReader("stopwords.txt"))
         );
 
         int count = countApp.count();
@@ -52,14 +49,12 @@ public class CountAppTest {
     public void testUniqueCountWithStopWordsFromFile() throws FileNotFoundException {
         CountApp countApp = new CountApp(
             new WordReader(new FileInputStream(new File("src\\test\\resources\\input_iv.txt"))),
-            new StopWordCounter(new StopWordReader("stopwords.txt")),
-            new UniqueCounter()
+            new StopWordCounter(new StopWordReader("stopwords.txt"))
         );
 
         int count = countApp.count();
         int unique = countApp.countUnique();
 
-        System.out.println(unique);
         assert count == 9;
         assert unique == 7;
     }

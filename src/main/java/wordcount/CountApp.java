@@ -2,7 +2,6 @@ package wordcount;
 
 import wordcount.counters.Counter;
 import wordcount.counters.StopWordCounter;
-import wordcount.counters.UniqueCounter;
 import wordcount.readers.Reader;
 import wordcount.readers.StopWordReader;
 import wordcount.readers.WordReader;
@@ -13,12 +12,10 @@ import java.util.*;
 public class CountApp {
 
     private Counter counter;
-    private UniqueCounter uniqueCounter;
     private Collection<String> words;
 
-    public CountApp(Reader reader, Counter counter, UniqueCounter uniqueCounter) {
+    public CountApp(Reader reader, Counter counter) {
         this.counter = counter;
-        this.uniqueCounter = uniqueCounter;
         words = reader.read();
     }
 
@@ -27,7 +24,7 @@ public class CountApp {
     }
 
     public int countUnique() {
-        return uniqueCounter.countWords(words);
+        return counter.countUniques(words);
     }
 
     public static void main(String[] args) throws IOException {
@@ -36,15 +33,13 @@ public class CountApp {
         if (args.length != 0) {
             countApp = new CountApp(
                 new WordReader(new FileInputStream(new File(args[0]))),
-                new StopWordCounter(new StopWordReader("stopwords.txt")),
-                new UniqueCounter()
+                new StopWordCounter(new StopWordReader("stopwords.txt"))
             );
         } else {
             System.out.println("Enter text:");
             countApp = new CountApp(
                 new WordReader(System.in),
-                new StopWordCounter(new StopWordReader("stopwords.txt")),
-                new UniqueCounter()
+                new StopWordCounter(new StopWordReader("stopwords.txt"))
             );
         }
 

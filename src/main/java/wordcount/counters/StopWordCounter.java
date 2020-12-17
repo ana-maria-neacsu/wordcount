@@ -3,16 +3,19 @@ package wordcount.counters;
 import wordcount.readers.Reader;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class StopWordCounter implements Counter {
 
-    Collection<String> stopWords;
+    private Set<String> stopWords;
 
     public StopWordCounter(Collection<String> stopWords) {
-        this.stopWords = stopWords;
+        this.stopWords = new HashSet<>(stopWords);
     }
+
     public StopWordCounter(Reader stopWordsReader) {
-        this.stopWords = stopWordsReader.read();
+        this.stopWords = new HashSet<>(stopWordsReader.read());
     }
 
     @Override
@@ -24,5 +27,12 @@ public class StopWordCounter implements Counter {
             }
         }
         return count;
+    }
+
+    @Override
+    public int countUniques(Collection<String> input) {
+        Set<String> uniqueWords = new HashSet<>(input);
+        uniqueWords.removeAll(stopWords);
+        return uniqueWords.contains("") ? uniqueWords.size() - 1 : uniqueWords.size();
     }
 }

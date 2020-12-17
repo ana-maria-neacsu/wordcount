@@ -14,6 +14,12 @@ public class WordCounter implements Counter {
         }
         return count;
     }
+
+    @Override
+    public int countUniques(Collection<String> input) {
+        // TODO: implement
+        throw new UnsupportedOperationException();
+    }
 }
 
 

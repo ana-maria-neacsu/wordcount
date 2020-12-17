@@ -5,4 +5,6 @@ import java.util.Collection;
 public interface Counter {
 
     int countWords(Collection<String> input);
+
+    int countUniques(Collection<String> input);
 }
