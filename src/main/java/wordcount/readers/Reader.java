@@ -1,8 +1,8 @@
 package wordcount.readers;
 
 import java.io.InputStream;
-import java.util.List;
+import java.util.Collection;
 
 public interface Reader {
-    List<String> read(InputStream inputStream);
+    Collection<String> read(InputStream inputStream);
 }

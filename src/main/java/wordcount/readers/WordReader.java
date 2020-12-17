@@ -1,13 +1,15 @@
 package wordcount.readers;
 
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class WordReader implements Reader {
 
-    public List<String> read(InputStream inputStream) {
+    @Override
+    public Collection<String> read(InputStream inputStream) {
         Scanner scanner = new Scanner(inputStream).useDelimiter("[^a-zA-Z]");
         List<String> words = new LinkedList<>();
         while (scanner.hasNext()) {

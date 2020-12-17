@@ -1,8 +1,8 @@
 package wordcount.counters;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface Counter {
 
-    int countWords(List<String> input);
+    int countWords(Collection<String> input);
 }
