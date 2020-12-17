@@ -29,10 +29,28 @@ public class WordReaderTest {
 
     @Test
     public void testMixed() {
-        InputStream inputStream = new ByteArrayInputStream("hfkjlhAW kdh 555lkh".getBytes());
+        InputStream inputStream = new ByteArrayInputStream("hf_kjlhAW kdh 555lkh".getBytes());
 
         List<String> words = wordReader.readWords(inputStream);
 
-        assert words.size() == 6;
+        assert words.size() == 7;
+    }
+
+    @Test
+    public void testNonAlphabetic() {
+        InputStream inputStream = new ByteArrayInputStream("555".getBytes());
+
+        List<String> words = wordReader.readWords(inputStream);
+
+        assert words.size() == 2;
+    }
+
+    @Test
+    public void testSimpleSentence() {
+        InputStream inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+
+        List<String> words = wordReader.readWords(inputStream);
+
+        assert words.size() == 5;
     }
 }
