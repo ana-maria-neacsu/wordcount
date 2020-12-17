@@ -7,9 +7,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WordReader implements Reader {
+    InputStream inputStream;
+
+    public WordReader(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
     @Override
-    public Collection<String> read(InputStream inputStream) {
+    public Collection<String> read() {
         Scanner scanner = new Scanner(inputStream).useDelimiter("[^a-zA-Z]");
         List<String> words = new LinkedList<>();
         while (scanner.hasNext()) {

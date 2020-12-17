@@ -6,7 +6,7 @@ import wordcount.readers.Reader;
 import wordcount.readers.StopWordReader;
 import wordcount.readers.WordReader;
 
-import java.io.InputStream;
+import java.io.*;
 import java.util.*;
 
 public class CountApp {
@@ -19,20 +19,24 @@ public class CountApp {
         this.counter = counter;
     }
 
-    public int count(InputStream inputStream) {
-        Collection<String> words = reader.read(inputStream);
+    public int count() {
+        Collection<String> words = reader.read();
 
         return counter.countWords(words);
     }
 
-    public static void main(String[] args) {
-        InputStream inputStream = CountApp.class.getClassLoader().getResourceAsStream("stopwords.txt");
+    public static void main(String[] args) throws IOException {
+        CountApp countApp;
 
-        Reader stopWordsReader = new StopWordReader();
+        if (args.length != 0) {
+            try (InputStream input = new FileInputStream(new File(args[0]))) {
+                countApp = new CountApp(new WordReader(input), new StopWordCounter(new StopWordReader("stopwords.txt")));
+            }
+        } else {
+            System.out.println("Enter text:");
+            countApp = new CountApp(new WordReader(System.in), new StopWordCounter(new StopWordReader("stopwords.txt")));
+        }
 
-        CountApp countApp = new CountApp(new WordReader(), new StopWordCounter(stopWordsReader.read(inputStream)));
-
-        System.out.println("Enter text:");
-        System.out.println("Number of words: " + countApp.count(System.in));
+        System.out.println("Number of words: " + countApp.count());
     }
 }

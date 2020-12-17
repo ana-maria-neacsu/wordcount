@@ -1,5 +1,7 @@
 package wordcount.counters;
 
+import wordcount.readers.Reader;
+
 import java.util.Collection;
 
 public class StopWordCounter implements Counter {
@@ -8,6 +10,9 @@ public class StopWordCounter implements Counter {
 
     public StopWordCounter(Collection<String> stopWords) {
         this.stopWords = stopWords;
+    }
+    public StopWordCounter(Reader stopWordsReader) {
+        this.stopWords = stopWordsReader.read();
     }
 
     @Override

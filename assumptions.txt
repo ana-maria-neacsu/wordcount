@@ -4,3 +4,6 @@
 
 For the second iteration:
 4) we assume words in stopwords are one word pre line
+
+3rd iteration
+5) we assume the specified file exists

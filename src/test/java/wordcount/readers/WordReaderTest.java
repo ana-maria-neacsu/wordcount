@@ -9,13 +9,12 @@ import java.util.Collection;
 
 public class WordReaderTest {
 
-    WordReader wordReader = new WordReader();
-
     @Test
     public void testEmpty() {
         InputStream inputStream = new ByteArrayInputStream("".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
 
-        Collection<String> words = wordReader.read(inputStream);
+        Collection<String> words = wordReader.read();
 
         assert words.isEmpty();
     }
@@ -24,8 +23,9 @@ public class WordReaderTest {
     @Test
     public void testSingleWord() {
         InputStream inputStream = new ByteArrayInputStream("hfkjlhAWkdhlkh".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
 
-        Collection<String> words = wordReader.read(inputStream);
+        Collection<String> words = wordReader.read();
 
         assert words.size() == 1;
     }
@@ -33,8 +33,9 @@ public class WordReaderTest {
     @Test
     public void testMixed() {
         InputStream inputStream = new ByteArrayInputStream("hf_kjlhAW kdh 555lkh".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
 
-        Collection<String> words = wordReader.read(inputStream);
+        Collection<String> words = wordReader.read();
 
         assert words.size() == 7;
     }
@@ -42,8 +43,9 @@ public class WordReaderTest {
     @Test
     public void testNonAlphabetic() {
         InputStream inputStream = new ByteArrayInputStream("555".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
 
-        Collection<String> words = wordReader.read(inputStream);
+        Collection<String> words = wordReader.read();
 
         assert words.size() == 2;
     }
@@ -51,8 +53,9 @@ public class WordReaderTest {
     @Test
     public void testSimpleSentence() {
         InputStream inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
 
-        Collection<String> words = wordReader.read(inputStream);
+        Collection<String> words = wordReader.read();
 
         assert words.size() == 5;
     }

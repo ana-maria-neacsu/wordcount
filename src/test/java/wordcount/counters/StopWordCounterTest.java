@@ -1,7 +1,6 @@
 package wordcount.counters;
 
 import org.junit.Test;
-import wordcount.counters.StopWordCounter;
 
 import java.util.*;
 
