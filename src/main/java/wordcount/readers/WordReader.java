@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class WordReader implements Reader {
+
+    private String WORD_SEPARATOR_PATTERN = "[^\\-a-zA-Z]";
+
     InputStream inputStream;
 
     public WordReader(InputStream inputStream) {
@@ -16,9 +19,9 @@ public class WordReader implements Reader {
     @Override
     public Collection<String> read() {
         if (inputStream==System.in) { // we do not want to close stdin
-            return collect(new Scanner(inputStream).useDelimiter("[^a-zA-Z]"));
+            return collect(new Scanner(inputStream).useDelimiter(WORD_SEPARATOR_PATTERN));
         }
-        try (Scanner scanner = new Scanner(inputStream).useDelimiter("[^a-zA-Z]")) {
+        try (Scanner scanner = new Scanner(inputStream).useDelimiter(WORD_SEPARATOR_PATTERN)) {
             return collect(scanner);
         }
     }

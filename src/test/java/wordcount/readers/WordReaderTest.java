@@ -59,4 +59,14 @@ public class WordReaderTest {
 
         assert words.size() == 5;
     }
+
+    @Test
+    public void testSimpleSentenceWithHyphen() {
+        InputStream inputStream = new ByteArrayInputStream("Mary-Anne had a little lamb".getBytes());
+        WordReader wordReader = new WordReader(inputStream);
+
+        Collection<String> words = wordReader.read();
+
+        assert words.size() == 5;
+    }
 }

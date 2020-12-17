@@ -2,18 +2,18 @@ package wordcount;
 
 import org.junit.Test;
 import wordcount.counters.StopWordCounter;
-import wordcount.counters.WordCounter;
 import wordcount.readers.StopWordReader;
 import wordcount.readers.WordReader;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class CountAppTest {
     @Test
     public void testWordCount() {
         InputStream inputStream = new ByteArrayInputStream("Mary had a little lamb".getBytes());
-        CountApp countApp = new CountApp(new WordReader(inputStream), new WordCounter());
+        CountApp countApp = new CountApp(new WordReader(inputStream), new StopWordCounter(Collections.emptyList()));
 
         int count = countApp.count();
 
@@ -55,7 +55,7 @@ public class CountAppTest {
         int count = countApp.count();
         int unique = countApp.countUnique();
 
-        assert count == 9;
-        assert unique == 7;
+        assert count == 7;
+        assert unique == 6;
     }
 }

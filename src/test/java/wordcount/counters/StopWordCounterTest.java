@@ -47,8 +47,7 @@ public class StopWordCounterTest {
 
         assert count == 0;
     }
-
-
+    
     @Test
     public void testExampleStopWordsAndInput() {
         Collection<String> stopWords = Arrays.asList("the", "a", "on", "off");
