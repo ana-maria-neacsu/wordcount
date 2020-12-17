@@ -1,6 +1,8 @@
+package wordcount.counters;
+
 import java.util.List;
 
-public class WordCount {
+public class WordCounter implements Counter {
 
     public int countWords(List<String> input) {
         int count = 0;

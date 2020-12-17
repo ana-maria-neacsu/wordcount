@@ -1,3 +1,3 @@
 1) input fits in memory
 2) we are not closing the input stream (because it is standard in) the caller needs to take cate if applicable
-3) input text is terminated with ^D
+3) input text consists of multiple lines, all terminated with \n whole input is terminated with ^D
