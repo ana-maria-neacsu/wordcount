@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,20 +23,14 @@ public class WordCounter {
         }
     }
 
-    public static Result countWords(final String input, final Set<String> stopWords) {
-        final String[] possibleWordsWithTrailingOrLeadingHyphens = input.split(",|\\.|\\s+");
-
-        // filter out words that starts or ends with hyphen
-        final  List<String> possibleWords = Arrays.stream(possibleWordsWithTrailingOrLeadingHyphens)
-                .filter(s -> !s.endsWith("-") && !s.startsWith("-"))
-                .collect(Collectors.toList());
+    public static Result countWords(final Collection<String> input, final Set<String> stopWords) {
 
         // just in case convert all stop words into the lowercase - the match should be case insensitive
         final Set<String> loverCaseStopWords = stopWords.stream().map(String::toLowerCase).collect(Collectors.toSet());
 
         int countOfActualWords = 0;
         final Set<String> uniqueWords = new HashSet<>();
-        for (final String possibleWord: possibleWords) {
+        for (final String possibleWord: input) {
             // convert to lowercase, so we can more easily check if the word is actual word and if it is not in stop
             // words, these should be already lowercase
             final String lowerCaseWord = possibleWord.toLowerCase();
