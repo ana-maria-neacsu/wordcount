@@ -12,7 +12,7 @@ public class WordCounter {
         this.inputReader = inputReader;
     }
 
-    public int count(final String[] args) throws FileNotFoundException {
+    int count(final String[] args) throws FileNotFoundException {
         return this.countWords(this.getInput(args), this.getStopWords());
     }
 

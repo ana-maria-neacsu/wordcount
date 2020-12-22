@@ -69,11 +69,7 @@ public class WordCounterTest {
         Assert.assertEquals(0, wordCounter.getStopWords().size());
 
     }
-
-    @Test
-    public void testInput() {
-    }
-
+    
     @Test
     public void countWordsTestWithNoStopWords() {
 
