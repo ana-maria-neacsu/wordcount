@@ -7,11 +7,25 @@ import java.util.stream.Collectors;
 
 public class Foo {
 
-    public static void main(final String[] args) {
-        System.out.print("Enter text: ");
-        final Scanner scanner = new Scanner(System.in);
-        final String input = scanner.nextLine();
-        System.out.println("Number of words: " + countWords(input, getStopWords()));
+    public static void main(final String[] args) throws FileNotFoundException {
+        System.out.println("Number of words: " + countWords(getInput(args), getStopWords()));
+    }
+
+    static String getInput(final String[] args) throws FileNotFoundException {
+        final Scanner scanner;
+        if (args.length > 0) {
+            scanner = new Scanner(new File(args[0]));
+        } else {
+            System.out.print("Enter text: ");
+            scanner = new Scanner(System.in);
+        }
+
+        final StringBuilder input = new StringBuilder();
+        while (scanner.hasNextLine()) {
+            input.append(scanner.nextLine()).append('\n');
+        }
+
+        return input.toString();
     }
 
     static Set<String> getStopWords() {
@@ -31,8 +45,8 @@ public class Foo {
         return stopWords;
     }
 
-    static int countWords(final String line, final Set<String> stopWords) {
-        final String[] possibleWords = line.split(",|\\.|\\s+");
+    static int countWords(final String input, final Set<String> stopWords) {
+        final String[] possibleWords = input.split(",|\\.|\\s+");
 
         // just in case convert all stop words into the lowercase - the match should be case insensitive
         final Set<String> loverCaseStopWords = stopWords.stream().map(String::toLowerCase).collect(Collectors.toSet());
