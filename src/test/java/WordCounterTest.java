@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,101 +7,57 @@ import org.junit.Test;
 
 public class WordCounterTest {
 
-    private static class ErroringTestReader implements InputReader {
-
-        @Override
-        public String readStandardInput() {
-            return null;
-        }
-
-        @Override
-        public String readFile(String file) throws FileNotFoundException {
-            throw new FileNotFoundException("File not found");
-        }
-    }
-
-    private static class TestReader implements InputReader {
-
-        @Override
-        public String readStandardInput() {
-            return "Mary has an input lamb";
-        }
-
-        @Override
-        public String readFile(String file) {
-            if (file.equals("input.txt")) {
-                return "Mary has a file lamb\n" +
-                        "and another file cow";
-            } else if (file.equals("stopwords.txt")) {
-                return "the\n" +
-                        "a\n" +
-                        "on\n" +
-                        "off";
-            } else {
-                throw new Error("Unexpected file name");
-            }
-        }
-    }
-
-    private final WordCounter wordCounter = new WordCounter(new TestReader());
-
-    @Test
-    public void testGetInput() throws FileNotFoundException {
-        // file input
-        Assert.assertEquals("Mary has a file lamb\nand another file cow",
-                wordCounter.getInput(new String[]{"input.txt"}));
-
-        // standard input
-        Assert.assertEquals("Mary has an input lamb", wordCounter.getInput(new String[]{}));
-    }
-
-    @Test
-    public void testGetStopWords() {
-        final Set<String> expectedStopWords = new HashSet<>(Arrays.asList("the", "a", "on", "off"));
-        Assert.assertEquals(expectedStopWords, wordCounter.getStopWords());
-    }
-
-    @Test
-    public void testNoStopWordsFilePresent() {
-        // if no file exists should return empty set
-        final WordCounter wordCounter = new WordCounter(new ErroringTestReader());
-        Assert.assertEquals(0, wordCounter.getStopWords().size());
-
-    }
-    
     @Test
     public void countWordsTestWithNoStopWords() {
-
         // ordinary lines
-        Assert.assertEquals(4,wordCounter.countWords("Mary had a lamb", new HashSet<String>()));
-        Assert.assertEquals(4,wordCounter.countWords("Mary, had a lamb.", new HashSet<String>()));
-        Assert.assertEquals(1,wordCounter.countWords("Mary", new HashSet<String>()));
-        Assert.assertEquals(8,wordCounter.countWords("Mary had a lamb. And Joe had two.", new HashSet<String>()));
-        Assert.assertEquals(6,wordCounter.countWords("Mary had 1 lamb. And Joe had 2.", new HashSet<String>()));
+        Assert.assertEquals(4,WordCounter.countWords("Mary had a lamb", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(4,WordCounter.countWords("Mary, had a lamb.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(1,WordCounter.countWords("Mary",new HashSet<>()).getOverallCount());
+        Assert.assertEquals(8,WordCounter.countWords("Mary had a lamb. And Joe had two.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(6,WordCounter.countWords("Mary had 1 lamb. And Joe had 2.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(4,WordCounter.countWords("Mary-Jane had a lamb.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(1,WordCounter.countWords("-Mary-", new HashSet<>()).getOverallCount());
+
 
         // weird input
-        Assert.assertEquals(4,wordCounter.countWords("MaRY HAD A LaMb.", new HashSet<String>()));
-        Assert.assertEquals(4,wordCounter.countWords(".Mary.had,a lamb", new HashSet<String>()));
-        Assert.assertEquals(0,wordCounter.countWords("", new HashSet<String>()));
-        Assert.assertEquals(0,wordCounter.countWords("H$ad", new HashSet<String>()));
-        Assert.assertEquals(0,wordCounter.countWords("541", new HashSet<String>()));
-        Assert.assertEquals(0,wordCounter.countWords(".,", new HashSet<String>()));
-        Assert.assertEquals(4,wordCounter.countWords(".Mary\thad,a lamb", new HashSet<String>()));
-        Assert.assertEquals(2,wordCounter.countWords("\tMary\t\t     had.    ", new HashSet<String>()));
-        Assert.assertEquals(2,wordCounter.countWords("Mary h$d & lamb", new HashSet<String>()));
+        Assert.assertEquals(4,WordCounter.countWords("MaRY HAD A LaMb.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(4,WordCounter.countWords(".Mary.had,a lamb", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("H$ad", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("541", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords(".,", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(4,WordCounter.countWords(".Mary\thad,a lamb", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(2,WordCounter.countWords("\tMary\t\t     had.    ", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(2,WordCounter.countWords("Mary h$d & lamb", new HashSet<>()).getOverallCount());
     }
 
     @Test
     public void countWordsTestWithSomeStopWords() {
         final Set<String> stopWords = new HashSet<>(Arrays.asList("Mary", "LAMB"));
-        Assert.assertEquals(2, wordCounter.countWords("Mary had a lamb", stopWords));
-        Assert.assertEquals(0, wordCounter.countWords("Mary, MARY, mary, LAMB, Lamb", stopWords));
-        Assert.assertEquals(4, wordCounter.countWords("Joe had a sheep", stopWords));
+        Assert.assertEquals(2, WordCounter.countWords("Mary had a lamb", stopWords).getOverallCount());
+        Assert.assertEquals(0, WordCounter.countWords("Mary, MARY, mary, LAMB, Lamb", stopWords).getOverallCount());
+        Assert.assertEquals(4, WordCounter.countWords("Joe had a sheep", stopWords).getOverallCount());
 
         final Set<String> strangeStopWords = new HashSet<>(Collections.singletonList("Mary had a lamb"));
-        Assert.assertEquals(4, wordCounter.countWords("Mary had a lamb", strangeStopWords));
+        Assert.assertEquals(4, WordCounter.countWords("Mary had a lamb", strangeStopWords).getOverallCount());
+    }
 
+    @Test
+    public void countUniqWordsWithSomeStopWords() {
+        final Set<String> stopWords = new HashSet<>(Arrays.asList("Mary", "LAMB"));
+        Assert.assertEquals(0, WordCounter.countWords("Mary Mary mary", stopWords).getUniqueCount());
+        Assert.assertEquals(1, WordCounter.countWords("Joe Joe joe Lamb lamb", stopWords).getUniqueCount());
+        Assert.assertEquals(2, WordCounter.countWords("Joe Cow joe Lamb lamb", stopWords).getUniqueCount());
+
+        final Set<String> strangeStopWords = new HashSet<>(Collections.singletonList("Mary mary"));
+        Assert.assertEquals(1, WordCounter.countWords("Mary Mary", strangeStopWords).getUniqueCount());
+    }
+
+    @Test
+    public void countUniqWordsNoStopWords() {
         final Set<String> emptyStopWords = Collections.emptySet();
-        Assert.assertEquals(4, wordCounter.countWords("Mary had a lamb", emptyStopWords));
+        Assert.assertEquals(1, WordCounter.countWords("Mary Mary mary", emptyStopWords).getUniqueCount());
+        Assert.assertEquals(3, WordCounter.countWords("Mary had a mary", emptyStopWords).getUniqueCount());
+        Assert.assertEquals(3, WordCounter.countWords("Mary had had a a mary", emptyStopWords).getUniqueCount());
     }
 }
