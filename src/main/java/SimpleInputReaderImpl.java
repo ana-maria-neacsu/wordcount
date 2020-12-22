@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class InputReaderImpl implements InputReader {
+public class SimpleInputReaderImpl implements InputReader {
 
     @Override
     public String readStandardInput() {

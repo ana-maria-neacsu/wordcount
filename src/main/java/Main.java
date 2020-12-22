@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(final String[] args) throws FileNotFoundException {
-        final InputProvider inputProvider = new InputProvider(new InputReaderImpl());
+        final InputProvider inputProvider = new InputProvider(new SimpleInputReaderImpl());
         final WordCounter.Result wordCount =
                 WordCounter.countWords(inputProvider.getInput(args), inputProvider.getStopWords());
 

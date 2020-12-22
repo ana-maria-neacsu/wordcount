@@ -18,6 +18,14 @@ public class WordCounterTest {
     }
 
     @Test
+    public void countWordsWithNoStopWordsMultilineTest() {
+         final Set<String> emptyStopWords = Collections.emptySet();
+         Assert.assertEquals(4, WordCounter.countWords("Mary had\n\n a lamb", emptyStopWords).getOverallCount());
+         Assert.assertEquals(4, WordCounter.countWords("Mary\nhad\na\nlamb", emptyStopWords).getOverallCount());
+         Assert.assertEquals(4, WordCounter.countWords("\nMary had a lamb\n", emptyStopWords).getOverallCount());
+    }
+
+    @Test
     public void countWordsWithNoStopWordsButWithHyphensTest() {
         final Set<String> emptyStopWords = Collections.emptySet();
         Assert.assertEquals(5, WordCounter.countWords("Mary-Jane had a lamb.", emptyStopWords).getOverallCount());
@@ -61,8 +69,14 @@ public class WordCounterTest {
         Assert.assertEquals(2, WordCounter.countWords("Mary had a lamb", stopWords).getOverallCount());
         Assert.assertEquals(0, WordCounter.countWords("Mary, MARY, mary, LAMB, Lamb", stopWords).getOverallCount());
         Assert.assertEquals(4, WordCounter.countWords("Joe had a sheep", stopWords).getOverallCount());
+    }
 
-        final Set<String> strangeStopWords = new HashSet<>(Collections.singletonList("Mary had a lamb"));
+    @Test
+    public void countWordsTestWithSomeStrangeStopWords() {
+        final Set<String> multipleWordsInOneEntry = new HashSet<>(Collections.singletonList("Mary had a lamb"));
+        Assert.assertEquals(4, WordCounter.countWords("Mary had a lamb", multipleWordsInOneEntry).getOverallCount());
+
+        final Set<String> strangeStopWords = new HashSet<>(Arrays.asList("-", "", "   ", " "));
         Assert.assertEquals(4, WordCounter.countWords("Mary had a lamb", strangeStopWords).getOverallCount());
     }
 
