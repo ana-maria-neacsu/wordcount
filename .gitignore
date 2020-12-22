@@ -1,6 +1,9 @@
 .idea/
 *.iml
 
+# exclude target folder
+target/
+
 # Compiled class file
 *.class
 
