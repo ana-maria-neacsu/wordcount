@@ -1,51 +1,49 @@
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Foo {
+public class WordCounter {
 
-    public static void main(final String[] args) throws FileNotFoundException {
-        System.out.println("Number of words: " + countWords(getInput(args), getStopWords()));
+    private final InputReader inputReader;
+
+    WordCounter(final InputReader inputReader) {
+        this.inputReader = inputReader;
     }
 
-    static String getInput(final String[] args) throws FileNotFoundException {
-        final Scanner scanner;
+    public int count(final String[] args) throws FileNotFoundException {
+        return this.countWords(this.getInput(args), this.getStopWords());
+    }
+
+    String getInput(final String[] args) throws FileNotFoundException {
+        final String input;
         if (args.length > 0) {
-            scanner = new Scanner(new File(args[0]));
+            input = this.inputReader.readFile(args[0]);
         } else {
             System.out.print("Enter text: ");
-            scanner = new Scanner(System.in);
+            input = this.inputReader.readStandardInput();
         }
 
-        final StringBuilder input = new StringBuilder();
-        while (scanner.hasNextLine()) {
-            input.append(scanner.nextLine()).append('\n');
-        }
-
-        return input.toString();
+        return input;
     }
 
-    static Set<String> getStopWords() {
-        final Scanner scanner;
+    Set<String> getStopWords() {
+        final String stopWords;
         try {
-            scanner = new Scanner(new File("stopwords.txt"));
+            stopWords = inputReader.readFile("stopwords.txt");
         } catch (final FileNotFoundException ex) {
             System.out.println("stopwords.txt file not found, defaulting to empty stop words.");
             return new HashSet<>();
         }
 
-        final Set<String> stopWords = new HashSet<>();
-        while (scanner.hasNextLine()) {
-            stopWords.add(scanner.nextLine().toLowerCase());
-        }
+        final Set<String> stopWordsSet = new HashSet<>();
+        Collections.addAll(stopWordsSet, stopWords.split("\n"));
 
-        return stopWords;
+        return stopWordsSet;
     }
 
-    static int countWords(final String input, final Set<String> stopWords) {
+    int countWords(final String input, final Set<String> stopWords) {
         final String[] possibleWords = input.split(",|\\.|\\s+");
 
         // just in case convert all stop words into the lowercase - the match should be case insensitive
