@@ -12,14 +12,16 @@ public class WordCounterTest {
         // ordinary lines
         Assert.assertEquals(4,WordCounter.countWords("Mary had a lamb", new HashSet<>()).getOverallCount());
         Assert.assertEquals(4,WordCounter.countWords("Mary, had a lamb.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(1,WordCounter.countWords("Mary",new HashSet<>()).getOverallCount());
+        Assert.assertEquals(1,WordCounter.countWords("Mary", new HashSet<>()).getOverallCount());
         Assert.assertEquals(8,WordCounter.countWords("Mary had a lamb. And Joe had two.", new HashSet<>()).getOverallCount());
         Assert.assertEquals(6,WordCounter.countWords("Mary had 1 lamb. And Joe had 2.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(4,WordCounter.countWords("Mary-Jane had a lamb.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(1,WordCounter.countWords("-Mary-", new HashSet<>()).getOverallCount());
-
+        Assert.assertEquals(5,WordCounter.countWords("Mary-Jane had a lamb.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(7,WordCounter.countWords("Mary-Jane-Ashley had a lamb-horse.", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(2,WordCounter.countWords("Mary---Jane.", new HashSet<>()).getOverallCount());
 
         // weird input
+        Assert.assertEquals(0,WordCounter.countWords("-Mary joe-", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("-Mary  -a-my- joe-", new HashSet<>()).getOverallCount());
         Assert.assertEquals(4,WordCounter.countWords("MaRY HAD A LaMb.", new HashSet<>()).getOverallCount());
         Assert.assertEquals(4,WordCounter.countWords(".Mary.had,a lamb", new HashSet<>()).getOverallCount());
         Assert.assertEquals(0,WordCounter.countWords("", new HashSet<>()).getOverallCount());
@@ -29,6 +31,8 @@ public class WordCounterTest {
         Assert.assertEquals(4,WordCounter.countWords(".Mary\thad,a lamb", new HashSet<>()).getOverallCount());
         Assert.assertEquals(2,WordCounter.countWords("\tMary\t\t     had.    ", new HashSet<>()).getOverallCount());
         Assert.assertEquals(2,WordCounter.countWords("Mary h$d & lamb", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("- - ----", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0,WordCounter.countWords("-Mary---Joe-  --fa-", new HashSet<>()).getOverallCount());
     }
 
     @Test
@@ -59,5 +63,6 @@ public class WordCounterTest {
         Assert.assertEquals(1, WordCounter.countWords("Mary Mary mary", emptyStopWords).getUniqueCount());
         Assert.assertEquals(3, WordCounter.countWords("Mary had a mary", emptyStopWords).getUniqueCount());
         Assert.assertEquals(3, WordCounter.countWords("Mary had had a a mary", emptyStopWords).getUniqueCount());
+        Assert.assertEquals(1, WordCounter.countWords("Mary-Mary-mary", emptyStopWords).getUniqueCount());
     }
 }
