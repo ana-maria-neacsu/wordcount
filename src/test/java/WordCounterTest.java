@@ -8,31 +8,51 @@ import org.junit.Test;
 public class WordCounterTest {
 
     @Test
-    public void countWordsTestWithNoStopWords() {
-        // ordinary lines
-        Assert.assertEquals(4,WordCounter.countWords("Mary had a lamb", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(4,WordCounter.countWords("Mary, had a lamb.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(1,WordCounter.countWords("Mary", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(8,WordCounter.countWords("Mary had a lamb. And Joe had two.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(6,WordCounter.countWords("Mary had 1 lamb. And Joe had 2.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(5,WordCounter.countWords("Mary-Jane had a lamb.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(7,WordCounter.countWords("Mary-Jane-Ashley had a lamb-horse.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(2,WordCounter.countWords("Mary---Jane.", new HashSet<>()).getOverallCount());
+    public void countWordsWithNoStopWordsAndNoHyphensTest() {
+        final Set<String> emptyStopWords = Collections.emptySet();
+        Assert.assertEquals(4, WordCounter.countWords("Mary had a lamb", emptyStopWords).getOverallCount());
+        Assert.assertEquals(4, WordCounter.countWords("Mary, had a lamb.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(1, WordCounter.countWords("Mary", emptyStopWords).getOverallCount());
+        Assert.assertEquals(8, WordCounter.countWords("Mary had a lamb. And Joe had two.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(6, WordCounter.countWords("Mary had 1 lamb. And Joe had 2.", emptyStopWords).getOverallCount());
+    }
 
-        // weird input
-        Assert.assertEquals(0,WordCounter.countWords("-Mary joe-", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("-Mary  -a-my- joe-", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(4,WordCounter.countWords("MaRY HAD A LaMb.", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(4,WordCounter.countWords(".Mary.had,a lamb", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("H$ad", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("541", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords(".,", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(4,WordCounter.countWords(".Mary\thad,a lamb", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(2,WordCounter.countWords("\tMary\t\t     had.    ", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(2,WordCounter.countWords("Mary h$d & lamb", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("- - ----", new HashSet<>()).getOverallCount());
-        Assert.assertEquals(0,WordCounter.countWords("-Mary---Joe-  --fa-", new HashSet<>()).getOverallCount());
+    @Test
+    public void countWordsWithNoStopWordsButWithHyphensTest() {
+        final Set<String> emptyStopWords = Collections.emptySet();
+        Assert.assertEquals(5, WordCounter.countWords("Mary-Jane had a lamb.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(7, WordCounter.countWords("Mary-Jane-Ashley had a lamb-horse.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(2, WordCounter.countWords("Mary---Jane.", emptyStopWords).getOverallCount());
+
+        Assert.assertEquals(0, WordCounter.countWords("-Mary joe-", emptyStopWords).getOverallCount());
+        Assert.assertEquals(0, WordCounter.countWords("-Mary  -a-my- joe-", emptyStopWords).getOverallCount());
+
+        Assert.assertEquals(0, WordCounter.countWords("- - ----", new HashSet<>()).getOverallCount());
+        Assert.assertEquals(0, WordCounter.countWords("-Mary---Joe-  --fa-", new HashSet<>()).getOverallCount());
+    }
+
+    @Test
+    public void countWordsWithNoStopWordsButWithWeirdInterpunctions() {
+        final Set<String> emptyStopWords = Collections.emptySet();
+        Assert.assertEquals(4, WordCounter.countWords(".Mary.had,a lamb", emptyStopWords).getOverallCount());
+        Assert.assertEquals(0, WordCounter.countWords(".,", emptyStopWords).getOverallCount());
+    }
+
+    @Test
+    public void countWordsWithNoStopWordsButWithWeirdWhitespaces() {
+        final Set<String> emptyStopWords = Collections.emptySet();
+
+        Assert.assertEquals(2, WordCounter.countWords("\tMary\t\t     had.    ", emptyStopWords).getOverallCount());
+        Assert.assertEquals(4, WordCounter.countWords(".Mary\thad,a lamb", emptyStopWords).getOverallCount());
+    }
+
+    @Test
+    public void countWordsWithNoStopWordsButWithWeirdSymbols() {
+        final Set<String> emptyStopWords = Collections.emptySet();
+
+        Assert.assertEquals(0, WordCounter.countWords("H$ad", emptyStopWords).getOverallCount());
+        Assert.assertEquals(0, WordCounter.countWords("541", emptyStopWords).getOverallCount());
+        Assert.assertEquals(2, WordCounter.countWords("Mary h$d & lamb", emptyStopWords).getOverallCount());
     }
 
     @Test
