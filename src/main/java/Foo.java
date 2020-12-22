@@ -6,19 +6,19 @@ public class Foo {
         System.out.print("Enter text: ");
         final Scanner scanner = new Scanner(System.in);
         final String input = scanner.nextLine();
-        System.out.println("Number of words: " + wordCount(input));
+        System.out.println("Number of words: " + countWords(input));
     }
 
-    static int wordCount(final String line) {
+    static int countWords(final String line) {
         final String[] possibleWords = line.split(",|\\.|\\s+");
 
-        int count = 0;
+        int countOfActualWords = 0;
         for (final String possibleWord: possibleWords) {
-            if (possibleWord.matches("[a-z]+|[A-Z]+")) {
-                count++;
+            if (possibleWord.matches("([a-z]|[A-Z])+")) {
+                countOfActualWords++;
             }
         }
 
-        return count;
+        return countOfActualWords;
     }
 }
