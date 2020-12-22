@@ -28,9 +28,9 @@ public class WordCounterTest {
     @Test
     public void countWordsWithNoStopWordsButWithHyphensTest() {
         final Set<String> emptyStopWords = Collections.emptySet();
-        Assert.assertEquals(5, WordCounter.countWords("Mary-Jane had a lamb.", emptyStopWords).getOverallCount());
-        Assert.assertEquals(7, WordCounter.countWords("Mary-Jane-Ashley had a lamb-horse.", emptyStopWords).getOverallCount());
-        Assert.assertEquals(2, WordCounter.countWords("Mary---Jane.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(4, WordCounter.countWords("Mary-Jane had a lamb.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(4, WordCounter.countWords("Mary-Jane-Ashley had a lamb-horse.", emptyStopWords).getOverallCount());
+        Assert.assertEquals(1, WordCounter.countWords("Mary---Jane.", emptyStopWords).getOverallCount());
 
         Assert.assertEquals(0, WordCounter.countWords("-Mary joe-", emptyStopWords).getOverallCount());
         Assert.assertEquals(0, WordCounter.countWords("-Mary  -a-my- joe-", emptyStopWords).getOverallCount());

@@ -26,21 +26,12 @@ public class WordCounter {
     }
 
     public static Result countWords(final String input, final Set<String> stopWords) {
-        final String[] possibleWordsWithHyphens = input.split(",|\\.|\\s+");
+        final String[] possibleWordsWithTrailingOrLeadingHyphens = input.split(",|\\.|\\s+");
 
-        final List<String> possibleWords = new ArrayList<>();
-
-        // we need to do one more split because of hyphens, filter out words that start or end with hyphen (not actual
-        // words) and than split the rest where the hyphens are
-        for (final String possibleWordWithHyphens: possibleWordsWithHyphens) {
-            if (possibleWordWithHyphens.startsWith("-") || possibleWordWithHyphens.endsWith("-")) {
-                // not a word just skip
-                continue;
-            }
-
-            final String[] wordsWithoutHyphens = possibleWordWithHyphens.split("-");
-            possibleWords.addAll(Arrays.asList(wordsWithoutHyphens));
-        }
+        // filter out words that starts or ends with hyphen
+        final  List<String> possibleWords = Arrays.stream(possibleWordsWithTrailingOrLeadingHyphens)
+                .filter(s -> !s.endsWith("-") && !s.startsWith("-"))
+                .collect(Collectors.toList());
 
         // just in case convert all stop words into the lowercase - the match should be case insensitive
         final Set<String> loverCaseStopWords = stopWords.stream().map(String::toLowerCase).collect(Collectors.toSet());
