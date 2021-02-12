@@ -13,6 +13,8 @@ import java.net.URL;
 
 public class WordCounterDemo {
 
+    private static final String STOP_FILE_NAME = "stopwords.txt";
+
     public static void main(String[] args) {
 
         TextReader reader = new ConsoleTextReaderImpl();
@@ -21,8 +23,7 @@ public class WordCounterDemo {
         TextParser textParser = new TextParserImpl(" ");
         FileReader textFileReader = new TextFileReaderImpl();
 
-        String stopFilesName = "";
-        URL fileUrl = WordCounterDemo.class.getClassLoader().getResource(stopFilesName);
+        URL fileUrl = WordCounterDemo.class.getClassLoader().getResource(STOP_FILE_NAME);
         StopWordsReader stopWordsReader = new StopWordsReaderImpl(textFileReader, fileUrl.getFile());
 
         WordCounter wordCounter = new WordCounter(text, textParser, stopWordsReader);

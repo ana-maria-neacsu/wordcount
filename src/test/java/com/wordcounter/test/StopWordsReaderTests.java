@@ -12,10 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StopWordsReaderTests {
 
+    private static final String MISSING_MOCKED_STOPPED_FILE_NAME = "stopwords_missing.txt";
+    private static final String MOCKED_STOPPED_FILE_NAME = "stopwords.txt";
+
     @Test
     public void when_called_on_existing_file_than_return_list_of_word() {
-        String mockedFileName = "stopwords.txt";
-        URL fileUrl = TextFileReaderTests.class.getClassLoader().getResource(mockedFileName);
+        URL fileUrl = TextFileReaderTests.class.getClassLoader().getResource(MOCKED_STOPPED_FILE_NAME);
         TextFileReaderMock textFileReaderMock = new TextFileReaderMock();
 
         StopWordsReader stopWords = new StopWordsReaderImpl(textFileReaderMock, fileUrl.getFile());
@@ -26,10 +28,9 @@ public class StopWordsReaderTests {
 
     @Test
     public void when_called_on_missing_file_than_return_empty_list() {
-        String mockedFileName = "stopwords_missing.txt";
         TextFileReaderMock textFileReaderMock = new TextFileReaderMock();
 
-        StopWordsReader stopWords = new StopWordsReaderImpl(textFileReaderMock, mockedFileName);
+        StopWordsReader stopWords = new StopWordsReaderImpl(textFileReaderMock, MISSING_MOCKED_STOPPED_FILE_NAME);
         List<String> words = stopWords.getStopWords();
 
         assertEquals(0, words.size());

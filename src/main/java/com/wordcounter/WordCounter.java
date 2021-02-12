@@ -29,6 +29,8 @@ public class WordCounter {
     public Long countWords() {
         List<String> tokens = this.getTokens();
         this.words = this.convertTokensToWords(tokens);
+        this.readStopWords();
+        this.excludeStopWordsFromWords();
         return Long.valueOf(this.words.size());
     }
 
@@ -49,7 +51,13 @@ public class WordCounter {
         return wordPatternMatcher.matches();
     }
 
-    private void getStopWords() {
+    private void readStopWords() {
         this.stopWords = stopWordsReader.getStopWords();
+    }
+
+    private void excludeStopWordsFromWords() {
+        this.words = words.stream()
+                .filter(word -> !stopWords.contains(word))
+                .collect(Collectors.toList());
     }
 }
