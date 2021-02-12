@@ -1,22 +1,20 @@
 package com.wordcounter.StopWords.impl;
 
-import com.wordcounter.FileReader.impl.TextFileReaderImpl;
+import com.wordcounter.FileReader.FileReader;
 import com.wordcounter.StopWords.StopWords;
 
 import java.util.List;
 
 public class StopWordsImpl implements StopWords {
-    private TextFileReaderImpl reader;
+    private FileReader reader;
 
-    public StopWordsImpl(
-//            FileReader reader
-    ) {
+    public StopWordsImpl(FileReader reader) {
+        this.reader = reader;
     }
 
     @Override
     public List<String> getStopWords() {
-
-        return null;
+        return this.readWords();
     }
 
     private List<String> readWords() {

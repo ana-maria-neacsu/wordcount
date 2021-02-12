@@ -1,4 +1,4 @@
-package com.wordcounter.FileReader.impl;
+package com.wordcounter.test.mock;
 
 import com.wordcounter.FileReader.AbstractTextFileReader;
 
@@ -8,8 +8,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextFileReaderImpl extends AbstractTextFileReader {
-
+public class TextFileReaderMock extends AbstractTextFileReader {
     @Override
     public List<String> readFile() {
         ArrayList<String> lines = new ArrayList<>();

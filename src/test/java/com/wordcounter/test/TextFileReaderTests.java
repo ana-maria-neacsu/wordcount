@@ -8,12 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FileReaderTests {
+public class TextFileReaderTests {
 
     @Test
     public void when_called_than_return_list_of_string() {
         String fileName = "stopwords.txt";
-        URL fileUrl = FileReaderTests.class.getClassLoader().getResource(fileName);
+        URL fileUrl = TextFileReaderTests.class.getClassLoader().getResource(fileName);
         TextFileReaderImpl reader = new TextFileReaderImpl();
         reader.setup(fileUrl.getFile());
         List<String> lines = reader.readFile();

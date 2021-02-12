@@ -4,7 +4,7 @@ import com.wordcounter.TextReader.TextReader;
 
 import java.util.Scanner;
 
-public class ConsoleTextReader implements TextReader {
+public class ConsoleTextReaderImpl implements TextReader {
     @Override
     public String readText() {
         System.out.print("Enter text: ");
