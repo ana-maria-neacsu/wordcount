@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class WordCountTest {
+public class WordCountTests {
 
     @Test
     public void when_2_words_input_than_count_2() {
