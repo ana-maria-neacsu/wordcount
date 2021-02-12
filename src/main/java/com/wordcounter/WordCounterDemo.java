@@ -6,7 +6,11 @@ import com.wordcounter.TextParser.TextParserImpl;
 public class WordCounterDemo {
 
     public static void main(String[] args) {
-        TextParser parser = new TextParserImpl("text", " ");
+        String text = "text";
 
+        TextParser parser = new TextParserImpl(" ");
+
+        WordCounter wordCounter = new WordCounter(text, parser);
+        wordCounter.countWords();
     }
 }

@@ -15,8 +15,8 @@ public class TextParserTests {
         String textInput = "word word";
         String delimiter = " ";
 
-        TextParser parser = new TextParserImpl(textInput, delimiter);
-        List<String> tokens = parser.getTokensWithCollection();
+        TextParser parser = new TextParserImpl(delimiter);
+        List<String> tokens = parser.getTokensWithCollection(textInput);
 
         assertEquals(2, tokens.size());
     }
@@ -26,8 +26,8 @@ public class TextParserTests {
         String textInput = "";
         String delimiter = "word ";
 
-        TextParser parser = new TextParserImpl(textInput, delimiter);
-        List<String> tokens = parser.getTokensWithCollection();
+        TextParser parser = new TextParserImpl(delimiter);
+        List<String> tokens = parser.getTokensWithCollection(textInput);
 
         assertEquals(0, tokens.size());
     }
@@ -37,8 +37,8 @@ public class TextParserTests {
         String textInput = "";
         String delimiter = "word";
 
-        TextParser parser = new TextParserImpl(textInput, delimiter);
-        List<String> tokens = parser.getTokensWithCollection();
+        TextParser parser = new TextParserImpl(delimiter);
+        List<String> tokens = parser.getTokensWithCollection(textInput);
 
         assertEquals(0, tokens.size());
     }
@@ -48,8 +48,8 @@ public class TextParserTests {
         String textInput = "";
         String delimiter = "";
 
-        TextParser parser = new TextParserImpl(textInput, delimiter);
-        List<String> tokens = parser.getTokensWithCollection();
+        TextParser parser = new TextParserImpl(delimiter);
+        List<String> tokens = parser.getTokensWithCollection(textInput);
 
         assertEquals(0, tokens.size());
     }
@@ -59,8 +59,8 @@ public class TextParserTests {
         String textInput = "";
         String delimiter = " ";
 
-        TextParser parser = new TextParserImpl(textInput, delimiter);
-        List<String> tokens = parser.getTokensWithCollection();
+        TextParser parser = new TextParserImpl(delimiter);
+        List<String> tokens = parser.getTokensWithCollection(textInput);
 
         assertEquals(0, tokens.size());
     }

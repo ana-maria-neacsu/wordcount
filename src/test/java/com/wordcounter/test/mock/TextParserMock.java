@@ -1,15 +1,16 @@
-package com.wordcounter.TextParser;
+package com.wordcounter.test.mock;
+
+import com.wordcounter.TextParser.TextParser;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-public class TextParserImpl implements TextParser {
-
+public class TextParserMock implements TextParser {
     private String delimiter;
 
-    public TextParserImpl(String delimiter) {
+    public TextParserMock(String delimiter) {
         this.delimiter = delimiter;
     }
 
