@@ -1,7 +1,7 @@
 package com.wordcounter.test;
 
-import com.wordcounter.StopWords.StopWords;
-import com.wordcounter.StopWords.impl.StopWordsImpl;
+import com.wordcounter.StopWordsReader.StopWordsReader;
+import com.wordcounter.StopWordsReader.impl.StopWordsReaderImpl;
 import com.wordcounter.test.mock.TextFileReaderMock;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class StopWordsTests {
+public class StopWordsReaderTests {
 
     @Test
     public void when_called_on_existing_file_than_return_list_of_word() {
@@ -18,7 +18,7 @@ public class StopWordsTests {
         URL fileUrl = TextFileReaderTests.class.getClassLoader().getResource(mockedFileName);
         TextFileReaderMock textFileReaderMock = new TextFileReaderMock();
 
-        StopWords stopWords = new StopWordsImpl(textFileReaderMock, fileUrl.getFile());
+        StopWordsReader stopWords = new StopWordsReaderImpl(textFileReaderMock, fileUrl.getFile());
         List<String> words = stopWords.getStopWords();
 
         assertEquals(4, words.size());
@@ -29,7 +29,7 @@ public class StopWordsTests {
         String mockedFileName = "stopwords_missing.txt";
         TextFileReaderMock textFileReaderMock = new TextFileReaderMock();
 
-        StopWords stopWords = new StopWordsImpl(textFileReaderMock, mockedFileName);
+        StopWordsReader stopWords = new StopWordsReaderImpl(textFileReaderMock, mockedFileName);
         List<String> words = stopWords.getStopWords();
 
         assertEquals(0, words.size());

@@ -1,5 +1,6 @@
 package com.wordcounter;
 
+import com.wordcounter.StopWordsReader.StopWordsReader;
 import com.wordcounter.TextParser.TextParser;
 
 import java.util.List;
@@ -10,12 +11,19 @@ import java.util.stream.Collectors;
 public class WordCounter {
 
     private String text;
+    private StopWordsReader stopWordsReader;
     private TextParser parser;
     private List<String> words;
+    private List<String> stopWords;
 
-    public WordCounter(String text, TextParser parser) {
-        this.text = text;
+    public WordCounter(
+            String text,
+            TextParser parser,
+            StopWordsReader stopWords
+    ) {
         this.parser = parser;
+        this.stopWordsReader = stopWords;
+        this.text = text;
     }
 
     public Long countWords() {
@@ -39,5 +47,9 @@ public class WordCounter {
         Pattern wordPattern = Pattern.compile(pattern);
         Matcher wordPatternMatcher = wordPattern.matcher(token);
         return wordPatternMatcher.matches();
+    }
+
+    private void getStopWords() {
+        this.stopWords = stopWordsReader.getStopWords();
     }
 }

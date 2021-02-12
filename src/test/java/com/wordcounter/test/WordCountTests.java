@@ -43,4 +43,16 @@ public class WordCountTests {
 
         assertEquals(0, wordsNumber);
     }
+
+    @Test
+    public void when_2_words_input_and_1_is_stopword_than_count_1() {
+        String textInput = "word word";
+        String textDelimiter = " ";
+        TextParserMock parserMock = new TextParserMock(textDelimiter);
+
+        WordCounter counter = new WordCounter(textInput, parserMock);
+        Long wordsNumber = counter.countWords();
+
+        assertEquals(0, wordsNumber);
+    }
 }

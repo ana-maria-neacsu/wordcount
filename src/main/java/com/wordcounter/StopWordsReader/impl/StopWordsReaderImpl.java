@@ -1,15 +1,15 @@
-package com.wordcounter.StopWords.impl;
+package com.wordcounter.StopWordsReader.impl;
 
 import com.wordcounter.FileReader.FileReader;
-import com.wordcounter.StopWords.StopWords;
+import com.wordcounter.StopWordsReader.StopWordsReader;
 
 import java.util.List;
 
-public class StopWordsImpl implements StopWords {
+public class StopWordsReaderImpl implements StopWordsReader {
     private FileReader reader;
     private String fileName = "";
 
-    public StopWordsImpl(FileReader reader, String fileName) {
+    public StopWordsReaderImpl(FileReader reader, String fileName) {
         this.reader = reader;
         this.fileName = fileName;
     }
