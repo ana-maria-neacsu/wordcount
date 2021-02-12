@@ -14,7 +14,7 @@ public class WordCountTest {
         WordCounter counter = new WordCounter();
         Long wordsNumber = counter.count(textInput);
 
-        assertEquals(wordsNumber, 2);
+        assertEquals(2, wordsNumber);
     }
 
 }
