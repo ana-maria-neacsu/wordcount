@@ -1,4 +1,6 @@
-package com.wordcounter.TextParser;
+package com.wordcounter.TextParser.impl;
+
+import com.wordcounter.TextParser.TextParser;
 
 import java.util.Collections;
 import java.util.List;

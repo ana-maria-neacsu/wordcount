@@ -1,7 +1,7 @@
 package com.wordcounter.test;
 
 import com.wordcounter.TextParser.TextParser;
-import com.wordcounter.TextParser.TextParserImpl;
+import com.wordcounter.TextParser.impl.TextParserImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
