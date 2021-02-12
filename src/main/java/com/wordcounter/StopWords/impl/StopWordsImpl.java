@@ -7,9 +7,11 @@ import java.util.List;
 
 public class StopWordsImpl implements StopWords {
     private FileReader reader;
+    private String fileName = "";
 
-    public StopWordsImpl(FileReader reader) {
+    public StopWordsImpl(FileReader reader, String fileName) {
         this.reader = reader;
+        this.fileName = fileName;
     }
 
     @Override
@@ -18,6 +20,6 @@ public class StopWordsImpl implements StopWords {
     }
 
     private List<String> readWords() {
-        return this.reader.readFile();
+        return this.reader.readFile(this.fileName);
     }
 }
