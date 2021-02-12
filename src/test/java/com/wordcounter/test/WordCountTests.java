@@ -1,6 +1,8 @@
 package com.wordcounter.test;
 
+import com.wordcounter.StopWordsReader.StopWordsReader;
 import com.wordcounter.WordCounter;
+import com.wordcounter.test.mock.StopWordsReaderMock;
 import com.wordcounter.test.mock.TextParserMock;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +15,10 @@ public class WordCountTests {
         String textInput = "word word";
         String textDelimiter = " ";
         TextParserMock parserMock = new TextParserMock(textDelimiter);
+        String mockedStopFileName = "";
+        StopWordsReader stopWordsReaderMock = new StopWordsReaderMock().buildtMock(mockedStopFileName);
 
-        WordCounter counter = new WordCounter(textInput, parserMock);
+        WordCounter counter = new WordCounter(textInput, parserMock, stopWordsReaderMock);
         Long wordsNumber = counter.countWords();
 
         assertEquals(2, wordsNumber);
@@ -25,8 +29,11 @@ public class WordCountTests {
         String textInput = "";
         String textDelimiter = " ";
         TextParserMock parserMock = new TextParserMock(textDelimiter);
+        String mockedStopFileName = "";
+        StopWordsReader stopWordsReaderMock = new StopWordsReaderMock().buildtMock(mockedStopFileName);
 
-        WordCounter counter = new WordCounter(textInput, parserMock);
+
+        WordCounter counter = new WordCounter(textInput, parserMock, stopWordsReaderMock);
         Long wordsNumber = counter.countWords();
 
         assertEquals(0, wordsNumber);
@@ -37,8 +44,10 @@ public class WordCountTests {
         String textInput = "word2word";
         String textDelimiter = " ";
         TextParserMock parserMock = new TextParserMock(textDelimiter);
+        String mockedStopFileName = "";
+        StopWordsReader stopWordsReaderMock = new StopWordsReaderMock().buildtMock(mockedStopFileName);
 
-        WordCounter counter = new WordCounter(textInput, parserMock);
+        WordCounter counter = new WordCounter(textInput, parserMock, stopWordsReaderMock);
         Long wordsNumber = counter.countWords();
 
         assertEquals(0, wordsNumber);
@@ -49,8 +58,10 @@ public class WordCountTests {
         String textInput = "word word";
         String textDelimiter = " ";
         TextParserMock parserMock = new TextParserMock(textDelimiter);
+        String mockedStopFileName = "";
+        StopWordsReader stopWordsReaderMock = new StopWordsReaderMock().buildtMock(mockedStopFileName);
 
-        WordCounter counter = new WordCounter(textInput, parserMock);
+        WordCounter counter = new WordCounter(textInput, parserMock, stopWordsReaderMock);
         Long wordsNumber = counter.countWords();
 
         assertEquals(0, wordsNumber);
