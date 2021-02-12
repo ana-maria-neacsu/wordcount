@@ -8,13 +8,15 @@ import com.wordcounter.TextReader.impl.ConsoleFileReader;
 public class WordCounterDemo {
 
     public static void main(String[] args) {
-//        String text = "text";
 
         TextReader reader = new ConsoleFileReader();
+        String text = reader.readText();
+
         TextParser parser = new TextParserImpl(" ");
 
-        String text = reader.readText();
         WordCounter wordCounter = new WordCounter(text, parser);
-        wordCounter.countWords();
+        Long wordNumber = wordCounter.countWords();
+
+        System.out.print(wordNumber);
     }
 }

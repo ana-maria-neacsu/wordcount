@@ -2,14 +2,13 @@ package com.wordcounter.TextReader.impl;
 
 import com.wordcounter.TextReader.TextReader;
 
-import java.io.Console;
+import java.util.Scanner;
 
 public class ConsoleFileReader implements TextReader {
     @Override
     public String readText() {
-        Console console = System.console();
-        System.out.println("Enter text:");
-        String text = console.readLine();
+        System.out.print("Enter text: ");
+        String text = new Scanner(System.in).nextLine();
         return text;
     }
 }
