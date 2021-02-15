@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 public class ConsoleInputReaderTest {
 
@@ -14,7 +13,7 @@ public class ConsoleInputReaderTest {
         ByteArrayInputStream in = new ByteArrayInputStream("\n".getBytes());
         System.setIn(in);
         InputReader reader = new ConsoleInputReader();
-        String input = reader.readLine();
+        String input = reader.readInput();
         Assertions.assertEquals("", input);
     }
     @Test
@@ -22,7 +21,7 @@ public class ConsoleInputReaderTest {
         ByteArrayInputStream in = new ByteArrayInputStream("word\n".getBytes());
         System.setIn(in);
         InputReader reader = new ConsoleInputReader();
-        String input = reader.readLine();
+        String input = reader.readInput();
         Assertions.assertEquals("word", input);
     }
 }

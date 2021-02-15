@@ -10,7 +10,7 @@ public class ConsoleInputReader implements InputReader {
     private String userInput;
 
     @Override
-    public String readLine() {
+    public String readInput() {
         System.out.print("Enter text: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {

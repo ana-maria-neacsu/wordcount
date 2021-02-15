@@ -13,7 +13,6 @@ public class DefaultWordCounter implements WordCounter {
 
         List<String> separated = Arrays.asList(inputText.split(" "));
         Pattern p = Pattern.compile("[^a-z ]", Pattern.CASE_INSENSITIVE);
-
         int counter = 0;
         for (String word : separated) {
             Matcher m = p.matcher(word);

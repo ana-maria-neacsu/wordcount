@@ -7,7 +7,10 @@ import com.example.util.DefaultWordCounter;
 
 public class BootClass {
     public static void main(String[] args) {
-
+        if(args.length > 0){
+            String argument = args[0];
+            System.out.println(argument);
+        }
         WordCounter wc = new DefaultWordCounter();
         InputReader reader = new ConsoleInputReader();
         Application app = new Application(reader, wc);
