@@ -31,7 +31,7 @@ public class DefaultWordCounterTest {
     public void testCountWordsOneIncorrectWord() {
         DefaultWordCounter testCounter = new DefaultWordCounter(new HashSet<>());
         int count = testCounter.countWords("?word");
-        Assertions.assertEquals(3, count);
+        Assertions.assertEquals(0, count);
     }
 
 }

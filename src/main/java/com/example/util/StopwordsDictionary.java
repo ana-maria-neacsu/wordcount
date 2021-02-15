@@ -7,8 +7,12 @@ public class StopwordsDictionary {
     private HashSet<String> stopWords = new HashSet<>();
 
     public void loadStopWords(List<String> words) {
-        for (String word : words) {
-            stopWords.add(word);
+        if (words != null) {
+            for (String word : words) {
+                if (!word.isEmpty()) {
+                    stopWords.add(word);
+                }
+            }
         }
     }
 
