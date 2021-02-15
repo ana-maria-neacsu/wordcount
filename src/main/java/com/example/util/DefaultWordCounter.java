@@ -1,6 +1,6 @@
 package com.example.util;
 
-import com.example.WordCounter;
+import com.example.interfaceExample.WordCounter;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -17,7 +17,7 @@ public class DefaultWordCounter implements WordCounter {
         int counter = 0;
         for (String word : separated) {
             Matcher m = p.matcher(word);
-            if (!m.find()){
+            if (!m.find() && !word.isEmpty()){
                 counter++;
             }
         }
