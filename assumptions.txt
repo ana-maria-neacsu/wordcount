@@ -1,2 +1,5 @@
 Iteration 1:
     White spaces separate words.
+Iteration2:
+    App should work without stopwords file so not finding it is not a problem for us.
+

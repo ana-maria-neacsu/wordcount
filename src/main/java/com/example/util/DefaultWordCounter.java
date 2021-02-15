@@ -7,6 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DefaultWordCounter implements WordCounter {
+    HashSet<String> stopWords;
+
+    public DefaultWordCounter(HashSet<String> stopWords){
+        this.stopWords = stopWords;
+    }
 
     @Override
     public int countWords(String inputText) {
@@ -16,7 +21,7 @@ public class DefaultWordCounter implements WordCounter {
         int counter = 0;
         for (String word : separated) {
             Matcher m = p.matcher(word);
-            if (!m.find() && !word.isEmpty()){
+            if (!m.find() && !word.isEmpty() && !stopWords.contains(word)){
                 counter++;
             }
         }
