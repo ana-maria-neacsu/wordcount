@@ -9,12 +9,15 @@ import java.util.regex.Pattern;
 public class WordCounter {
 
     // this regex matches white spaces, '.', '?', '!', '#'
-    public static final String PARSING_REGEX = "[\\s\\.!?#]+";
+    private static final String PARSING_REGEX = "[\\s\\.!?#]+";
     private static final Pattern pattern = Pattern.compile("[a-zA-Z-]+");
-    private final Optional<StopWords> stopWords;
+    private StopWords stopWords;
 
-    public WordCounter(Optional<StopWords> stopWords) {
+    public WordCounter(StopWords stopWords) {
         this.stopWords = stopWords;
+    }
+
+    public WordCounter() {
     }
 
     public WordCounterResult calculateResult(final String input) {
@@ -34,8 +37,8 @@ public class WordCounter {
     }
 
     private boolean isStopWord(final String word) {
-        return stopWords.isPresent()
+        return stopWords != null
                 &&
-                stopWords.get().getStopWords().contains(word);
+                stopWords.getStopWords().contains(word);
     }
 }

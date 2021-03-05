@@ -16,7 +16,7 @@ public class WordCounterWithStopWords {
     @BeforeEach
     public void setUp() {
         StopWords stopWords = new StopWordsImpl("stopwords.txt");
-        wordCounter = new WordCounter(Optional.of(stopWords));
+        wordCounter = new WordCounter(stopWords);
     }
 
     @Test

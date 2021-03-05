@@ -2,12 +2,11 @@ package at.erste.words;
 
 import org.junit.jupiter.api.Test;
 
-import static java.util.Optional.empty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterAverageTest {
 
-    WordCounter wordCounter = new WordCounter(empty());
+    WordCounter wordCounter = new WordCounter();
 
     @Test
     public void testAverageSizes() {

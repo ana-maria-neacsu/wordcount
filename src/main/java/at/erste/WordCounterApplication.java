@@ -21,7 +21,7 @@ public class WordCounterApplication {
 
         InputReader inputReader = getInputReader(args);
         StopWords stopWords = new StopWordsImpl(STOP_WORDS_FILE_NAME);
-        WordCounter wordCounter = new WordCounter(Optional.of(stopWords));
+        WordCounter wordCounter = new WordCounter(stopWords);
         WordCounterResult wordCounterResult = wordCounter.calculateResult(inputReader.getInput());
         wordCounterResult.printResult(out);
     }

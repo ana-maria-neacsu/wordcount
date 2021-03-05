@@ -1,16 +1,12 @@
 package at.erste.words;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static java.util.Optional.empty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WordCounterTest {
 
-    WordCounter wordCounter = new WordCounter(empty());
-
+    WordCounter wordCounter = new WordCounter();
 
     @Test
     public void testOneWord() {
