@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class InputReaderFromStdIn implements InputReader {
 
-    public InputReaderFromStdIn(PrintStream out) {
-        out.print("Enter text: ");
+    public InputReaderFromStdIn(PrintStream streamToPrintAskingForInput) {
+        streamToPrintAskingForInput.print("Enter text: ");
     }
 
     @Override
