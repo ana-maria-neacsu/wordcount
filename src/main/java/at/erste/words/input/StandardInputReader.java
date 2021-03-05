@@ -1,4 +1,4 @@
-package at.erste.words;
+package at.erste.words.input;
 
 import java.util.Scanner;
 

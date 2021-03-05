@@ -1,22 +1,22 @@
 package at.erste.words;
 
+import at.erste.words.stopwords.StopWords;
+import at.erste.words.stopwords.StopWordsImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.FileNotFoundException;
+import java.util.Optional;
 
-import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class WordCounterWithStopWords {
 
     WordCounter wordCounter;
 
     @BeforeEach
-    void setUp() throws FileNotFoundException {
-        StopWords stopWords = new StopWords("stopwords.txt");
-        wordCounter = new WordCounter(stopWords);
+    void setUp() {
+        StopWords stopWords = new StopWordsImpl("stopwords.txt");
+        wordCounter = new WordCounter(Optional.of(stopWords));
     }
 
     @Test

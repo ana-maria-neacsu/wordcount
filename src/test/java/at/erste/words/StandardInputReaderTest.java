@@ -1,5 +1,6 @@
 package at.erste.words;
 
+import at.erste.words.input.StandardInputReader;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

@@ -1,27 +1,25 @@
 package at.erste.words;
 
+import at.erste.words.stopwords.StopWords;
+
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class WordCounter {
 
     private static final Pattern pattern = Pattern.compile("[a-zA-Z]+");
+    private final Optional<StopWords> stopWords;
 
-    private StopWords stopWords;
-
-    public WordCounter(final StopWords stopWords) {
-        if (stopWords == null) {
-            throw new IllegalArgumentException("Stopword cannot be null");
-        }
+    public WordCounter(Optional<StopWords> stopWords) {
         this.stopWords = stopWords;
     }
 
     public int count(final String input) {
         int count = 0;
 
-        String[] strings = input.split("\\s+");
-        for (String word : strings) {
+        for (String word : input.split("\\s+")) {
 
-            if (stopWords.getStopWords().contains(word)) {
+            if (isStopWord(word)) {
                 continue;
             }
 
@@ -30,5 +28,11 @@ public class WordCounter {
             }
         }
         return count;
+    }
+
+    private boolean isStopWord(final String word) {
+        return stopWords.isPresent()
+                &&
+                stopWords.get().getStopWords().contains(word);
     }
 }
