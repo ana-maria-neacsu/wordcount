@@ -1,7 +1,5 @@
 package at.erste.words.input;
 
-import at.erste.words.input.InputReaderFromFile;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
