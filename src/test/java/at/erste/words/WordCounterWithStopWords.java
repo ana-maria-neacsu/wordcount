@@ -21,22 +21,26 @@ class WordCounterWithStopWords {
 
     @Test
     void testWordWithOneStopWord() {
-        assertEquals(0, wordCounter.count("a"));
+        assertEquals(0, wordCounter.calculateResult("a").getCount());
+        assertEquals(0, wordCounter.calculateResult("a").getUniqueWordsCount());
     }
 
     @Test
     void testWordWithTwoStopWord() {
-        assertEquals(0, wordCounter.count("a the"));
+        assertEquals(0, wordCounter.calculateResult("a the").getCount());
+        assertEquals(0, wordCounter.calculateResult("a the").getUniqueWordsCount());
     }
 
     @Test
     void testWordsContainingStopWord() {
-        assertEquals(4, wordCounter.count("Mary had a little lamb"));
+        assertEquals(4, wordCounter.calculateResult("Mary had a little lamb").getCount());
+        assertEquals(4, wordCounter.calculateResult("Mary had a little lamb").getUniqueWordsCount());
     }
 
     @Test
     void testStopWordAndSpecialCharacter() {
-        assertEquals(0, wordCounter.count("a&"));
+        assertEquals(0, wordCounter.calculateResult("a&").getCount());
+        assertEquals(0, wordCounter.calculateResult("a&").getUniqueWordsCount());
     }
 
 }

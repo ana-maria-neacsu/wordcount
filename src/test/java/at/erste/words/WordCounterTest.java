@@ -18,43 +18,49 @@ public class WordCounterTest {
 
     @Test
     void testOneWord() {
-        assertEquals(1, wordCounter.count("word"));
+        assertEquals(1, wordCounter.calculateResult("word").getCount());
+        assertEquals(1, wordCounter.calculateResult("word").getUniqueWordsCount());
     }
 
     @Test
     void testTwoWords() {
-        assertEquals(2, wordCounter.count("word word"));
+        assertEquals(2, wordCounter.calculateResult("word word").getCount());
+        assertEquals(1, wordCounter.calculateResult("word word").getUniqueWordsCount());
     }
 
     @Test
     void testTwoWordsWithTwoSpaces() {
-        assertEquals(2, wordCounter.count("word  word"));
+        assertEquals(2, wordCounter.calculateResult("word  word").getCount());
+        assertEquals(1, wordCounter.calculateResult("word  word").getUniqueWordsCount());
     }
 
     @Test
     void testTwoWordsWithTabulator() {
-        assertEquals(2, wordCounter.count("word \t word"));
+        assertEquals(2, wordCounter.calculateResult("word \t word").getCount());
+        assertEquals(1, wordCounter.calculateResult("word \t word").getUniqueWordsCount());
     }
 
     @Test
     void testWordWithNumbersEnding() {
-        assertEquals(0, wordCounter.count("word1"));
+        assertEquals(0, wordCounter.calculateResult("word1").getCount());
+        assertEquals(0, wordCounter.calculateResult("word1").getUniqueWordsCount());
     }
 
     @Test
     void testWordWithNumbersStarting() {
-        assertEquals(0, wordCounter.count("1word"));
+        assertEquals(0, wordCounter.calculateResult("1word").getCount());
+        assertEquals(0, wordCounter.calculateResult("1word").getUniqueWordsCount());
     }
 
     @Test
     void testWordWithSpecialCharactersStarting() {
-        assertEquals(0, wordCounter.count("#word"));
+        assertEquals(0, wordCounter.calculateResult("#word").getCount());
+        assertEquals(0, wordCounter.calculateResult("#word").getUniqueWordsCount());
     }
 
     @Test
     void testWordWithSpecialCharactersEnding() {
-        assertEquals(0, wordCounter.count("word!"));
+        assertEquals(0, wordCounter.calculateResult("word!").getCount());
+        assertEquals(0, wordCounter.calculateResult("word!").getUniqueWordsCount());
     }
-
-
 }
