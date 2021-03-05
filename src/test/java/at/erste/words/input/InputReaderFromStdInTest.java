@@ -18,5 +18,4 @@ class InputReaderFromStdInTest {
         System.setIn(targetStream);
         assertEquals("firstLine", new InputReaderFromStdIn().getInput());
     }
-
 }

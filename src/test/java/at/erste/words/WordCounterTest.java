@@ -22,17 +22,17 @@ public class WordCounterTest {
     }
 
     @Test
-    void testTwoWords () {
+    void testTwoWords() {
         assertEquals(2, wordCounter.count("word word"));
     }
 
     @Test
-    void testTwoWordsWithTwoSpaces () {
+    void testTwoWordsWithTwoSpaces() {
         assertEquals(2, wordCounter.count("word  word"));
     }
 
     @Test
-    void testTwoWordsWithTabulator () {
+    void testTwoWordsWithTabulator() {
         assertEquals(2, wordCounter.count("word \t word"));
     }
 
