@@ -11,7 +11,7 @@ public class WordCounter {
     // this regex matches white spaces, '.', '?', '!', '#'
     private static final String PARSING_REGEX = "[\\s\\.!?#]+";
     private static final Pattern pattern = Pattern.compile("[a-zA-Z-]+");
-    private StopWords stopWords;
+    private final StopWords stopWords;
 
     public WordCounter() {
         stopWords = null;
