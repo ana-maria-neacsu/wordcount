@@ -13,11 +13,12 @@ public class WordCounter {
     private static final Pattern pattern = Pattern.compile("[a-zA-Z-]+");
     private StopWords stopWords;
 
-    public WordCounter(StopWords stopWords) {
-        this.stopWords = stopWords;
+    public WordCounter() {
+        stopWords = null;
     }
 
-    public WordCounter() {
+    public WordCounter(StopWords stopWords) {
+        this.stopWords = stopWords;
     }
 
     public WordCounterResult calculateResult(final String input) {

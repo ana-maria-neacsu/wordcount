@@ -1,8 +1,8 @@
 package at.erste.words.stopwords;
 
-import java.util.List;
+import java.util.Set;
 
 public interface StopWords {
 
-    List<String> getStopWords();
+    Set<String> getStopWords();
 }

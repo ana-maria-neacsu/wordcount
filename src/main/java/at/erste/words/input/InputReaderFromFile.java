@@ -2,12 +2,11 @@ package at.erste.words.input;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Optional;
 import java.util.Scanner;
 
 public class InputReaderFromFile implements InputReader {
 
-    String wordsFileName;
+    private final String wordsFileName;
 
     public InputReaderFromFile(final String wordsFileName) {
         checkFileExists(wordsFileName);

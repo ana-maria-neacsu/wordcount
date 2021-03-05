@@ -2,16 +2,17 @@ package at.erste.words.stopwords;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class StopWordsImpl implements StopWords {
 
-    private final List<String> stopWords;
+    public static final String STOP_WORDS_FILE_NAME = "stopwords.txt";
+    private final Set<String> stopWords;
 
     public StopWordsImpl(final String stopWordsFileName) {
-        stopWords = new ArrayList<>();
+        stopWords = new HashSet<>();
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource(stopWordsFileName).getFile());
 
@@ -25,7 +26,7 @@ public class StopWordsImpl implements StopWords {
         }
     }
 
-    public List<String> getStopWords() {
+    public Set<String> getStopWords() {
         return stopWords;
     }
 }

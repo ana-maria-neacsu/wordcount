@@ -1,7 +1,5 @@
 package at.erste.words.input;
 
-import at.erste.words.input.InputReader;
-import at.erste.words.input.InputReaderFromStdIn;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
@@ -16,6 +14,6 @@ public class InputReaderFromStdInTest {
         String initialString = "firstLine\nsecondLine";
         InputStream targetStream = new ByteArrayInputStream(initialString.getBytes());
         System.setIn(targetStream);
-        assertEquals("firstLine", new InputReaderFromStdIn().getInput());
+        assertEquals("firstLine", new InputReaderFromStdIn(System.out).getInput());
     }
 }
