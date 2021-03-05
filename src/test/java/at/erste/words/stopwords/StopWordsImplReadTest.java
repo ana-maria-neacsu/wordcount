@@ -1,16 +1,12 @@
 package at.erste.words.stopwords;
 
-import at.erste.words.stopwords.StopWordsImpl;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileNotFoundException;
 
 import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class StopWordsImplReadTest {
-
 
     @Test
     void testStopWordsEquals() {
