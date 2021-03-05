@@ -45,7 +45,7 @@ public class WordCounterWithStopWords {
 
     @Test
     public void testWordsWithSpecialCharacters() {
-        assertEquals(9, wordCounter.calculateResult("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getCount());
-        assertEquals(7, wordCounter.calculateResult("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getUniqueWordsCount());
+        assertEquals(7, wordCounter.calculateResult("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getCount());
+        assertEquals(6, wordCounter.calculateResult("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getUniqueWordsCount());
     }
 }

@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
-    // this regex matches white spaces, '.', '?', '!', '#' and '-'
-    public static final String PARSING_REGEX = "[\\s-\\.!?#]+";
-    private static final Pattern pattern = Pattern.compile("[a-zA-Z]+");
+    // this regex matches white spaces, '.', '?', '!', '#'
+    public static final String PARSING_REGEX = "[\\s\\.!?#]+";
+    private static final Pattern pattern = Pattern.compile("[a-zA-Z-]+");
     private final Optional<StopWords> stopWords;
 
     public WordCounter(Optional<StopWords> stopWords) {
