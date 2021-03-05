@@ -1,9 +1,11 @@
 package at.erste.words.input;
 
 import at.erste.words.input.InputReaderFromFile;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class InputReaderFromFileTest {
 
@@ -13,5 +15,12 @@ class InputReaderFromFileTest {
         assertEquals("Mary had\n" +
                 "a little\n" +
                 "lamb\n", input);
+    }
+
+    @Test
+    void testNonExistingFile() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new InputReaderFromFile("fileWhichDoesNotExits.txt").getInput();
+        });
     }
 }

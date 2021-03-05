@@ -9,8 +9,8 @@ public class InputReaderFromFile implements InputReader {
 
     String wordsFileName;
 
-    public InputReaderFromFile(String wordsFileName) {
-        //TODO check if file exists otherwise do not even create instance
+    public InputReaderFromFile(final String wordsFileName) {
+        checkFileExists(wordsFileName);
         this.wordsFileName = wordsFileName;
     }
 
@@ -26,10 +26,15 @@ public class InputReaderFromFile implements InputReader {
                 words.append(System.getProperty("line.separator"));
             }
         } catch (FileNotFoundException e) {
-            System.err.println(wordsFileName + "file does not exists. Exiting");
-            System.exit(1);
+            throw new IllegalArgumentException(wordsFileName + "file does not exists");
         }
         return words.toString();
+    }
+
+    private void checkFileExists(String wordsFileName) {
+        if (getClass().getClassLoader().getResource(wordsFileName) == null) {
+            throw new IllegalArgumentException(wordsFileName + "file does not exists");
+        }
     }
 
 }
