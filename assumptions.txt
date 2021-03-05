@@ -4,6 +4,7 @@
         2, input is one line
 
 2. Iteration
+    file is in UTF-8
 
 
 

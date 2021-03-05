@@ -2,7 +2,7 @@ package at.erste.words;
 
 import java.util.Scanner;
 
-public class InputReader {
+public class StandardInputReader {
 
     public String getInput() {
         String input = "";

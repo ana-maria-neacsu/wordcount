@@ -1,8 +1,9 @@
-package at.erste;
+package at.erste.words;
 
-import at.erste.words.WordCounter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,8 +12,9 @@ public class WordCounterTest {
     WordCounter wordCounter;
 
     @BeforeEach
-    void setUp() {
-        wordCounter = new WordCounter();
+    void setUp() throws FileNotFoundException {
+        StopWords stopWords = new StopWords("stopwords.txt");
+        wordCounter = new WordCounter(stopWords);
     }
 
     @Test
@@ -42,4 +44,6 @@ public class WordCounterTest {
     void testWordWithSpecialCharactersEnding() {
         assertEquals(0, wordCounter.count("word!"));
     }
+
+
 }
