@@ -1,0 +1,7 @@
+1 Iteration
+
+        1, Words are separated with whitespaces
+        2, input is one line
+
+2 Iteration
+
