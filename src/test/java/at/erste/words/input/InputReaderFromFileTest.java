@@ -17,8 +17,6 @@ public class InputReaderFromFileTest {
 
     @Test
     public void testNonExistingFile() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new InputReaderFromFile("fileWhichDoesNotExits.txt").getInput();
-        });
+        assertThrows(IllegalArgumentException.class, () -> new InputReaderFromFile("FileNotExits.txt").getInput());
     }
 }
