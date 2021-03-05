@@ -2,8 +2,9 @@ package at.erste.words.input;
 
 import java.util.Scanner;
 
-public class StandardInputReader {
+public class InputReaderFromStdIn implements InputReader {
 
+    @Override
     public String getInput() {
         String input = "";
         try (Scanner scanner = new Scanner(System.in)) {
