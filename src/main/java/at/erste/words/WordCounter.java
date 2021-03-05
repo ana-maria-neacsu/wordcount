@@ -1,19 +1,17 @@
-package at.erste;
+package at.erste.words;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class WordCounter {
 
     private static final Pattern pattern = Pattern.compile("[a-zA-Z]+");
 
-    int count(String input){
+    public int count(final String input){
         int count = 0;
 
         String[] strings = input.split("\\s+");
         for (String word : strings) {
-            Matcher m = pattern.matcher(word);
-            if(m.matches()){
+            if(pattern.matcher(word).matches()){
                 count++;
             }
         }
