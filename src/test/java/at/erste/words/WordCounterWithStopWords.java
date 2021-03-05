@@ -9,36 +9,36 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class WordCounterWithStopWords {
+public class WordCounterWithStopWords {
 
     WordCounter wordCounter;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         StopWords stopWords = new StopWordsImpl("stopwords.txt");
         wordCounter = new WordCounter(Optional.of(stopWords));
     }
 
     @Test
-    void testWordWithOneStopWord() {
+    public void testWordWithOneStopWord() {
         assertEquals(0, wordCounter.calculateResult("a").getCount());
         assertEquals(0, wordCounter.calculateResult("a").getUniqueWordsCount());
     }
 
     @Test
-    void testWordWithTwoStopWord() {
+    public void testWordWithTwoStopWord() {
         assertEquals(0, wordCounter.calculateResult("a the").getCount());
         assertEquals(0, wordCounter.calculateResult("a the").getUniqueWordsCount());
     }
 
     @Test
-    void testWordsContainingStopWord() {
+    public void testWordsContainingStopWord() {
         assertEquals(4, wordCounter.calculateResult("Mary had a little lamb").getCount());
         assertEquals(4, wordCounter.calculateResult("Mary had a little lamb").getUniqueWordsCount());
     }
 
     @Test
-    void testStopWordAndSpecialCharacter() {
+    public void testStopWordAndSpecialCharacter() {
         assertEquals(0, wordCounter.calculateResult("a&").getCount());
         assertEquals(0, wordCounter.calculateResult("a&").getUniqueWordsCount());
     }

@@ -9,10 +9,10 @@ import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class InputReaderFromStdInTest {
+public class InputReaderFromStdInTest {
 
     @Test
-    void testOnlyFirstLineIsRead() {
+    public void testOnlyFirstLineIsRead() {
         String initialString = "firstLine\nsecondLine";
         InputStream targetStream = new ByteArrayInputStream(initialString.getBytes());
         System.setIn(targetStream);
