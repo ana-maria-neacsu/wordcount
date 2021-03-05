@@ -6,5 +6,8 @@
 2. Iteration
     file is in UTF-8
 
+6.
+    average size is calculated on all (not only unique) words
+
 
 

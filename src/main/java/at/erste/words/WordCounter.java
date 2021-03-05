@@ -3,10 +3,7 @@ package at.erste.words;
 import at.erste.words.ouput.WordCounterResult;
 import at.erste.words.stopwords.StopWords;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class WordCounter {
@@ -32,7 +29,8 @@ public class WordCounter {
                 words.add(word);
             }
         }
-        return new WordCounterResult(words.size(), new HashSet<>(words).size());
+        OptionalDouble average = words.stream().mapToInt(word -> word.length()).average();
+        return new WordCounterResult(words.size(), new HashSet<>(words).size(), average.orElse(0));
     }
 
     private boolean isStopWord(final String word) {
