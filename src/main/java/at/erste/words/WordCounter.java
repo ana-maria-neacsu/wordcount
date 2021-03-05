@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class WordCounter {
 
     // this regex matches white spaces, '.', '?', '!', '#'
-    private static final String PARSING_REGEX = "[\\s\\.!?#]+";
+    private static final String PARSING_REGEX = "[\\s.!?#]+";
     private static final Pattern pattern = Pattern.compile("[a-zA-Z-]+");
     private final StopWords stopWords;
 
@@ -33,7 +33,7 @@ public class WordCounter {
                 words.add(word);
             }
         }
-        OptionalDouble average = words.stream().mapToInt(word -> word.length()).average();
+        OptionalDouble average = words.stream().mapToInt(String::length).average();
         return new WordCounterResult(words.size(), new HashSet<>(words).size(), average.orElse(0));
     }
 
