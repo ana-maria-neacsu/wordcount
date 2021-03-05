@@ -50,13 +50,13 @@ public class WordCounterTest {
 
     @Test
     public void testWordWithSpecialCharactersStarting() {
-        assertEquals(0, wordCounter.calculateResult("#word").getCount());
-        assertEquals(0, wordCounter.calculateResult("#word").getUniqueWordsCount());
+        assertEquals(1, wordCounter.calculateResult("#word").getCount());
+        assertEquals(1, wordCounter.calculateResult("#word").getUniqueWordsCount());
     }
 
     @Test
     public void testWordWithSpecialCharactersEnding() {
-        assertEquals(0, wordCounter.calculateResult("word!").getCount());
-        assertEquals(0, wordCounter.calculateResult("word!").getUniqueWordsCount());
+        assertEquals(1, wordCounter.calculateResult("word!").getCount());
+        assertEquals(1, wordCounter.calculateResult("word!").getUniqueWordsCount());
     }
 }
