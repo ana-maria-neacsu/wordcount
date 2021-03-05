@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 public class WordCounter {
 
+    // this regex matches white spaces, '.', '?', '!' and '-'
+    public static final String PARSING_REGEX = "[\\s-\\.!?]+";
     private static final Pattern pattern = Pattern.compile("[a-zA-Z]+");
     private final Optional<StopWords> stopWords;
 
@@ -21,7 +23,7 @@ public class WordCounter {
     public WordCounterResult calculateResult(final String input) {
         List<String> words = new ArrayList<>();
 
-        for (String word : input.split("\\s+")) {
+        for (String word : input.split(PARSING_REGEX)) {
 
             if (isStopWord(word)) {
                 continue;
