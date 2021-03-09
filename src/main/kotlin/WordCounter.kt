@@ -17,7 +17,8 @@ class LatinWordCounter(
         return WordCount(
                 words.size,
                 words.map { it.toLowerCase() }.distinct().size,
-                if (words.isNotEmpty()) words.sumBy { it.length }.toDouble() / words.size else 0.0
+                if (words.isNotEmpty()) words.sumBy { it.length }.toDouble() / words.size else 0.0,
+                words
         )
     }
 
@@ -30,5 +31,6 @@ class LatinWordCounter(
 data class WordCount(
         val total: Int,
         val unique: Int,
-        val avgLength: Double
+        val avgLength: Double,
+        val index: List<String> = emptyList()
 )
