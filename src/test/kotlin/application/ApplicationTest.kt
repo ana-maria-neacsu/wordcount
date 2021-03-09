@@ -1,7 +1,6 @@
 package application
 
 import org.junit.Assert
-import org.junit.Ignore
 import org.junit.Test
 import java.io.ByteArrayOutputStream
 import java.io.OutputStream
@@ -71,7 +70,6 @@ class ApplicationTest {
     }
 
     @Test
-    @Ignore
     fun `test manual input with duplicated words and index specified`() {
         val outputStream = ByteArrayOutputStream()
         val application = createApplication(outputStream, "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
@@ -80,7 +78,7 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"")
 
-        val expectedOutput = generateOutput("Number of words: 7, unique: 6; average word length: 6.43 characters", index)
+        val expectedOutput = generateOutput("Number of words: 7, unique: 6; average word length: 6.43 characters", 1, index)
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -94,7 +92,7 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"")
 
-        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", index)
+        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", 2, index)
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -109,7 +107,7 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"", textFilePath)
 
-        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", index)
+        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", 4, index)
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -117,34 +115,21 @@ class ApplicationTest {
     @Test
     fun `test an empty text with index specified`() {
         val outputStream = ByteArrayOutputStream()
-        val application = createApplication(outputStream, " ")
+        val application = createApplication(outputStream, "")
         val index = emptyList<String>()
 
         application.run("-index")
 
-        val expectedOutput = generateOutput("Number of words: 0, unique: 0; average word length: 0.00 characters", index)
+        val expectedOutput = generateOutput("Number of words: 0, unique: 0; average word length: 0.00 characters", 0, index)
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
 
-    @Test
-    @Ignore
-    fun `test line feed is interrupted by EOF`() {
-        val outputStream = ByteArrayOutputStream()
-        val application = createApplication(outputStream, "")
-
-        application.run()
-
-        val expectedOutput = "Please, do not interrupt a line feed with EOF symbol...${System.lineSeparator()}"
-        val actualOutput = String(outputStream.toByteArray())
-        Assert.assertEquals(expectedOutput, actualOutput)
-    }
-
-    private fun generateOutput(mainOutputLine: String, indexList: List<String>? = null): String {
+    private fun generateOutput(mainOutputLine: String, unknownWordsCounter: Int = 0, indexList: List<String>? = null): String {
         return "$mainOutputLine${System.lineSeparator()}" +
                 (indexList?.joinToString(
                         System.lineSeparator(),
-                        prefix = "Index:${System.lineSeparator()}",
+                        prefix = "Index (unknown $unknownWordsCounter):${System.lineSeparator()}",
                         postfix = if (indexList.isNotEmpty()) System.lineSeparator() else ""
                 ) ?: "")
     }

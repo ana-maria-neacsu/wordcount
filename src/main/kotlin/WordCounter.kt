@@ -19,7 +19,7 @@ class LatinWordCounter(
                 words.size,
                 words.map { it.toLowerCase() }.distinct().size,
                 if (words.isNotEmpty()) words.sumBy { it.length }.toDouble() / words.size else 0.0,
-                words
+                words.map { it.toLowerCase() to it }.toMap().values
                         .sortedWith { first, second -> first.compareTo(second, true)}
                         .map { word -> WordFromIndex(word, dictionary.none { wordFromDictionary -> wordFromDictionary.compareTo(word, true) == 0 }) }
         )

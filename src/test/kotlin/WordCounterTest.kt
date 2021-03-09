@@ -8,14 +8,14 @@ class WordCounterTest {
     @Test
     fun `test count of one word without whitespaces`() {
         val expectedCount = WordCount(1, 1, 4.0, listOf(WordFromIndex("word")))
-        val actualCount = simpleWordCounter . count ("word", setOf("word"))
+        val actualCount = simpleWordCounter.count("word", setOf("word"))
 
         Assert.assertEquals(expectedCount, actualCount)
     }
 
     @Test
     fun `test count of multiple words with whitespaces`() {
-        val expectedCount = WordCount(3, 1, 4.0, (1..3).map { WordFromIndex("word") })
+        val expectedCount = WordCount(3, 1, 4.0, listOf(WordFromIndex("word")))
         val actualCount = simpleWordCounter.count("word word word", setOf("word"))
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -23,7 +23,7 @@ class WordCounterTest {
 
     @Test
     fun `test words count separated by special characters`() {
-        val expectedCount = WordCount(15, 2, 61.0 / 15.0, (1..14).map { WordFromIndex("word") } + listOf(WordFromIndex("word-")))
+        val expectedCount = WordCount(15, 2, 61.0 / 15.0, listOf(WordFromIndex("word"), WordFromIndex("word-")))
         val actualCount = simpleWordCounter.count("word, word. word! word# word? word! word@ word\$ word% word^ word& word* word- word. word,", setOf("word", "word-"))
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -93,7 +93,6 @@ class WordCounterTest {
                         WordFromIndex("fall"),
                         WordFromIndex("great", true),
                         WordFromIndex("had", true),
-                        WordFromIndex("Humpty-Dumpty"),
                         WordFromIndex("Humpty-Dumpty"),
                         WordFromIndex("sat"),
                         WordFromIndex("wall")

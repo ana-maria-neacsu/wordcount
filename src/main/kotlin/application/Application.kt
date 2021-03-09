@@ -5,7 +5,6 @@ import ResourceFileStopWordsProvider
 import java.io.File
 import java.io.InputStream
 import java.io.PrintStream
-import java.lang.NullPointerException
 
 class Application(
         private val inputStream: InputStream = System.`in`,
@@ -17,12 +16,7 @@ class Application(
         val inputText = if (arguments.textFilePath == null) {
             print("Enter text: ")
 
-            try {
-                inputStream.bufferedReader().readLine()
-            } catch (e: NullPointerException) {
-                printStream.println("Please, do not interrupt a line feed with EOF symbol...")
-                return
-            }
+            inputStream.bufferedReader().let { it.readLine() ?: it.readText() }
         }
         else
         {
@@ -36,10 +30,11 @@ class Application(
         val latinWordCounter = LatinWordCounter(stopWordsProvider)
 
         val wordsCount = latinWordCounter.count(inputText, dictionary)
+        val unknownWordCounter = wordsCount.index.count { it.unknown }
 
         printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}; average word length: ${String.format("%.2f", wordsCount.avgLength)} characters")
         if (arguments.withIndex) {
-            printStream.println("Index:")
+            printStream.println("Index (unknown $unknownWordCounter):")
             wordsCount.index.forEach { printStream.println(it) }
         }
     }
