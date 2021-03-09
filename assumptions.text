@@ -23,5 +23,11 @@ Words having hypens in the beginning or the end also should be treated as unique
 
 Iteration #6
 When there is no word, the average length is 0.0
+
+Iteration #7
 Index is sorted alphabetically ignoring the case
+
+Iteration #8
+Index shows only unique words
+Each word in a dictionary is on a new line. No need for correctness check
 

@@ -1,5 +1,5 @@
 interface WordCounter {
-    fun count(text: String): WordCount
+    fun count(text: String, dictionary: Set<String>): WordCount
 }
 
 class LatinWordCounter(
@@ -7,18 +7,21 @@ class LatinWordCounter(
 ) : WordCounter {
     private val stopWords: Set<String> = stopWordsProvider?.getStopWords() ?: emptySet()
 
-    override fun count(text: String): WordCount {
+    override fun count(text: String, dictionary: Set<String>): WordCount {
         val tokens = text.split(SEPARATOR_CHARACTER_REGEX)
 
         val words = tokens.filter { token ->
             val containsInvalidCharacter = token.contains(INVALID_CHARACTER_REGEX)
             !containsInvalidCharacter && token.isNotEmpty() && stopWords.none { stopWord -> stopWord.compareTo(token, true) == 0 }
         }
+
         return WordCount(
                 words.size,
                 words.map { it.toLowerCase() }.distinct().size,
                 if (words.isNotEmpty()) words.sumBy { it.length }.toDouble() / words.size else 0.0,
-                words.sortedWith { first, second -> first.compareTo(second, true)}
+                words
+                        .sortedWith { first, second -> first.compareTo(second, true)}
+                        .map { word -> WordFromIndex(word, dictionary.none { wordFromDictionary -> wordFromDictionary.compareTo(word, true) == 0 }) }
         )
     }
 
@@ -32,5 +35,14 @@ data class WordCount(
         val total: Int,
         val unique: Int,
         val avgLength: Double,
-        val index: List<String> = emptyList()
+        val index: List<WordFromIndex> = emptyList()
 )
+
+data class WordFromIndex(
+        val word: String,
+        val unknown: Boolean = false
+) {
+    override fun toString(): String {
+        return word + (if (unknown) "*" else "")
+    }
+}
