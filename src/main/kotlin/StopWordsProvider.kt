@@ -1,4 +1,6 @@
-interface StopWordsProvider{
+import java.lang.RuntimeException
+
+interface StopWordsProvider {
     fun getStopWords(): Set<String>
 }
 
@@ -7,11 +9,18 @@ class ResourceFileStopWordsProvider(
 ) : StopWordsProvider {
 
     override fun getStopWords(): Set<String> {
-        return LatinWordCounter::class.java.getResource(resourceFilePath).readText().split(NEW_LINE_REGEX).toSet()
+        val stopWordsResource = LatinWordCounter::class.java.getResource(resourceFilePath)
+                ?: throw NoResourceFileWithStopWordsFound()
+        return stopWordsResource.readText()
+                .split(NEW_LINE_REGEX)
+                .filter { it.isNotEmpty() }
+                .map { it.toLowerCase() }
+                .toSet()
     }
 
     companion object {
-        private const val STOP_WORDS_FILE_PATH = "/stopwords.txt"
         private val NEW_LINE_REGEX = Regex("(\\r\\n|\\r|\\n)")
     }
 }
+
+class NoResourceFileWithStopWordsFound : RuntimeException()

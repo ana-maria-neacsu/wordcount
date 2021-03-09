@@ -8,3 +8,4 @@ A new line symbol provides a token to finish the input
 Iteration #2
 Number of stopwords can fit into RAM
 Stopwords can be compared using ignored case, because some of the letters can be capital
+Stopwords can be stored in lowercase format
