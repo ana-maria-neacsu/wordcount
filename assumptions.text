@@ -13,3 +13,7 @@ Stopwords can be stored in lowercase format
 Iteration #3
 Text in the file is good to be stored in a single String without a need to be read using StringBuffers
 If file doesn't exist, it should ask for manual input
+
+Iteration #4
+Special characters are now treated as word separators
+Unique words should be unique regardless the case of characters

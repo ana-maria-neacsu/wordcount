@@ -23,9 +23,9 @@ class ResourceFileStopWordsProviderTest {
     @Test
     fun `test simple tokens with duplicates and different cases for characters`()
     {
-        val stopWordsProvider = ResourceFileStopWordsProvider("\\stopWords.txt")
+        val stopWordsProvider = ResourceFileStopWordsProvider("\\stopwords.txt")
 
-        val expectedStopWords = setOf("the", "a", "of")
+        val expectedStopWords = setOf("the", "a", "of", "on")
         val actualStopWords = stopWordsProvider.getStopWords()
         Assert.assertEquals(expectedStopWords, actualStopWords)
     }

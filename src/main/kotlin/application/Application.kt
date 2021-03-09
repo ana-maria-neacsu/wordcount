@@ -34,7 +34,7 @@ class Application(
 
         val wordsCount = latinWordCounter.count(inputText)
 
-        printStream.println("Number of words: $wordsCount")
+        printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}")
     }
 }
 
