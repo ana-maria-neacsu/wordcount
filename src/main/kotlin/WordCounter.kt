@@ -14,7 +14,11 @@ class LatinWordCounter(
             val containsInvalidCharacter = token.contains(INVALID_CHARACTER_REGEX)
             !containsInvalidCharacter && token.isNotEmpty() && stopWords.none { stopWord -> stopWord.compareTo(token, true) == 0 }
         }
-        return WordCount(words.size, words.map { it.toLowerCase() }.distinct().size )
+        return WordCount(
+                words.size,
+                words.map { it.toLowerCase() }.distinct().size,
+                if (words.isNotEmpty()) words.sumBy { it.length }.toDouble() / words.size else 0.0
+        )
     }
 
     companion object {
@@ -25,5 +29,6 @@ class LatinWordCounter(
 
 data class WordCount(
         val total: Int,
-        val unique: Int
+        val unique: Int,
+        val avgLength: Double
 )

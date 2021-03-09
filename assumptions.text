@@ -20,3 +20,6 @@ Unique words should be unique regardless the case of characters
 
 Iteration #5
 Words having hypens in the beginning or the end also should be treated as unique
+
+Iteration #6
+When there is no word, the average length is 0.0
