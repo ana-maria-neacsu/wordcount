@@ -40,7 +40,11 @@ class ApplicationTest {
 
         application.run()
 
-        val expectedOutput = generateOutput("Number of words: 1, unique: 1; average word length: 4.00 characters")
+        val expectedOutput = generateOutput(
+                "Number of words: 1, unique: 1; average word length: 4.00 characters",
+                true,
+                lastManualInput = true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -52,7 +56,11 @@ class ApplicationTest {
 
         application.run("nonexistingpath")
 
-        val expectedOutput = generateOutput("Number of words: 1, unique: 1; average word length: 4.00 characters")
+        val expectedOutput = generateOutput(
+                "Number of words: 1, unique: 1; average word length: 4.00 characters",
+                true,
+                lastManualInput = true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -64,7 +72,11 @@ class ApplicationTest {
 
         application.run()
 
-        val expectedOutput = generateOutput("Number of words: 7, unique: 6; average word length: 6.43 characters")
+        val expectedOutput = generateOutput(
+                "Number of words: 7, unique: 6; average word length: 6.43 characters",
+                true,
+                lastManualInput = true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -78,7 +90,13 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"")
 
-        val expectedOutput = generateOutput("Number of words: 7, unique: 6; average word length: 6.43 characters", 1, index)
+        val expectedOutput = generateOutput(
+                "Number of words: 7, unique: 6; average word length: 6.43 characters",
+                true,
+                1,
+                index,
+                true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -92,7 +110,13 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"")
 
-        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", 2, index)
+        val expectedOutput = generateOutput(
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                true,
+                2,
+                index,
+                true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -107,7 +131,12 @@ class ApplicationTest {
 
         application.run("-index", "-dictionary=\"$dictionaryFilePath\"", textFilePath)
 
-        val expectedOutput = generateOutput("Number of words: 4, unique: 4; average word length: 4.25 characters", 4, index)
+        val expectedOutput = generateOutput(
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                false,
+                4,
+                index
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -115,23 +144,60 @@ class ApplicationTest {
     @Test
     fun `test an empty text with index specified`() {
         val outputStream = ByteArrayOutputStream()
-        val application = createApplication(outputStream, "")
+        val application = createApplication(outputStream, " ")
         val index = emptyList<String>()
 
         application.run("-index")
 
-        val expectedOutput = generateOutput("Number of words: 0, unique: 0; average word length: 0.00 characters", 0, index)
+        val expectedOutput = generateOutput(
+                "Number of words: 0, unique: 0; average word length: 0.00 characters",
+                true,
+                0,
+                index,
+                true
+        )
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
 
-    private fun generateOutput(mainOutputLine: String, unknownWordsCounter: Int = 0, indexList: List<String>? = null): String {
-        return "$mainOutputLine${System.lineSeparator()}" +
+    @Test
+    //It wouldn't hurt to add one more test for multiple manual inputs with index included
+    fun `test multiple manual inputs are provided`() {
+        val outputStream = ByteArrayOutputStream()
+        val application = createApplication(outputStream, listOf("Mary had a little lamb", "a bb ccc dddd", "").joinToString(System.lineSeparator()))
+
+        application.run()
+
+        val expectedOutputLine1 = generateOutput(
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                true,
+                0,
+        )
+        val expectedOutputLine2 = generateOutput(
+                "Number of words: 3, unique: 3; average word length: 3.00 characters",
+                true,
+                0,
+                lastManualInput = true
+        )
+        val actualOutput = String(outputStream.toByteArray())
+        Assert.assertEquals(expectedOutputLine1 + expectedOutputLine2, actualOutput)
+    }
+
+    private fun generateOutput(
+            mainOutputLine: String,
+            manualInput: Boolean = false,
+            unknownWordsCounter: Int = 0,
+            indexList: List<String>? = null,
+            lastManualInput: Boolean = false
+    ): String {
+        return (if (manualInput) "Enter text: " else "") +
+                "$mainOutputLine${System.lineSeparator()}" +
                 (indexList?.joinToString(
                         System.lineSeparator(),
                         prefix = "Index (unknown $unknownWordsCounter):${System.lineSeparator()}",
                         postfix = if (indexList.isNotEmpty()) System.lineSeparator() else ""
-                ) ?: "")
+                ) ?: "") +
+                if (lastManualInput) "Enter text: " else ""
     }
 
     private fun createApplication(outputStream: OutputStream, input: String = ""): Application {

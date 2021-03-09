@@ -31,3 +31,6 @@ Iteration #8
 Index shows only unique words
 Each word in a dictionary is on a new line. No need for correctness check
 
+Iteration #9
+We assume that behavior for file input don't change here. A multiple input option will appear only when manual input mode is on
+Example in requirements is wrong. `a` is not being ignored in the second sample

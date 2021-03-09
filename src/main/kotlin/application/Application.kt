@@ -2,6 +2,7 @@ package application
 
 import LatinWordCounter
 import ResourceFileStopWordsProvider
+import java.io.BufferedReader
 import java.io.File
 import java.io.InputStream
 import java.io.PrintStream
@@ -12,31 +13,39 @@ class Application(
 ) {
     fun run(vararg args: String) {
         val arguments = parseInputArguments(*args)
+        val inputFromFile = arguments.textFilePath != null
 
-        val inputText = if (arguments.textFilePath == null) {
-            print("Enter text: ")
-
-            inputStream.bufferedReader().let { it.readLine() ?: it.readText() }
-        }
-        else
-        {
-            File(arguments.textFilePath).readLines().joinToString(" ")
+        val bufferedReader = inputStream.bufferedReader()
+        var inputText = if (!inputFromFile) {
+            bufferedReader.readInputText()
+        } else {
+            File(arguments.textFilePath!!).readLines().joinToString(" ")
         }
 
-        val dictionaryFile = arguments.dictionaryFilePath?.let { File(it) }
-        val dictionary = if (dictionaryFile?.exists() == true) dictionaryFile.readLines().toSet() else emptySet()
+        while(inputText != "" || inputFromFile) {
+            val dictionaryFile = arguments.dictionaryFilePath?.let { File(it) }
+            val dictionary = if (dictionaryFile?.exists() == true) dictionaryFile.readLines().toSet() else emptySet()
 
-        val stopWordsProvider = ResourceFileStopWordsProvider(STOPWORDS_FILE_PATH)
-        val latinWordCounter = LatinWordCounter(stopWordsProvider)
+            val stopWordsProvider = ResourceFileStopWordsProvider(STOPWORDS_FILE_PATH)
+            val latinWordCounter = LatinWordCounter(stopWordsProvider)
 
-        val wordsCount = latinWordCounter.count(inputText, dictionary)
-        val unknownWordCounter = wordsCount.index.count { it.unknown }
+            val wordsCount = latinWordCounter.count(inputText, dictionary)
+            val unknownWordCounter = wordsCount.index.count { it.unknown }
 
-        printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}; average word length: ${String.format("%.2f", wordsCount.avgLength)} characters")
-        if (arguments.withIndex) {
-            printStream.println("Index (unknown $unknownWordCounter):")
-            wordsCount.index.forEach { printStream.println(it) }
+            printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}; average word length: ${String.format("%.2f", wordsCount.avgLength)} characters")
+            if (arguments.withIndex) {
+                printStream.println("Index (unknown $unknownWordCounter):")
+                wordsCount.index.forEach { printStream.println(it) }
+            }
+
+            if (inputFromFile) break
+            inputText = bufferedReader.readInputText()
         }
+    }
+
+    private fun BufferedReader.readInputText(): String {
+        printStream.print("Enter text: ")
+        return readLine() ?: readText()
     }
 
     // Needs to be extracted to argument parser and tested or used a third-party library
