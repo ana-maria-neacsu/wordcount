@@ -3,7 +3,7 @@ import org.junit.Test
 
 class WordCounterTest {
 
-    private val simpleWordCounter = LatinWordCounter()
+    private val simpleWordCounter = getLatinWordCounter()
 
     @Test
     fun `test count of one word without whitespaces`() {
@@ -67,5 +67,36 @@ class WordCounterTest {
         val actualCount = simpleWordCounter.count("SomeWord\t")
 
         Assert.assertEquals("There is no legal word in the input text", expectedCount, actualCount)
+    }
+
+    @Test
+    fun `test words count with ignored stopwords`() {
+        val wordCounterWithStopWords = getLatinWordCounter("a")
+        val expectedCount = 4
+        val actualCount = wordCounterWithStopWords.count("Mary had a little lamb")
+
+        Assert.assertEquals("There should be only 4 words", expectedCount, actualCount)
+    }
+
+    @Test
+    fun `test all words are stopwords with different cases`() {
+        val wordCounterWithStopWords = getLatinWordCounter("a", "the", "on", "off", "on")
+        val expectedCount = 0
+        val actualCount = wordCounterWithStopWords.count("On the A on ofF")
+
+        Assert.assertEquals("There should no words because all of them are stop words", expectedCount, actualCount)
+    }
+
+    private fun getLatinWordCounter(vararg stopWords: String): WordCounter {
+        return LatinWordCounter(MockedStopWordsProvider(stopWords.asList()))
+    }
+
+    class MockedStopWordsProvider(
+            private val stopWords: List<String>
+    ) : StopWordsProvider
+    {
+        override fun getStopWords(): Set<String> {
+            return stopWords.toSet()
+        }
     }
 }

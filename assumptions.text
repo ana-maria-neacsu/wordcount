@@ -4,3 +4,7 @@ Words with any other characters other than a-zA-Z should be ignored
 Since the input comes from the command line we assume that it's rather short not to care about RAM and therefor we won't be using StringBuffers
 We assume that the application takes only one input and gives an answer and finishes the execution
 A new line symbol provides a token to finish the input
+
+Iteration #2
+Number of stopwords can fit into RAM
+Stopwords can be compared using ignored case, because some of the letters can be capital
