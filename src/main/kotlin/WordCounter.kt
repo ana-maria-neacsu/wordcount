@@ -18,8 +18,8 @@ class LatinWordCounter(
     }
 
     companion object {
-        private val INVALID_CHARACTER_REGEX = Regex("[^a-zA-Z]")
-        private val SEPARATOR_CHARACTER_REGEX = Regex("([#?!@\$%^&*-., \t\n\r])")
+        private val INVALID_CHARACTER_REGEX = Regex("[^a-zA-Z-]")
+        private val SEPARATOR_CHARACTER_REGEX = Regex("([#?!@\$%^&*., \t\n\r])")
     }
 }
 

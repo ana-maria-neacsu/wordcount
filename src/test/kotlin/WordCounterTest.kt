@@ -23,7 +23,7 @@ class WordCounterTest {
 
     @Test
     fun `test words count separated by special characters`() {
-        val expectedCount =  WordCount(15, 1)
+        val expectedCount =  WordCount(15, 2)
         val actualCount = simpleWordCounter.count("word, word. word! word# word? word! word@ word\$ word% word^ word& word* word- word. word,")
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -82,7 +82,7 @@ class WordCounterTest {
     @Test
     fun `test words count with duplicated words`() {
         val wordCounterWithStopWords = getLatinWordCounter("a", "the", "on", "off")
-        val expectedCount = WordCount(9, 7)
+        val expectedCount = WordCount(7, 6)
         val actualCount = wordCounterWithStopWords.count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
 
         Assert.assertEquals(expectedCount, actualCount)

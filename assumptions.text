@@ -17,3 +17,6 @@ If file doesn't exist, it should ask for manual input
 Iteration #4
 Special characters are now treated as word separators
 Unique words should be unique regardless the case of characters
+
+Iteration #5
+Words having hypens in the beginning or the end also should be treated as unique

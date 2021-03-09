@@ -65,7 +65,7 @@ class ApplicationTest
 
         application.run()
 
-        val expectedOutput = "Number of words: 9, unique: 7${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 7, unique: 6${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
