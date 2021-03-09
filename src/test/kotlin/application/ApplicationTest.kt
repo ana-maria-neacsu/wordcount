@@ -16,7 +16,7 @@ class ApplicationTest
 
         application.run(filePath)
 
-        val expectedOutput = "Number of words: 4, unique: 4${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 4, unique: 4; average word length: 4.25 characters${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -29,7 +29,7 @@ class ApplicationTest
 
         application.run(filePath)
 
-        val expectedOutput = "Number of words: 0, unique: 0${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 0, unique: 0; average word length: 0.00 characters${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -41,7 +41,7 @@ class ApplicationTest
 
         application.run()
 
-        val expectedOutput = "Number of words: 1, unique: 1${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 1, unique: 1; average word length: 4.00 characters${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -53,7 +53,7 @@ class ApplicationTest
 
         application.run("nonexistingpath")
 
-        val expectedOutput = "Number of words: 1, unique: 1${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 1, unique: 1; average word length: 4.00 characters${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }
@@ -65,7 +65,7 @@ class ApplicationTest
 
         application.run()
 
-        val expectedOutput = "Number of words: 7, unique: 6${System.lineSeparator()}"
+        val expectedOutput = "Number of words: 7, unique: 6; average word length: 6.43 characters${System.lineSeparator()}"
         val actualOutput = String(outputStream.toByteArray())
         Assert.assertEquals(expectedOutput, actualOutput)
     }

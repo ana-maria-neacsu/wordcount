@@ -13,18 +13,15 @@ class Application(
     fun run(vararg args: String) {
         var inputText = ""
         var fileExists = false
-        if (args.isNotEmpty())
-        {
+        if (args.isNotEmpty()) {
             val inputFile = File(args[0])
-            if (inputFile.exists())
-            {
+            if (inputFile.exists()) {
                 fileExists = true
                 inputText = inputFile.readLines().joinToString(" ")
             }
         }
 
-        if (!fileExists)
-        {
+        if (!fileExists) {
             print("Enter text: ")
             inputText = inputStream.bufferedReader().readLine()
         }
@@ -34,7 +31,7 @@ class Application(
 
         val wordsCount = latinWordCounter.count(inputText)
 
-        printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}")
+        printStream.println("Number of words: ${wordsCount.total}, unique: ${wordsCount.unique}; average word length: ${String.format("%.2f", wordsCount.avgLength)} characters")
     }
 }
 
