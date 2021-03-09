@@ -1,4 +1,6 @@
 Iteration #1:
 Only Space is counted as a word separator
 Words with any other characters other than a-zA-Z should be ignored
-Since the input comes from the command line we assume that i's rather short not to care about RAM and therefor we won't be using StringBufferst
+Since the input comes from the command line we assume that it's rather short not to care about RAM and therefor we won't be using StringBuffers
+We assume that the application takes only one input and gives an answer and finishes the execution
+A new line symbol provides a token to finish the input
