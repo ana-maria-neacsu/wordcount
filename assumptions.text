@@ -9,3 +9,6 @@ Iteration #2
 Number of stopwords can fit into RAM
 Stopwords can be compared using ignored case, because some of the letters can be capital
 Stopwords can be stored in lowercase format
+
+Iteration #3
+Text in the file is good to be stored in a single String without a need to be read using StringBuffers
