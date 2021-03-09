@@ -73,7 +73,7 @@ class ApplicationTest {
     fun `test manual input with duplicated words and index specified`() {
         val outputStream = ByteArrayOutputStream()
         val application = createApplication(outputStream, "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
-        val index = listOf("Humpty-Dumpty", "sat", "wall", "Humpty-Dumpty", "had", "great", "fall")
+        val index = listOf("fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall")
 
         application.run("-index")
 
@@ -86,7 +86,7 @@ class ApplicationTest {
     fun `test a simple mytexttxt file with four words as an argument for application and index for output`() {
         val outputStream = ByteArrayOutputStream()
         val application = createApplication(outputStream)
-        val index = listOf("Mary", "had", "little", "lamb")
+        val index = listOf("had", "lamb", "little", "Mary")
         val filePath = ApplicationTest::class.java.getResource("/ApplicationInputFiles/mytext.txt").path
 
         application.run("-index", filePath)

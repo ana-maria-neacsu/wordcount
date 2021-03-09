@@ -23,7 +23,7 @@ class WordCounterTest {
 
     @Test
     fun `test words count separated by special characters`() {
-        val expectedCount =  WordCount(15, 2, 61.0/15.0, (1..12).map { "word" } + listOf("word-", "word", "word")  )
+        val expectedCount = WordCount(15, 2, 61.0 / 15.0, (1..14).map { "word" } + listOf("word-"))
         val actualCount = simpleWordCounter.count("word, word. word! word# word? word! word@ word\$ word% word^ word& word* word- word. word,")
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -64,7 +64,7 @@ class WordCounterTest {
     @Test
     fun `test words count with ignored stopwords`() {
         val wordCounterWithStopWords = getLatinWordCounter("a")
-        val expectedCount = WordCount(4, 4, 17.0/4, listOf("Mary", "had", "little", "lamb"))
+        val expectedCount = WordCount(4, 4, 17.0 / 4, listOf("had", "lamb", "little", "Mary"))
         val actualCount = wordCounterWithStopWords.count("Mary had a little lamb")
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -82,7 +82,7 @@ class WordCounterTest {
     @Test
     fun `test words count with duplicated words`() {
         val wordCounterWithStopWords = getLatinWordCounter("a", "the", "on", "off")
-        val expectedCount = WordCount(7, 6, 45.0/7, listOf("Humpty-Dumpty", "sat", "wall", "Humpty-Dumpty", "had", "great", "fall"))
+        val expectedCount = WordCount(7, 6, 45.0 / 7, listOf("fall", "great", "had", "Humpty-Dumpty", "Humpty-Dumpty", "sat", "wall"))
         val actualCount = wordCounterWithStopWords.count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
 
         Assert.assertEquals(expectedCount, actualCount)
@@ -94,8 +94,7 @@ class WordCounterTest {
 
     class MockedStopWordsProvider(
             private val stopWords: List<String>
-    ) : StopWordsProvider
-    {
+    ) : StopWordsProvider {
         override fun getStopWords(): Set<String> {
             return stopWords.toSet()
         }
