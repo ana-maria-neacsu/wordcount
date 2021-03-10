@@ -1,0 +1,2 @@
+iteration 2
+    stop words are considered case sensitive
