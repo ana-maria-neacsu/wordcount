@@ -23,6 +23,12 @@ public class App {
         WordCountService wordCountService = new WordCountService();
 
         List<String> stopwords = iOutils.readStopWords();
-        System.out.println(wordCountService.countWords(text, stopwords));
+        System.out.println(createOutput(wordCountService.countWords(text, stopwords),
+                wordCountService.countUniqueWords(text,stopwords)
+                ));
+    }
+
+    private static String createOutput(int numberOfWords,int numberOfUniqueWords){
+        return "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords;
     }
 }

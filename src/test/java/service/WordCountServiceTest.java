@@ -41,25 +41,54 @@ public class WordCountServiceTest {
     }
 
     @Test
-    public void countWordRequirement(){
+    public void countWordRequirementTest(){
         Assertions.assertEquals(4, wordCountService.countWords("Mary had a little lamb",initializeStopWords()));
     }
 
     @Test
-    public void countWordWithNoStopWord(){
+    public void countWordWithNoStopWordTest(){
         Assertions.assertEquals(5, wordCountService.countWords("Mary had a little lamb",
                 new ArrayList<String>()));
     }
 
     @Test
-    public void countWordOnlyStopWords(){
+    public void countWordOnlyStopWordsTest(){
         Assertions.assertEquals(0, wordCountService.countWords("a on off test",
                 Arrays.asList("on","off","a","test")));
     }
 
     @Test
-    public void countWordWithDifferentCases(){
+    public void countWordWithDifferentCasesTest(){
         Assertions.assertEquals(2, wordCountService.countWords("A on oFF test",
                 Arrays.asList("on","off","a","oFF")));
     }
+
+    @Test
+    public void countUniqueWordsRequirementTest(){
+        Assertions.assertEquals(7, wordCountService.countUniqueWords(
+                "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
+                Arrays.asList("on","off","a","the")));
+    }
+
+    @Test
+    public void countWordsRequirementTest(){
+        Assertions.assertEquals(9, wordCountService.countUniqueWords(
+                "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
+                Arrays.asList("on","off","a","the")));
+    }
+
+    @Test
+    public void countUniqueWordsCaseSensitiveTest(){
+        Assertions.assertEquals(7, wordCountService.countUniqueWords(
+                "THE quick brown fox jumps over the lazy Brown fox",
+                Arrays.asList("THE","the")));
+    }
+
+    @Test
+    public void countUniqueWordsAllRepeatedTest(){
+        Assertions.assertEquals(1, wordCountService.countUniqueWords(
+                "word word word word",
+                Arrays.asList()));
+    }
+
 }
