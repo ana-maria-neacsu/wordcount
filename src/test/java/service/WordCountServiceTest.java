@@ -72,7 +72,7 @@ public class WordCountServiceTest {
 
     @Test
     public void countWordsRequirementTest(){
-        Assertions.assertEquals(9, wordCountService.countUniqueWords(
+        Assertions.assertEquals(9, wordCountService.countWords(
                 "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
                 Arrays.asList("on","off","a","the")));
     }
