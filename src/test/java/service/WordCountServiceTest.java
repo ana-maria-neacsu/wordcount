@@ -65,14 +65,14 @@ public class WordCountServiceTest {
 
     @Test
     public void countUniqueWordsRequirementTest(){
-        Assertions.assertEquals(7, wordCountService.countUniqueWords(
+        Assertions.assertEquals(6, wordCountService.countUniqueWords(
                 "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
                 Arrays.asList("on","off","a","the")));
     }
 
     @Test
     public void countWordsRequirementTest(){
-        Assertions.assertEquals(9, wordCountService.countWords(
+        Assertions.assertEquals(7, wordCountService.countWords(
                 "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.",
                 Arrays.asList("on","off","a","the")));
     }
@@ -91,4 +91,24 @@ public class WordCountServiceTest {
                 Arrays.asList()));
     }
 
+    @Test
+    public void countUniqueHyphenatedDottedWordsTest(){
+        Assertions.assertEquals(2, wordCountService.countUniqueWords(
+                "..-  .-- --. - --- -.--",
+                Arrays.asList("-")));
+    }
+
+    @Test
+    public void countHyphenatedWordsTest(){
+        Assertions.assertEquals(5, wordCountService.countWords(
+                "word- -word word w-ord --",
+                Arrays.asList()));
+    }
+
+    @Test
+    public void countUniqueHyphenatedWordsTest(){
+        Assertions.assertEquals(3, wordCountService.countUniqueWords(
+                "word- word -- -",
+                Arrays.asList("-")));
+    }
 }
