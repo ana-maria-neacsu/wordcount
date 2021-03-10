@@ -21,5 +21,18 @@ public class WordCountService {
                 .count();
     }
 
+    public double averageWordsLength(String text, List<String> stopWords){
+        int numberOfWords = countWords(text,stopWords);
+        if(numberOfWords == 0)
+            return 0;
+
+        double length = Arrays.stream(text.split("[\\s.]+")).filter(t->
+                t.matches("[a-zA-Z-]+"))
+                .filter(t -> !stopWords.contains(t))
+                .map(String::length).reduce(0, (a,b) -> a+b).doubleValue();
+
+        return length / numberOfWords;
+    }
+
 
 }

@@ -111,4 +111,34 @@ public class WordCountServiceTest {
                 "word- word -- -",
                 Arrays.asList("-")));
     }
+
+    @Test
+    public void averageLengthOfTextTest(){
+        Assertions.assertEquals(4, wordCountService.averageWordsLength(
+                "test word on more test",
+                Arrays.asList("on","and")));
+    }
+
+    @Test
+    public void averageLengthOfEmptyTextTest(){
+        Assertions.assertEquals(0, wordCountService.averageWordsLength(
+                "",
+                Arrays.asList("on","and")));
+    }
+
+    @Test
+    public void averageLengthOfDecimalTextTest(){
+        Assertions.assertEquals(1.5, wordCountService.averageWordsLength(
+                "a and bb",
+                Arrays.asList("on","and")));
+    }
+
+    @Test
+    public void averageLengthOfRoundedTextTest(){
+        Assertions.assertEquals(1.5, wordCountService.averageWordsLength(
+                "a and bb",
+                Arrays.asList("on","and")));
+    }
+
+
 }

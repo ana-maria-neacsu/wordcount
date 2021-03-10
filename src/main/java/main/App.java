@@ -8,6 +8,8 @@ import service.WordCountService;
 
 import java.util.List;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 public class App {
 
     public static void main(String[] args) {
@@ -24,11 +26,13 @@ public class App {
 
         List<String> stopwords = iOutils.readStopWords();
         System.out.println(createOutput(wordCountService.countWords(text, stopwords),
-                wordCountService.countUniqueWords(text,stopwords)
+                wordCountService.countUniqueWords(text,stopwords),
+                wordCountService.averageWordsLength(text,stopwords)
                 ));
     }
 
-    private static String createOutput(int numberOfWords,int numberOfUniqueWords){
-        return "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords;
+    private static String createOutput(int numberOfWords,int numberOfUniqueWords, double averageLength){
+        return "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords
+                + "; average word length: " + round(averageLength,2) + " characters";
     }
 }
