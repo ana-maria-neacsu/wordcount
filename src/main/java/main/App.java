@@ -1,5 +1,7 @@
 package main;
 
+import io.ConsoleInputReader;
+import io.InputReader;
 import service.WordCountService;
 
 import java.util.Scanner;
@@ -7,8 +9,10 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        String text = scanner.nextLine();
-        System.out.println(new WordCountService().countWords(text));
+        InputReader inputReader = new ConsoleInputReader();
+        WordCountService wordCountService = new WordCountService();
+
+        String text = inputReader.readInput();
+        System.out.println(wordCountService.countWords(text));
     }
 }
