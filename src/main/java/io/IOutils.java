@@ -19,4 +19,19 @@ public class IOutils {
         }
         return stopWords;
     }
+
+    public static String createOutput(int numberOfWords,int numberOfUniqueWords, double averageLength,
+                                       List<String> indices, boolean printIndex){
+        String output =  "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords
+                + "; average word length: " + averageLength + " characters";
+        if(printIndex)
+            output += "/n" + printIndex(indices);
+        return output;
+    }
+
+    private static String printIndex(List<String> indices){
+        StringBuilder output = new StringBuilder("Index:\n");
+        indices.stream().forEach(s -> output.append(s + "\n"));
+        return output.toString();
+    }
 }

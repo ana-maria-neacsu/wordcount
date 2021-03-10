@@ -3,9 +3,8 @@ package service;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordCountServiceTest {
 
@@ -145,5 +144,35 @@ public class WordCountServiceTest {
         Assertions.assertEquals(15, wordCountService.averageWordsLength(
                 "abcdefghijklmno",
                 Arrays.asList("on","and")));
+    }
+
+    @Test
+    public void indexRequirementSizeTest(){
+        Assertions.assertEquals(4, wordCountService.indexOfText(
+                "Mary had a little lamb",
+                Arrays.asList("on","and","a")).size());
+    }
+
+    @Test
+    public void indexSimpleOrderTest(){
+        Assertions.assertEquals(Arrays.asList("A","D","a","c"),
+                wordCountService.indexOfText(
+                "a A c D",
+                Arrays.asList()).stream().sorted().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void indexOrderWithSpecialCharacterTest(){
+        Assertions.assertEquals(Arrays.asList("---","Mary","had","lamb","little"),
+                wordCountService.indexOfText(
+                "--- Mary had a little lamb a",
+                Arrays.asList("on","and","a")).stream().sorted().collect(Collectors.toList()));
+    }
+
+    @Test
+    public void indexOfEmptyTextTest(){
+        Assertions.assertTrue(wordCountService.indexOfText(
+                "",
+                Arrays.asList("on","and","a")).isEmpty());
     }
 }

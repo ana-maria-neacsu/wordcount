@@ -12,10 +12,17 @@ public class App {
 
     public static void main(String[] args) {
         InputReader inputReader;
+        boolean indexFlag = false;
         if(args.length == 0)
             inputReader = new ConsoleInputReader();
-        else
-            inputReader = new FileInputReader(args[0]);
+        else {
+            if(!args[0].startsWith("-")) {
+                inputReader = new FileInputReader(args[0]);
+            } else {
+                inputReader = new ConsoleInputReader();
+                indexFlag = true;
+            }
+        }
 
         String text = inputReader.readInput();
 
@@ -23,14 +30,10 @@ public class App {
         WordCountService wordCountService = new WordCountService();
 
         List<String> stopwords = iOutils.readStopWords();
-        System.out.println(createOutput(wordCountService.countWords(text, stopwords),
+        System.out.println(IOutils.createOutput(wordCountService.countWords(text, stopwords),
                 wordCountService.countUniqueWords(text,stopwords),
-                wordCountService.averageWordsLength(text,stopwords)
+                wordCountService.averageWordsLength(text,stopwords),
+                wordCountService.indexOfText(text,stopwords), indexFlag
                 ));
-    }
-
-    private static String createOutput(int numberOfWords,int numberOfUniqueWords, double averageLength){
-        return "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords
-                + "; average word length: " + averageLength + " characters";
     }
 }

@@ -1,10 +1,9 @@
 package service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-import java.util.regex.Pattern;
-
-import static jdk.nashorn.internal.objects.NativeMath.round;
+import java.util.stream.Collectors;
 
 public class WordCountService {
 
@@ -36,5 +35,11 @@ public class WordCountService {
         return Math.round(length / numberOfWords * 100.0)/100.0;
     }
 
-
+    public List<String> indexOfText(String text, List<String> stopWords){
+        return Arrays.stream(text.split("[\\s.]+")).filter(t->
+                t.matches("[a-zA-Z-]+"))
+                .filter(t -> !stopWords.contains(t))
+                .distinct()
+                .collect(Collectors.toList());
+    }
 }

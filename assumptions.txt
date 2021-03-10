@@ -4,3 +4,5 @@ iteration 4
     - and . were added to split criteria to be in accord with the sample in the website
 iteration 6
     the average length is rounded to 2 decimal points
+iteration 7
+    I assume indices are printed in natural order
