@@ -8,8 +8,6 @@ import service.WordCountService;
 
 import java.util.List;
 
-import static jdk.nashorn.internal.objects.NativeMath.round;
-
 public class App {
 
     public static void main(String[] args) {
@@ -33,6 +31,6 @@ public class App {
 
     private static String createOutput(int numberOfWords,int numberOfUniqueWords, double averageLength){
         return "Number of Words: " + numberOfWords + ", unique: " + numberOfUniqueWords
-                + "; average word length: " + round(averageLength,2) + " characters";
+                + "; average word length: " + averageLength + " characters";
     }
 }

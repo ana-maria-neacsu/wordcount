@@ -134,11 +134,16 @@ public class WordCountServiceTest {
     }
 
     @Test
-    public void averageLengthOfRoundedTextTest(){
-        Assertions.assertEquals(1.5, wordCountService.averageWordsLength(
-                "a and bb",
-                Arrays.asList("on","and")));
+    public void averageLengthOfRoundedDecimalTextTest(){
+        Assertions.assertEquals(3.33, wordCountService.averageWordsLength(
+                "aaaaa bbb cc",
+                Arrays.asList()));
     }
 
-
+    @Test
+    public void averageLengthOfOneWordTest(){
+        Assertions.assertEquals(15, wordCountService.averageWordsLength(
+                "abcdefghijklmno",
+                Arrays.asList("on","and")));
+    }
 }

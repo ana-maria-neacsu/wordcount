@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static jdk.nashorn.internal.objects.NativeMath.round;
+
 public class WordCountService {
 
     public int countWords(String text, List<String> stopWords){
@@ -31,7 +33,7 @@ public class WordCountService {
                 .filter(t -> !stopWords.contains(t))
                 .map(String::length).reduce(0, (a,b) -> a+b).doubleValue();
 
-        return length / numberOfWords;
+        return Math.round(length / numberOfWords * 100.0)/100.0;
     }
 
 
