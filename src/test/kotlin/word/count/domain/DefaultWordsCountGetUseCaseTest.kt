@@ -1,14 +1,13 @@
 package word.count.domain
 
 import text.split.api.TextSplitUseCase
-import token.count.api.TokensCountUseCase
 import token.filter.api.TokensFilterUseCase
 import junit.framework.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class ConfigurableWordsCountGetUseCaseTest {
+class DefaultWordsCountGetUseCaseTest {
 
     private val mockTextSplitUseCase = object : TextSplitUseCase {
 
@@ -30,20 +29,9 @@ class ConfigurableWordsCountGetUseCaseTest {
         }
     }
 
-    private val mockTokensCountUseCase = object : TokensCountUseCase {
-
-        var wasCountTokensCalled = false
-
-        override fun countTokens(tokens: List<String>): Int {
-            wasCountTokensCalled = true
-            return tokens.count()
-        }
-    }
-
-    private val wordsCountUseCase = ConfigurableWordsCountGetUseCase(
+    private val wordsCountUseCase = DefaultWordsCountGetUseCase(
         textSplitUseCase = mockTextSplitUseCase,
-        tokensFilterUseCase = mockTokensFilterUseCase,
-        tokensCountUseCase = mockTokensCountUseCase
+        tokensFilterUseCase = mockTokensFilterUseCase
     )
 
     @Before
@@ -62,12 +50,6 @@ class ConfigurableWordsCountGetUseCaseTest {
     fun `given text when get word count is invoked should call tokens filter use case`() {
         wordsCountUseCase.getWordCount("")
         assertTrue(mockTokensFilterUseCase.wasFilterCalled)
-    }
-
-    @Test
-    fun `given text when get word count is invoked should call tokens count use case`() {
-        wordsCountUseCase.getWordCount("")
-        assertTrue(mockTokensCountUseCase.wasCountTokensCalled)
     }
 
     @Test

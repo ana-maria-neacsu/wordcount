@@ -12,15 +12,13 @@ import text.split.domain.CompositeTextSplitUseCase
 import text.split.domain.TextByDashSplitUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
-import token.count.api.TokensCountUseCase
-import token.count.domain.AllTokensCountUseCase
 import token.filter.api.TokensFilterUseCase
 import token.filter.domain.CompositeTokensFilterUseCase
 import token.filter.domain.NonStopWordTokensFilterUseCase
 import token.filter.domain.UniqueTokensFilterUseCase
 import token.filter.domain.ValidWordTokensFilterUseCase
 import word.count.api.WordsCountGetUseCase
-import word.count.domain.ConfigurableWordsCountGetUseCase
+import word.count.domain.DefaultWordsCountGetUseCase
 import word.input.api.WordsInputUseCase
 import word.input.commandline.CommandLineWordsInputUseCase
 import word.input.file.FileWordsInputUseCase
@@ -36,8 +34,6 @@ private val textSplitUseCase: TextSplitUseCase = CompositeTextSplitUseCase(
     )
 )
 
-private val tokensCountUseCase: TokensCountUseCase = AllTokensCountUseCase()
-
 private val validWordTokensFilterUseCase: TokensFilterUseCase = ValidWordTokensFilterUseCase()
 
 private val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
@@ -47,18 +43,17 @@ private val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTok
     )
 )
 
-private val wordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
+private val wordsCountGetUseCase: WordsCountGetUseCase = DefaultWordsCountGetUseCase(
     textSplitUseCase = textSplitUseCase,
     tokensFilterUseCase = CompositeTokensFilterUseCase(
         listOf(
             validWordTokensFilterUseCase,
             nonStopWordTokensFilterUseCase
         )
-    ),
-    tokensCountUseCase = tokensCountUseCase
+    )
 )
 
-private val uniqueWordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
+private val uniqueWordsCountGetUseCase: WordsCountGetUseCase = DefaultWordsCountGetUseCase(
     textSplitUseCase = textSplitUseCase,
     tokensFilterUseCase = CompositeTokensFilterUseCase(
         listOf(
@@ -66,8 +61,7 @@ private val uniqueWordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWords
             nonStopWordTokensFilterUseCase,
             UniqueTokensFilterUseCase()
         )
-    ),
-    tokensCountUseCase = tokensCountUseCase
+    )
 )
 
 private fun wordsInputUseCase(arguments: Arguments): WordsInputUseCase = arguments.textFilePath?.let { path ->
