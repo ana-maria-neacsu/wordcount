@@ -4,5 +4,5 @@ import domain.TextSplitUseCase
 
 class TextByNewLineSplitUseCase : TextSplitUseCase {
 
-    override fun split(text: String) = text.lines()
+    override fun split(text: String) = text.lines().filter { it.isNotBlank() }
 }

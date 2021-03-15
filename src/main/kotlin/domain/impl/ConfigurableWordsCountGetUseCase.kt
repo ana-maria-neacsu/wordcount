@@ -3,15 +3,15 @@ package domain.impl
 import domain.TextSplitUseCase
 import domain.TokensCountUseCase
 import domain.TokensFilterUseCase
-import domain.WordsCountUseCase
+import domain.WordsCountGetUseCase
 
-class ConfigurableWordsCountUseCase(
+class ConfigurableWordsCountGetUseCase(
     private val textSplitUseCase: TextSplitUseCase,
     private val tokensFilterUseCase: TokensFilterUseCase,
     private val tokensCountUseCase: TokensCountUseCase
-) : WordsCountUseCase {
+) : WordsCountGetUseCase {
 
-    override fun countWords(text: String) = tokensCountUseCase.countTokens(
+    override fun getWordCount(text: String) = tokensCountUseCase.countTokens(
         tokensFilterUseCase.filter(
             textSplitUseCase.split(text)
         )
