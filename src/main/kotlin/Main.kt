@@ -1,4 +1,4 @@
-import arguments.domain.ArgumentsParseUseCaseImpl
+import arguments.domain.DefaultArgumentsParseUseCase
 import stopwords.domain.TextInputReadStopWordsGetUseCase
 import text.input.api.InvalidInputException
 import text.input.commandline.CommandLineTextInputReadUseCase
@@ -14,12 +14,12 @@ import token.filter.domain.ValidWordTokensFilterUseCase
 import word.count.api.WordsCountGetUseCase
 import word.count.domain.ConfigurableWordsCountGetUseCase
 import word.input.api.WordsInputUseCase
-import word.input.domain.CommandLineWordsInputUseCase
-import word.input.domain.FileWordsInputUseCase
+import word.input.commandline.CommandLineWordsInputUseCase
+import word.input.file.FileWordsInputUseCase
 
 fun main(args: Array<String>) {
 
-    val argumentsParseUseCase = ArgumentsParseUseCaseImpl()
+    val argumentsParseUseCase = DefaultArgumentsParseUseCase()
     val arguments = argumentsParseUseCase.parseArguments(args)
 
     val outputWriteUseCase: TextOutputWriteUseCase = CommandLineTextOutputWriteUseCase()
@@ -54,6 +54,6 @@ fun main(args: Array<String>) {
 
         outputWriteUseCase.writeText("Number of words: $result\n")
     } catch (e: InvalidInputException) {
-        outputWriteUseCase.writeText(e.message ?: "Unknown error")
+        outputWriteUseCase.writeText(e.message ?: "Unknown input error")
     }
 }

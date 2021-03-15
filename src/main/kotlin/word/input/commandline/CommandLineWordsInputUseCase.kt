@@ -1,4 +1,4 @@
-package word.input.domain
+package word.input.commandline
 
 import text.input.commandline.CommandLineTextInputReadUseCase
 import text.output.api.TextOutputWriteUseCase

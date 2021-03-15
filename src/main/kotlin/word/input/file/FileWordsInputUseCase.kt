@@ -1,4 +1,4 @@
-package word.input.domain
+package word.input.file
 
 import text.input.file.FileTextInputReadUseCase
 import word.input.api.WordsInputUseCase

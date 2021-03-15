@@ -4,9 +4,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 
-class ArgumentsParseUseCaseImplTest {
+class DefaultArgumentsParseUseCaseTest {
 
-    private val argumentsParseUseCase = ArgumentsParseUseCaseImpl()
+    private val argumentsParseUseCase = DefaultArgumentsParseUseCase()
 
     @Test
     fun `given empty arguments when parse arguments is invoked should return null text file path`() {
