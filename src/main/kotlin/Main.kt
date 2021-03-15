@@ -8,15 +8,13 @@ import text.input.file.FileTextInputReadUseCase
 import text.output.api.TextOutputWriteUseCase
 import text.output.commandline.CommandLineTextOutputWriteUseCase
 import text.split.api.TextSplitUseCase
-import text.split.domain.CompositeTextSplitUseCase
-import text.split.domain.TextByDashSplitUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
 import token.filter.api.TokensFilterUseCase
 import token.filter.domain.CompositeTokensFilterUseCase
 import token.filter.domain.NonStopWordTokensFilterUseCase
+import token.filter.domain.TokensByRegexFilterUseCase
 import token.filter.domain.UniqueTokensFilterUseCase
-import token.filter.domain.ValidWordTokensFilterUseCase
 import word.count.api.WordsCountGetUseCase
 import word.count.domain.DefaultWordsCountGetUseCase
 import word.input.api.WordsInputUseCase
@@ -27,14 +25,9 @@ private val argumentsParseUseCase: ArgumentsParseUseCase = DefaultArgumentsParse
 
 private val outputWriteUseCase: TextOutputWriteUseCase = CommandLineTextOutputWriteUseCase()
 
-private val textSplitUseCase: TextSplitUseCase = CompositeTextSplitUseCase(
-    listOf(
-        TextByWhitespaceSplitUseCase(),
-        TextByDashSplitUseCase()
-    )
-)
+private val textSplitUseCase: TextSplitUseCase = TextByWhitespaceSplitUseCase()
 
-private val validWordTokensFilterUseCase: TokensFilterUseCase = ValidWordTokensFilterUseCase()
+private val validWordTokensFilterUseCase: TokensFilterUseCase = TokensByRegexFilterUseCase("[a-zA-Z.-]+".toRegex())
 
 private val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
     stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
