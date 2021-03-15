@@ -1,3 +1,8 @@
 Iteration 3
     - file input is relative to project path
     - if path to file is incorrect write error on output
+
+Iteration 4
+    - "-" is also a separator for words
+    - "." is a valid character in word
+    - the order or characters by which text is split is not important
