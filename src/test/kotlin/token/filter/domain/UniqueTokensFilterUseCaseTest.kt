@@ -13,7 +13,7 @@ class UniqueTokensFilterUseCaseTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters(name = "{index}: expectedResult({0})={1}")
+        @Parameterized.Parameters
         fun getParameters() = listOf(
             arrayOf(listOf("word"), listOf("word")),
             arrayOf(listOf("word", "other"), listOf("word", "other")),

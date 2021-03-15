@@ -13,7 +13,7 @@ class CompositeTextSplitUseCaseTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters(name = "{index}: expectedResult({0})={1}")
+        @Parameterized.Parameters
         fun getParameters() = listOf(
             arrayOf("word", listOf("word")),
             arrayOf("word other", listOf("word", "other")),

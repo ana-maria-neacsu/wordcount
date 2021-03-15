@@ -14,7 +14,7 @@ class TextByNewLineSplitUseCaseTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters(name = "{index}: expectedResult({0})={1}")
+        @Parameterized.Parameters
         fun getParameters() = listOf(
             arrayOf("word", listOf("word")),
             arrayOf("word\n\n\n\nother", listOf("word", "other")),

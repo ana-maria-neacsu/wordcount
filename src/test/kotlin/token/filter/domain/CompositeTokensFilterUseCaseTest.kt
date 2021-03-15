@@ -14,7 +14,7 @@ class CompositeTokensFilterUseCaseTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters(name = "{index}: expectedResult({0})={1}")
+        @Parameterized.Parameters
         fun getParameters() = listOf(
             arrayOf(listOf("word"), listOf()),
             arrayOf(listOf("word", "11"), listOf()),

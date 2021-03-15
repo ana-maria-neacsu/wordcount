@@ -14,7 +14,7 @@ class TokensByRegexFilterUseCaseTest(
 
     companion object {
         @JvmStatic
-        @Parameterized.Parameters(name = "{index}: expectedResult({0})={1}")
+        @Parameterized.Parameters
         fun getParameters() = listOf(
             arrayOf("[a-zA-Z.]+".toRegex(), listOf("word"), listOf("word")),
             arrayOf("[a-zA-Z.]+".toRegex(), listOf("word", "other"), listOf("word", "other")),
