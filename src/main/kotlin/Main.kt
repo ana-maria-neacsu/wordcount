@@ -1,9 +1,10 @@
-import stopwords.domain.TextInputStopWordsGetUseCase
-import text.input.api.TextInput
-import text.input.commandline.CommandLineTextInput
-import text.input.file.FileTextInput
-import text.output.api.TextOutput
-import text.output.commandline.CommandLineTextOutput
+import arguments.domain.ArgumentsParseUseCaseImpl
+import stopwords.domain.TextInputReadStopWordsGetUseCase
+import text.input.api.InvalidInputException
+import text.input.commandline.CommandLineTextInputReadUseCase
+import text.input.file.FileTextInputReadUseCase
+import text.output.api.TextOutputWriteUseCase
+import text.output.commandline.CommandLineTextOutputWriteUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
 import token.count.domain.AllTokensCountUseCase
@@ -12,10 +13,23 @@ import token.filter.domain.NonStopWordTokensFilterUseCase
 import token.filter.domain.ValidWordTokensFilterUseCase
 import word.count.api.WordsCountGetUseCase
 import word.count.domain.ConfigurableWordsCountGetUseCase
+import word.input.api.WordsInputUseCase
+import word.input.domain.CommandLineWordsInputUseCase
+import word.input.domain.FileWordsInputUseCase
 
 fun main(args: Array<String>) {
-    val input: TextInput = CommandLineTextInput()
-    val output: TextOutput = CommandLineTextOutput()
+
+    val argumentsParseUseCase = ArgumentsParseUseCaseImpl()
+    val arguments = argumentsParseUseCase.parseArguments(args)
+
+    val outputWriteUseCase: TextOutputWriteUseCase = CommandLineTextOutputWriteUseCase()
+
+    val wordsInputUseCase: WordsInputUseCase = arguments.textFilePath?.let { path ->
+        FileWordsInputUseCase(FileTextInputReadUseCase(path))
+    } ?: CommandLineWordsInputUseCase(
+        textInputReadUseCase = CommandLineTextInputReadUseCase(),
+        textOutputWriteUseCase = outputWriteUseCase
+    )
 
     val wordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
         textSplitUseCase = TextByWhitespaceSplitUseCase(),
@@ -23,8 +37,8 @@ fun main(args: Array<String>) {
             listOf(
                 ValidWordTokensFilterUseCase(),
                 NonStopWordTokensFilterUseCase(
-                    stopWordsGetUseCase = TextInputStopWordsGetUseCase(
-                        textInput = FileTextInput("stopwords.txt"),
+                    stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
+                        textInputReadUseCase = FileTextInputReadUseCase("stopwords.txt"),
                         textSplitUseCase = TextByNewLineSplitUseCase()
                     )
                 )
@@ -33,8 +47,13 @@ fun main(args: Array<String>) {
         tokensCountUseCase = AllTokensCountUseCase()
     )
 
-    output.showText("Enter text: ")
+    try {
+        val result = wordsCountGetUseCase.getWordCount(
+            wordsInputUseCase.getInput()
+        )
 
-    val result = wordsCountGetUseCase.getWordCount(input.getText())
-    output.showText("Number of words: $result\n")
+        outputWriteUseCase.writeText("Number of words: $result\n")
+    } catch (e: InvalidInputException) {
+        outputWriteUseCase.writeText(e.message ?: "Unknown error")
+    }
 }

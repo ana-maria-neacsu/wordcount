@@ -1,13 +1,13 @@
 package stopwords.domain
 
 import text.split.api.TextSplitUseCase
-import text.input.api.TextInput
+import text.input.api.TextInputReadUseCase
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
-class TextInputStopWordsGetUseCaseTest {
+class TextInputReadStopWordsGetUseCaseTest {
 
-    private val mockTextInput = object : TextInput {
+    private val mockTextInput = object : TextInputReadUseCase {
         override fun getText(): String = "some\ntext"
     }
 
@@ -15,8 +15,8 @@ class TextInputStopWordsGetUseCaseTest {
         override fun split(text: String) = text.lines()
     }
 
-    private val stopWordsGetUseCase = TextInputStopWordsGetUseCase(
-        textInput = mockTextInput,
+    private val stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
+        textInputReadUseCase = mockTextInput,
         textSplitUseCase = mockTextSplitUseCase
     )
 

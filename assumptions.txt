@@ -1,2 +1,3 @@
 Iteration 3
     - file input is relative to project path
+    - if path to file is incorrect write error on output

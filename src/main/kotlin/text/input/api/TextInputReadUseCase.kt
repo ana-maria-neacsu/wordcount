@@ -1,6 +1,6 @@
 package text.input.api
 
-interface TextInput {
+interface TextInputReadUseCase {
 
     fun getText(): String
 }
