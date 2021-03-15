@@ -1,6 +1,5 @@
 package token.filter.domain
 
-import token.filter.domain.ValidWordTokensFilterUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
