@@ -1,4 +1,6 @@
-package domain
+package domain.impl
+
+import domain.TokensFilterUseCase
 
 class ValidWordTokensFilterUseCase : TokensFilterUseCase {
 
