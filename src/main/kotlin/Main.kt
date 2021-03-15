@@ -5,11 +5,15 @@ import text.input.commandline.CommandLineTextInputReadUseCase
 import text.input.file.FileTextInputReadUseCase
 import text.output.api.TextOutputWriteUseCase
 import text.output.commandline.CommandLineTextOutputWriteUseCase
+import text.split.api.TextSplitUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
+import token.count.api.TokensCountUseCase
 import token.count.domain.AllTokensCountUseCase
+import token.filter.api.TokensFilterUseCase
 import token.filter.domain.CompositeTokensFilterUseCase
 import token.filter.domain.NonStopWordTokensFilterUseCase
+import token.filter.domain.UniqueTokensFilterUseCase
 import token.filter.domain.ValidWordTokensFilterUseCase
 import word.count.api.WordsCountGetUseCase
 import word.count.domain.ConfigurableWordsCountGetUseCase
@@ -31,28 +35,46 @@ fun main(args: Array<String>) {
         textOutputWriteUseCase = outputWriteUseCase
     )
 
+    val textSplitUseCase: TextSplitUseCase = TextByWhitespaceSplitUseCase()
+    val tokensCountUseCase: TokensCountUseCase = AllTokensCountUseCase()
+
+    val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
+        stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
+            textInputReadUseCase = FileTextInputReadUseCase("stopwords.txt"),
+            textSplitUseCase = TextByNewLineSplitUseCase()
+        )
+    )
+
     val wordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
-        textSplitUseCase = TextByWhitespaceSplitUseCase(),
+        textSplitUseCase = textSplitUseCase,
         tokensFilterUseCase = CompositeTokensFilterUseCase(
             listOf(
                 ValidWordTokensFilterUseCase(),
-                NonStopWordTokensFilterUseCase(
-                    stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
-                        textInputReadUseCase = FileTextInputReadUseCase("stopwords.txt"),
-                        textSplitUseCase = TextByNewLineSplitUseCase()
-                    )
-                )
+                nonStopWordTokensFilterUseCase
             )
         ),
-        tokensCountUseCase = AllTokensCountUseCase()
+        tokensCountUseCase = tokensCountUseCase
+    )
+
+    val uniqueWordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
+        textSplitUseCase = textSplitUseCase,
+        tokensFilterUseCase = CompositeTokensFilterUseCase(
+            listOf(
+                ValidWordTokensFilterUseCase(),
+                nonStopWordTokensFilterUseCase,
+                UniqueTokensFilterUseCase()
+            )
+        ),
+        tokensCountUseCase = tokensCountUseCase
     )
 
     try {
-        val result = wordsCountGetUseCase.getWordCount(
-            wordsInputUseCase.getInput()
-        )
+        val wordsInput = wordsInputUseCase.getInput()
 
-        outputWriteUseCase.writeText("Number of words: $result\n")
+        val result = wordsCountGetUseCase.getWordCount(wordsInput)
+        val uniqueResult = uniqueWordsCountGetUseCase.getWordCount(wordsInput)
+
+        outputWriteUseCase.writeText("Number of words: $result, unique: $uniqueResult\n")
     } catch (e: InvalidInputException) {
         outputWriteUseCase.writeText(e.message ?: "Unknown input error")
     }
