@@ -1,19 +1,19 @@
-import token.count.domain.AllTokensCountUseCase
-import word.count.api.WordsCountGetUseCase
-import token.filter.domain.CompositeTokensFilterUseCase
-import token.filter.domain.NonStopWordTokensFilterUseCase
-import token.filter.domain.ValidWordTokensFilterUseCase
+import stopwords.domain.TextInputStopWordsGetUseCase
 import text.input.api.TextInput
 import text.input.commandline.CommandLineTextInput
 import text.input.file.FileTextInput
 import text.output.api.TextOutput
 import text.output.commandline.CommandLineTextOutput
-import stopwords.domain.TextInputStopWordsGetUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
+import token.count.domain.AllTokensCountUseCase
+import token.filter.domain.CompositeTokensFilterUseCase
+import token.filter.domain.NonStopWordTokensFilterUseCase
+import token.filter.domain.ValidWordTokensFilterUseCase
+import word.count.api.WordsCountGetUseCase
 import word.count.domain.ConfigurableWordsCountGetUseCase
 
-fun main() {
+fun main(args: Array<String>) {
     val input: TextInput = CommandLineTextInput()
     val output: TextOutput = CommandLineTextOutput()
 
