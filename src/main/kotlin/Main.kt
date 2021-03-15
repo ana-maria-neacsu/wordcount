@@ -1,3 +1,5 @@
+import arguments.api.Arguments
+import arguments.api.ArgumentsParseUseCase
 import arguments.domain.DefaultArgumentsParseUseCase
 import stopwords.domain.TextInputReadStopWordsGetUseCase
 import text.input.api.InvalidInputException
@@ -23,57 +25,62 @@ import word.input.api.WordsInputUseCase
 import word.input.commandline.CommandLineWordsInputUseCase
 import word.input.file.FileWordsInputUseCase
 
+private val argumentsParseUseCase: ArgumentsParseUseCase = DefaultArgumentsParseUseCase()
+
+private val outputWriteUseCase: TextOutputWriteUseCase = CommandLineTextOutputWriteUseCase()
+
+private val textSplitUseCase: TextSplitUseCase = CompositeTextSplitUseCase(
+    listOf(
+        TextByWhitespaceSplitUseCase(),
+        TextByDashSplitUseCase()
+    )
+)
+
+private val tokensCountUseCase: TokensCountUseCase = AllTokensCountUseCase()
+
+private val validWordTokensFilterUseCase: TokensFilterUseCase = ValidWordTokensFilterUseCase()
+
+private val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
+    stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
+        textInputReadUseCase = FileTextInputReadUseCase("stopwords.txt"),
+        textSplitUseCase = TextByNewLineSplitUseCase()
+    )
+)
+
+private val wordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
+    textSplitUseCase = textSplitUseCase,
+    tokensFilterUseCase = CompositeTokensFilterUseCase(
+        listOf(
+            validWordTokensFilterUseCase,
+            nonStopWordTokensFilterUseCase
+        )
+    ),
+    tokensCountUseCase = tokensCountUseCase
+)
+
+private val uniqueWordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
+    textSplitUseCase = textSplitUseCase,
+    tokensFilterUseCase = CompositeTokensFilterUseCase(
+        listOf(
+            validWordTokensFilterUseCase,
+            nonStopWordTokensFilterUseCase,
+            UniqueTokensFilterUseCase()
+        )
+    ),
+    tokensCountUseCase = tokensCountUseCase
+)
+
+private fun wordsInputUseCase(arguments: Arguments): WordsInputUseCase = arguments.textFilePath?.let { path ->
+    FileWordsInputUseCase(FileTextInputReadUseCase(path))
+} ?: CommandLineWordsInputUseCase(
+    textInputReadUseCase = CommandLineTextInputReadUseCase(),
+    textOutputWriteUseCase = outputWriteUseCase
+)
+
 fun main(args: Array<String>) {
 
-    val argumentsParseUseCase = DefaultArgumentsParseUseCase()
     val arguments = argumentsParseUseCase.parseArguments(args)
-
-    val outputWriteUseCase: TextOutputWriteUseCase = CommandLineTextOutputWriteUseCase()
-
-    val wordsInputUseCase: WordsInputUseCase = arguments.textFilePath?.let { path ->
-        FileWordsInputUseCase(FileTextInputReadUseCase(path))
-    } ?: CommandLineWordsInputUseCase(
-        textInputReadUseCase = CommandLineTextInputReadUseCase(),
-        textOutputWriteUseCase = outputWriteUseCase
-    )
-
-    val textSplitUseCase: TextSplitUseCase = CompositeTextSplitUseCase(
-        listOf(
-            TextByWhitespaceSplitUseCase(),
-            TextByDashSplitUseCase()
-        )
-    )
-    val tokensCountUseCase: TokensCountUseCase = AllTokensCountUseCase()
-
-    val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
-        stopWordsGetUseCase = TextInputReadStopWordsGetUseCase(
-            textInputReadUseCase = FileTextInputReadUseCase("stopwords.txt"),
-            textSplitUseCase = TextByNewLineSplitUseCase()
-        )
-    )
-
-    val wordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
-        textSplitUseCase = textSplitUseCase,
-        tokensFilterUseCase = CompositeTokensFilterUseCase(
-            listOf(
-                ValidWordTokensFilterUseCase(),
-                nonStopWordTokensFilterUseCase
-            )
-        ),
-        tokensCountUseCase = tokensCountUseCase
-    )
-
-    val uniqueWordsCountGetUseCase: WordsCountGetUseCase = ConfigurableWordsCountGetUseCase(
-        textSplitUseCase = textSplitUseCase,
-        tokensFilterUseCase = CompositeTokensFilterUseCase(
-            listOf(
-                ValidWordTokensFilterUseCase(),
-                nonStopWordTokensFilterUseCase,
-                UniqueTokensFilterUseCase()
-            )
-        ),
-        tokensCountUseCase = tokensCountUseCase
-    )
+    val wordsInputUseCase: WordsInputUseCase = wordsInputUseCase(arguments)
 
     try {
         val wordsInput = wordsInputUseCase.getInput()
