@@ -6,6 +6,8 @@ import text.input.file.FileTextInputReadUseCase
 import text.output.api.TextOutputWriteUseCase
 import text.output.commandline.CommandLineTextOutputWriteUseCase
 import text.split.api.TextSplitUseCase
+import text.split.domain.CompositeTextSplitUseCase
+import text.split.domain.TextByDashSplitUseCase
 import text.split.domain.TextByNewLineSplitUseCase
 import text.split.domain.TextByWhitespaceSplitUseCase
 import token.count.api.TokensCountUseCase
@@ -35,7 +37,12 @@ fun main(args: Array<String>) {
         textOutputWriteUseCase = outputWriteUseCase
     )
 
-    val textSplitUseCase: TextSplitUseCase = TextByWhitespaceSplitUseCase()
+    val textSplitUseCase: TextSplitUseCase = CompositeTextSplitUseCase(
+        listOf(
+            TextByWhitespaceSplitUseCase(),
+            TextByDashSplitUseCase()
+        )
+    )
     val tokensCountUseCase: TokensCountUseCase = AllTokensCountUseCase()
 
     val nonStopWordTokensFilterUseCase: TokensFilterUseCase = NonStopWordTokensFilterUseCase(
