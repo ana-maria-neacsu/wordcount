@@ -26,7 +26,7 @@ class TextWhitespaceSplitUseCaseTest(
     private val textSplitUseCase = TextByWhitespaceSplitUseCase()
 
     @Test
-    fun `given text when split is invoked should return list of tokens`() {
+    fun `given text when split is invoked should return list of tokens separated by whitespace`() {
         val result = textSplitUseCase.split(text)
         assertEquals(result, expectedResult)
     }
