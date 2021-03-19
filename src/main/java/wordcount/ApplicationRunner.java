@@ -8,7 +8,7 @@ import wordcount.output.OutputWriter;
 import wordcount.service.StopWordsLoader;
 import wordcount.service.WordsCounterService;
 
-import static wordcount.output.OutputFormatter.numberOfWordsFormatter;
+import static wordcount.output.OutputFormatter.numberOfWordsFormatterWithUniqueWords;
 
 public class ApplicationRunner {
 
@@ -20,8 +20,12 @@ public class ApplicationRunner {
             outputWriter.write("Enter text: ");
         }
         String input = inputReader.readInput();
-        long count = new WordsCounterService(new StopWordsLoader()).countWords(input);
-        outputWriter.write(numberOfWordsFormatter(count));
+        final WordsCounterService wordsCounterService = new WordsCounterService(new StopWordsLoader());
+        long wordsCount = wordsCounterService.countWords(input);
+        long uniqueWordsCount = wordsCounterService.countUniqueWords(input);
+        outputWriter.write(numberOfWordsFormatterWithUniqueWords(wordsCount, uniqueWordsCount));
 
     }
+
+
 }
