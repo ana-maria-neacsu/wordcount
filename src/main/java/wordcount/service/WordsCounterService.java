@@ -12,15 +12,22 @@ public class WordsCounterService {
         this.stopWords = stopWords;
     }
 
-    public long countWords(String text) {
-        return getStringStream(text)
+    public long countWords(String input) {
+        return getStringStream(input)
                 .count();
     }
 
-    public long countUniqueWords(String text) {
-        return getStringStream(text)
+    public long countUniqueWords(String input) {
+        return getStringStream(input)
                 .distinct()
                 .count();
+    }
+
+    public double countWordsAverage(String input) {
+        return getStringStream(input)
+                .mapToInt(String::length)
+                .average().orElse(0.0);
+
     }
 
     private Stream<String> getStringStream(String text) {

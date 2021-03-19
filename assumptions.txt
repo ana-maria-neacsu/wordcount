@@ -14,6 +14,9 @@ Words can end with "." and we still count them.
 Iteration5:
 Words can still end with .
 Words "-" are valid
+Iteration6:
+The average is rounded up to 2.
+Average is calculated from all words.
 
 
 

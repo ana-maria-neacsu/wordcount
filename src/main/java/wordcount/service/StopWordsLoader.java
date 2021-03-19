@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
@@ -20,11 +19,10 @@ public class StopWordsLoader implements StopWords {
         try {
             URL resource = getClass().getClassLoader()
                     .getResource("stopwords.txt");
-            if(Objects.isNull(resource)) {
+            if (Objects.isNull(resource)) {
                 return Collections.emptyList();
             }
-            Path path = Paths.get(resource.toURI());
-            return Files.lines(path).collect(Collectors.toList());
+            return Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
         } catch (IOException | URISyntaxException e) {
             new ConsoleOutputWriter().write("Could not load stop words");
             return Collections.emptyList();

@@ -16,14 +16,18 @@ public class ApplicationRunner {
 
         InputReader inputReader = InputReaderFactory.getInputReader(args);
         OutputWriter outputWriter = new ConsoleOutputWriter();
+
         if (inputReader instanceof ConsoleInputReader) {
             outputWriter.write("Enter text: ");
         }
         String input = inputReader.readInput();
+
         final WordsCounterService wordsCounterService = new WordsCounterService(new StopWordsLoader());
         long wordsCount = wordsCounterService.countWords(input);
         long uniqueWordsCount = wordsCounterService.countUniqueWords(input);
-        outputWriter.write(numberOfWordsFormatterWithUniqueWords(wordsCount, uniqueWordsCount));
+        double averageWordCount = wordsCounterService.countWordsAverage(input);
+
+        outputWriter.write(numberOfWordsFormatterWithUniqueWords(wordsCount, uniqueWordsCount, averageWordCount));
 
     }
 

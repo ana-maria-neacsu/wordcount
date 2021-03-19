@@ -102,4 +102,13 @@ public class WordsCounterServiceTest {
     public void countUniqueWords(String input, long expectedCount) {
         Assertions.assertEquals(expectedCount, wordsCounterService.countUniqueWords(input));
     }
+
+    @Test
+    public void calculateAverageOfWords() {
+        Assertions.assertEquals(4.25, wordsCounterService.countWordsAverage("Mary had a little lamb"));
+    }
+    @Test
+    public void calculateAverageOfWordsForInvalidInput() {
+        Assertions.assertEquals(0.00, wordsCounterService.countWordsAverage("!!!"));
+    }
 }
