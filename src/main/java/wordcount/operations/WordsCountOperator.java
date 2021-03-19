@@ -2,7 +2,7 @@ package wordcount.operations;
 
 import java.util.Arrays;
 
-public class WordsCounter implements TextOperator {
+public class WordsCountOperator implements TextOperator {
     @Override
     public long operate(String text) {
         return Arrays.stream(text.split("[\\s]+"))
