@@ -1,4 +1,7 @@
-package wordcount.helper;
+package wordcount.service;
+
+import wordcount.contract.StopWords;
+import wordcount.output.ConsoleOutputWriter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,13 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class StopWordsLoader {
-
+public class StopWordsLoader implements StopWords {
+    @Override
     public List<String> loadStopWordsFromClassPath() {
-        Stream<String> lines = null;
-
         try {
             URL resource = getClass().getClassLoader()
                     .getResource("stopwords.txt");
@@ -24,15 +24,10 @@ public class StopWordsLoader {
                 return Collections.emptyList();
             }
             Path path = Paths.get(resource.toURI());
-            lines = Files.lines(path);
-            return lines.collect(Collectors.toList());
+            return Files.lines(path).collect(Collectors.toList());
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            new ConsoleOutputWriter().write("Could not load stop words");
             return Collections.emptyList();
-        } finally {
-            if (lines != null)
-                lines.close();
         }
-
     }
 }

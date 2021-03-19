@@ -4,5 +4,6 @@ Input is not super long.
 Iteration2:
 "stopwords.txt" file is part of the application and not provided by the user.
 I think the user should only decide the input and not how/what the application should behave.
+Stopwords are case-sensitive
 
 
