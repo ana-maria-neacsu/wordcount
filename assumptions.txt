@@ -5,5 +5,9 @@ Iteration2:
 "stopwords.txt" file is part of the application and not provided by the user.
 I think the user should only decide the input and not how/what the application should behave.
 Stopwords are case-sensitive
+Iteration3;
+There is only one argument and it is the file name. The file name parameter is the absolute path to the file.
+We still use stop words here.
+
 
 
