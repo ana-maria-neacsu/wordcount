@@ -1,5 +1,7 @@
 package wordcount.input;
 
+import wordcount.contract.input.InputReader;
+
 import java.util.Objects;
 
 public final class InputReaderFactory {

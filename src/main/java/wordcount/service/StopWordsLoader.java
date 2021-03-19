@@ -1,6 +1,6 @@
 package wordcount.service;
 
-import wordcount.contract.StopWords;
+import wordcount.contract.business.StopWords;
 import wordcount.output.ConsoleOutputWriter;
 
 import java.io.IOException;

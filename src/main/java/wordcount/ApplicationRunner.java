@@ -1,10 +1,10 @@
 package wordcount;
 
 import wordcount.input.ConsoleInputReader;
-import wordcount.input.InputReader;
+import wordcount.contract.input.InputReader;
 import wordcount.input.InputReaderFactory;
 import wordcount.output.ConsoleOutputWriter;
-import wordcount.output.OutputWriter;
+import wordcount.contract.output.OutputWriter;
 import wordcount.service.StopWordsLoader;
 import wordcount.service.WordsCounterService;
 

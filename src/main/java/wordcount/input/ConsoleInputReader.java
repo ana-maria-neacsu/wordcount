@@ -1,5 +1,7 @@
 package wordcount.input;
 
+import wordcount.contract.input.InputReader;
+
 import java.util.Scanner;
 
 public class ConsoleInputReader implements InputReader {

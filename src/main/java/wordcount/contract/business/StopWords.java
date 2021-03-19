@@ -1,4 +1,4 @@
-package wordcount.contract;
+package wordcount.contract.business;
 
 import java.util.List;
 
