@@ -8,6 +8,9 @@ Stopwords are case-sensitive
 Iteration3;
 There is only one argument and it is the file name. The file name parameter is the absolute path to the file.
 We still use stop words here.
+Iteration4:
+Words can end with "." and we still count them.
+"-" is a valid word separator
 
 
 

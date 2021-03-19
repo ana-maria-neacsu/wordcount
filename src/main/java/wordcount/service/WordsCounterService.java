@@ -13,7 +13,7 @@ public class WordsCounterService {
 
     public long countWords(String text) {
         return Arrays.stream(text.split("[\\s]+"))
-                .filter(word -> word.matches("[a-zA-Z]+"))
+                .filter(word -> word.matches("[a-zA-Z-.]+"))
                 .filter(validWord -> !stopWords.loadStopWordsFromClassPath().contains(validWord))
                 .count();
     }
