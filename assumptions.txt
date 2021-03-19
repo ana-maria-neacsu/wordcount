@@ -1,0 +1,4 @@
+Iteration1:
+hi hi-- space character is the words separator, multiple spaces will still be counted as one.
+Input is not super long.
+
