@@ -11,6 +11,9 @@ We still use stop words here.
 Iteration4:
 Words can end with "." and we still count them.
 "-" is a valid word separator
+Iteration5:
+Words can still end with .
+Words "-" are valid
 
 
 

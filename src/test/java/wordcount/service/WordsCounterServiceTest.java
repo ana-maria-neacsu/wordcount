@@ -19,8 +19,8 @@ public class WordsCounterServiceTest {
                 arguments("Word word word", 3L),
                 arguments("not so long but long enough", 6L),
                 arguments("Only", 1L),
-                arguments("I-AM-VALID", 3L),
-                arguments("cat. wants MILK-OR-MEAT", 5L)
+                arguments("I-AM-VALID", 1L),
+                arguments("cat. wants MILK-OR-MEAT", 3L)
         );
     }
 
@@ -29,9 +29,9 @@ public class WordsCounterServiceTest {
                 arguments("Word word word", 2L),
                 arguments("not so long but long enough", 5L),
                 arguments("Only Only", 1L),
-                arguments("I-AM-VALID", 3L),
-                arguments("cat. wants MILK-OR-MEAT", 5L),
-                arguments("-------",0L),
+                arguments("I-AM-VALID", 1L),
+                arguments("cat. wants MILK-OR-MEAT", 3L),
+                arguments("-------",1L),
                 arguments(".a......", 0L)
         );
     }
@@ -89,12 +89,12 @@ public class WordsCounterServiceTest {
 
     @Test
     public void testForHypenAsSplitCharacter() {
-        Assertions.assertEquals(9, wordsCounterService.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall"));
+        Assertions.assertEquals(7, wordsCounterService.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall"));
     }
 
     @Test
     public void testForHypenAsSplitCharacterAndUniqueCharacters() {
-        Assertions.assertEquals(7, wordsCounterService.countUniqueWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall"));
+        Assertions.assertEquals(6, wordsCounterService.countUniqueWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall"));
     }
 
     @ParameterizedTest

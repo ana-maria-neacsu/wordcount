@@ -24,8 +24,8 @@ public class WordsCounterService {
     }
 
     private Stream<String> getStringStream(String text) {
-        return Arrays.stream(text.split("[\\s-]+"))
-                .filter(word -> word.matches("[a-zA-Z]+\\.?"))
+        return Arrays.stream(text.split("[\\s]+"))
+                .filter(word -> word.matches("[a-zA-Z-]+\\.?"))
                 .filter(validWord -> !stopWords.loadStopWordsFromClassPath().contains(validWord));
     }
 }
