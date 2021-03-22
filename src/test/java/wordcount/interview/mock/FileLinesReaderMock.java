@@ -3,7 +3,6 @@ package wordcount.interview.mock;
 import wordcount.interview.environment.file.FileLinesReader;
 
 import java.util.List;
-import java.util.Set;
 
 public class FileLinesReaderMock extends FileLinesReader {
     private final List<String> lines;

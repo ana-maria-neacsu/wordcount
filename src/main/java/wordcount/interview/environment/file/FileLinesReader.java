@@ -9,12 +9,8 @@ import static java.nio.file.Files.readAllLines;
 
 public class FileLinesReader {
     public List<String> getLines(String fileName) {
-        return getLInes(fileName);
-    }
-
-    private List<String> getLInes(String name) {
-        Path path = Paths.get(name);
-        List<String> lines = readLines(path, name);
+        Path path = Paths.get(fileName);
+        List<String> lines = readLines(path, fileName);
         return lines;
     }
 
