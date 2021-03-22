@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class IntegrationTest {
     private static final String EXPECTED_ENTER_TEXT = "Enter text:";
     private static final String EXPECTED_NUMBER_OF_WORDS = "Number of words: ";
-    private static final String WORD = "Word";
+    private static final String WORD = "Word the";
     private static final int EXPECTED_COUNT = 1;
     private PrintStreamMock out;
 

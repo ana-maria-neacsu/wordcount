@@ -17,7 +17,7 @@ public class FileLinesCache {
     }
 
     public Set<String> getLines() {
-        return lines;
+        return new HashSet<>(lines);
     }
 
     private static Set<String> getLInes(String name) {
