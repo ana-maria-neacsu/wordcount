@@ -7,8 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import wordcount.interview.domain.counter.WordCounter;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +20,7 @@ class WordCounterTest {
 
     @BeforeEach
     void setUp() {
-        Set<String> stopWords = new HashSet<>();
+        List<String> stopWords = new ArrayList<>();
         stopWords.add(STOP_WORD_1);
         stopWords.add(STOP_WORD_2);
 

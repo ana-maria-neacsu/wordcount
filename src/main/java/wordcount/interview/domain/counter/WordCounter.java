@@ -1,6 +1,7 @@
 package wordcount.interview.domain.counter;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static java.util.stream.Stream.of;
@@ -12,7 +13,7 @@ public class WordCounter {
 
     private final Set<String> stopWords;
 
-    public WordCounter(Set<String> stopWords) {
+    public WordCounter(List<String> stopWords) {
         this.stopWords = new HashSet<>(stopWords);
     }
 

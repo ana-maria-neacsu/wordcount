@@ -2,14 +2,14 @@ package wordcount.interview.mock;
 
 import wordcount.interview.domain.counter.WordCounter;
 
-import static java.util.Collections.emptySet;
+import static java.util.Collections.emptyList;
 
 public class WordCounterMock extends WordCounter {
     private final long expectedCount;
     private String textToCount;
 
     public WordCounterMock(long expectedCount) {
-        super(emptySet());
+        super(emptyList());
         this.expectedCount = expectedCount;
     }
 

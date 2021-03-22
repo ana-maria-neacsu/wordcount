@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class WordCountTest {
+class WordCountWithAskTest {
     private static final String EMPTY = "";
     private static final String EXPECTED_ENTER_TEXT = "Enter text:";
     private static final String INPUT_TEXT = "inputText";
@@ -19,7 +19,7 @@ class WordCountTest {
     private InputMock input;
     private OutputMock output;
     private WordCounterMock wordCounter;
-    private WordCount sut;
+    private WordCountWithAsk sut;
 
     @Test
     void shouldWriteCorrectEnterTextLineToOutput() {
@@ -55,6 +55,6 @@ class WordCountTest {
         input = new InputMock(inputText);
         output = new OutputMock();
         wordCounter = new WordCounterMock(expectedCount);
-        sut = new WordCount(input, output, wordCounter);
+        sut = new WordCountWithAsk(input, output, wordCounter);
     }
 }

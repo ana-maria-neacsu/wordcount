@@ -1,7 +1,7 @@
 package wordcount.interview;
 
-import wordcount.interview.configuration.file.FileLinesCache;
 import wordcount.interview.domain.counter.WordCounter;
+import wordcount.interview.environment.file.FileLinesReader;
 import wordcount.interview.ui.input.ConsoleInput;
 import wordcount.interview.ui.input.Input;
 import wordcount.interview.ui.output.ConsoleOutput;
@@ -11,13 +11,15 @@ public class Application {
     private static final String STOP_WORD_FILE_PATH = "src/main/resources/stopwords.txt";
 
     public static void main(String[] args) {
-        Input input = new ConsoleInput(System.in);
-        Output output = new ConsoleOutput(System.out);
+        if (args == null || args.length == 0) {
+            Input input = new ConsoleInput(System.in);
+            Output output = new ConsoleOutput(System.out);
 
-        FileLinesCache fileLinesCache = new FileLinesCache(STOP_WORD_FILE_PATH);
-        WordCounter wordCounter = new WordCounter(fileLinesCache.getLines());
+            FileLinesReader fileLinesReader = new FileLinesReader();
+            WordCounter wordCounter = new WordCounter(fileLinesReader.getLines(STOP_WORD_FILE_PATH));
 
-        WordCount wordCount = new WordCount(input, output, wordCounter);
-        wordCount.run();
+            WordCountWithAsk wordCount = new WordCountWithAsk(input, output, wordCounter);
+            wordCount.run();
+        }
     }
 }
