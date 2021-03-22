@@ -1,4 +1,4 @@
-package wordcount.interview;
+package wordcount.interview.domain;
 
 import org.junit.jupiter.api.Test;
 import wordcount.interview.mock.InputMock;
@@ -10,26 +10,16 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class WordCountWithAskTest {
+class WordCountDefaultTest {
     private static final String EMPTY = "";
-    private static final String EXPECTED_ENTER_TEXT = "Enter text:";
     private static final String INPUT_TEXT = "inputText";
     private static final long EXPECTED_COUNT = 10l;
     private static final String EXPECTED_NUMBER_OF_WORDS = "Number of words: ";
+
     private InputMock input;
     private OutputMock output;
     private WordCounterMock wordCounter;
-    private WordCountWithAsk sut;
-
-    @Test
-    void shouldWriteCorrectEnterTextLineToOutput() {
-        createSut(EMPTY, EXPECTED_COUNT);
-
-        sut.run();
-
-        List<String> outputText = output.getOutputTexts();
-        assertEquals(EXPECTED_ENTER_TEXT, outputText.get(0));
-    }
+    private WordCountDefault sut;
 
     @Test
     void shouldCallWordCounterCountOnInputText() {
@@ -48,13 +38,13 @@ class WordCountWithAskTest {
         sut.run();
 
         List<String> outputText = output.getOutputTexts();
-        assertEquals(EXPECTED_NUMBER_OF_WORDS + EXPECTED_COUNT, outputText.get(1));
+        assertEquals(EXPECTED_NUMBER_OF_WORDS + EXPECTED_COUNT, outputText.get(0));
     }
 
     private void createSut(String inputText, long expectedCount) {
         input = new InputMock(inputText);
         output = new OutputMock();
         wordCounter = new WordCounterMock(expectedCount);
-        sut = new WordCountWithAsk(input, output, wordCounter);
+        sut = new WordCountDefault(input, output, wordCounter);
     }
 }

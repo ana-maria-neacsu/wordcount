@@ -14,7 +14,9 @@ public class IntegrationTest {
     private static final String EXPECTED_NUMBER_OF_WORDS = "Number of words: ";
     private static final String WORD = "Word the";
     private static final int EXPECTED_COUNT = 1;
+    private static final String INPUT_FILE_PATH = "src/test/resources/input.txt";
     private PrintStreamMock out;
+    private String[] fileAsInput;
 
     @BeforeEach
     void setUp() {
@@ -22,10 +24,11 @@ public class IntegrationTest {
         ByteArrayInputStream in = new ByteArrayInputStream(WORD.getBytes());
         System.setOut(out);
         System.setIn(in);
+        fileAsInput = getFileAsInput();
     }
 
     @Test
-    void shouldHaveTwoOutputText() {
+    void shouldHaveTwoOutputTextToConsole() {
         Application.main(null);
 
         List<String> outputTexts = out.getOutputTexts();
@@ -33,7 +36,7 @@ public class IntegrationTest {
     }
 
     @Test
-    void shouldAskFirstForEnterText() {
+    void shouldAskFirstForEnterTextToConsole() {
         Application.main(null);
 
         List<String> outputTexts = out.getOutputTexts();
@@ -41,11 +44,32 @@ public class IntegrationTest {
     }
 
     @Test
-    void shouldOneCountWordAndPutItToOutput() {
+    void shouldOneCountWordAndPutItToOutputFromConsole() {
         Application.main(null);
 
         List<String> outputTexts = out.getOutputTexts();
         assertEquals(EXPECTED_NUMBER_OF_WORDS + EXPECTED_COUNT, outputTexts.get(1));
     }
 
+    @Test
+    void shouldHaveOneOutputTextToConsole() {
+        Application.main(fileAsInput);
+
+        List<String> outputTexts = out.getOutputTexts();
+        assertEquals(1, outputTexts.size());
+    }
+
+    @Test
+    void shouldOneCountWordAndPutItToOutputFromFile() {
+        Application.main(fileAsInput);
+
+        List<String> outputTexts = out.getOutputTexts();
+        assertEquals(EXPECTED_NUMBER_OF_WORDS + EXPECTED_COUNT, outputTexts.get(0));
+    }
+
+    private String[] getFileAsInput() {
+        String[] args = new String[1];
+        args[0] = INPUT_FILE_PATH;
+        return args;
+    }
 }

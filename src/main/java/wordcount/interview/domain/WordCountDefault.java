@@ -1,16 +1,16 @@
-package wordcount.interview;
+package wordcount.interview.domain;
 
 import wordcount.interview.domain.counter.WordCounter;
 import wordcount.interview.ui.input.Input;
 import wordcount.interview.ui.output.Output;
 
-public class WordCount {
+public class WordCountDefault implements WordCount {
     private static final String NUMBER_OF_WORDS = "Number of words: ";
     private final Input input;
     private final Output output;
     private final WordCounter wordCounter;
 
-    public WordCount(Input input, Output output, WordCounter wordCounter) {
+    public WordCountDefault(Input input, Output output, WordCounter wordCounter) {
         this.input = input;
         this.output = output;
         this.wordCounter = wordCounter;
