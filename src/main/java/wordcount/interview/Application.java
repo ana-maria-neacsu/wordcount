@@ -1,8 +1,18 @@
 package wordcount.interview;
 
-import java.util.Scanner;
+import wordcount.interview.domain.WordCounter;
+import wordcount.interview.ui.input.ConsoleInput;
+import wordcount.interview.ui.input.Input;
+import wordcount.interview.ui.output.ConsoleOutput;
+import wordcount.interview.ui.output.Output;
 
 public class Application {
     public static void main(String[] args) {
+        Input input = new ConsoleInput(System.in);
+        Output output = new ConsoleOutput(System.out);
+        WordCounter wordCounter = new WordCounter();
+
+        WordCount wordCount = new WordCount(input, output, wordCounter);
+        wordCount.run();
     }
 }

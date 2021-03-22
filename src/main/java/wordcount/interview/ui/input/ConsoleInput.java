@@ -7,12 +7,11 @@ public class ConsoleInput implements Input {
     private final Scanner scanner;
 
     public ConsoleInput(InputStream inputStream) {
-        this.scanner = new Scanner(inputStream);;
+        this.scanner = new Scanner(inputStream);
     }
 
     @Override
     public String read() {
-        Scanner scanner = this.scanner;
         return scanner.nextLine();
     }
 }

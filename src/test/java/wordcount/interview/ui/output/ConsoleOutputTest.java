@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import java.io.OutputStream;
-import java.io.PrintStream;
+import wordcount.interview.mock.PrintStreamMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,26 +22,18 @@ class ConsoleOutputTest {
     @ParameterizedTest
     @ValueSource(strings = {"a", "text", "Enter text:", "Number of words:"})
     @NullAndEmptySource
+    void shouldWriteOneTextToOutput(String text) {
+        sut.write(text);
+
+        assertEquals(1, printStream.getOutputTexts().size());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"a", "text", "Enter text:", "Number of words:"})
+    @NullAndEmptySource
     void shouldWriteToOutput(String text) {
         sut.write(text);
 
-        assertEquals(text, printStream.getLastText());
-    }
-
-    private class PrintStreamMock extends PrintStream {
-        private String lastText;
-
-        public PrintStreamMock(OutputStream out) {
-            super(out);
-        }
-
-        @Override
-        public void println(String text) {
-            lastText = text;
-        }
-
-        public String getLastText() {
-            return lastText;
-        }
+        assertEquals(text, printStream.getOutputTexts().get(0));
     }
 }
