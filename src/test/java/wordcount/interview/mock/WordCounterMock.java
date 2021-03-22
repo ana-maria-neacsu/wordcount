@@ -1,8 +1,6 @@
 package wordcount.interview.mock;
 
-import wordcount.interview.domain.WordCounter;
-
-import java.util.Collections;
+import wordcount.interview.domain.counter.WordCounter;
 
 import static java.util.Collections.emptySet;
 

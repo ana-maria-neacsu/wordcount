@@ -1,6 +1,6 @@
 package wordcount.interview;
 
-import wordcount.interview.domain.WordCounter;
+import wordcount.interview.domain.counter.WordCounter;
 import wordcount.interview.ui.input.Input;
 import wordcount.interview.ui.output.Output;
 

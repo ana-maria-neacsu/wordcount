@@ -1,2 +1,6 @@
 ==============Iteration1=============
 -Expected size of input (int vs long)
+
+==============Iteration2=============
+Should we expect that stopword.txt changes during operation?
+-I would expect it could not change

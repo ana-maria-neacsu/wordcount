@@ -1,5 +1,6 @@
-package wordcount.interview.domain;
+package wordcount.interview.domain.counter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.stream.Stream.of;
@@ -7,16 +8,17 @@ import static java.util.stream.Stream.of;
 public class WordCounter {
     private static final String ONLY_LETTER_REGEXP = "[a-zA-Z]+";
     private static final String WHITESPACE = "\\s";
+    private static final int ZERO = 0;
 
     private final Set<String> stopWords;
 
     public WordCounter(Set<String> stopWords) {
-        this.stopWords = stopWords;
+        this.stopWords = new HashSet<>(stopWords);
     }
 
     public long count(String text) {
         if (isBlank(text)) {
-            return 0;
+            return ZERO;
         }
 
         String[] words = split(text);

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import wordcount.interview.domain.counter.WordCounter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,7 +34,7 @@ class WordCounterTest {
             "word word                word, 3",
             "F$$oo Ba3 Baz, 1"
     })
-    void shouldCountWordsWithoutStopWords(String text, int expectedOutcome) {
+    void shouldCountWordsWithoutStopWordsInIt(String text, int expectedOutcome) {
         long count = sut.count(text);
 
         assertEquals(expectedOutcome, count);
@@ -44,7 +45,7 @@ class WordCounterTest {
             "word  STOP, 1",
             "world STOP world NO, 2"
     })
-    void shouldCountWordsWithStopWords(String text, int expectedOutcome) {
+    void shouldCountWordsWithStopWordsInIt(String text, int expectedOutcome) {
         long count = sut.count(text);
 
         assertEquals(expectedOutcome, count);
