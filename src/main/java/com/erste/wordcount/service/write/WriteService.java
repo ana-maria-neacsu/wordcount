@@ -1,4 +1,4 @@
-package com.erste.wordcount.service;
+package com.erste.wordcount.service.write;
 
 import java.io.PrintStream;
 

@@ -1,11 +1,11 @@
 package com.erste.wordcount;
 
-import com.erste.wordcount.service.CountService;
-import com.erste.wordcount.service.CountServiceFromKeyboardToDisplay;
-import com.erste.wordcount.service.ReadService;
-import com.erste.wordcount.service.ReadServiceFromKeyboard;
-import com.erste.wordcount.service.WriteService;
-import com.erste.wordcount.service.WriteServiceToDisplay;
+import com.erste.wordcount.service.count.CountService;
+import com.erste.wordcount.service.count.CountServiceFromKeyboardToDisplay;
+import com.erste.wordcount.service.read.ReadService;
+import com.erste.wordcount.service.read.ReadServiceFromKeyboard;
+import com.erste.wordcount.service.write.WriteService;
+import com.erste.wordcount.service.write.WriteServiceToDisplay;
 
 public class Main {
 
