@@ -5,15 +5,17 @@ import com.erste.wordcount.exception.splitterNullException;
 import com.erste.wordcount.service.read.ReadService;
 import com.erste.wordcount.service.write.WriteService;
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CountServiceFromKeyboardToDisplay implements CountService {
 
 
   private ReadService readServiceFromKeyboard;
   private WriteService writeServiceToDisplay;
-  private String allowedRegexPattern="[a-zA-Z]";
-  private String splitterRegexPattern="\\s+";
-
+  private String allowedRegexPattern = "[a-zA-Z]^[ ?]*[?][ ?]*$";
+  private String splitterRegexPattern = "\\s+";
 
 
   public CountServiceFromKeyboardToDisplay(ReadService readService,
@@ -30,10 +32,19 @@ public class CountServiceFromKeyboardToDisplay implements CountService {
     if (splitterRegexPattern == null || splitterRegexPattern.isEmpty()) {
       throw new splitterNullException();
     }
-  String inputString= readServiceFromKeyboard.read();
+    String inputString = readServiceFromKeyboard.read();
     String[] InputStringArray = inputString.split(splitterRegexPattern);
 
     return Arrays.stream(InputStringArray).count();
+  }
+
+  public List<String> filterNotAllowedWords(String[] inputArray) {
+    Pattern pattern = Pattern.compile(allowedRegexPattern);
+    List<String> matchList = Arrays.stream(inputArray)
+        .filter(pattern.asPredicate())
+
+        .collect(Collectors.toList());
+    return matchList;
   }
 
   @Override
