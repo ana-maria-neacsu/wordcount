@@ -1,5 +1,8 @@
 package com.erste.wordcount.service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CountServiceFromKeyboardToDisplay implements CountService {
 
 
@@ -12,8 +15,9 @@ public class CountServiceFromKeyboardToDisplay implements CountService {
     this.writeService = writeService;
   }
 
-  String count(){
+  @Override
+  public int count() {
 
-    return null;
+    return 0;
   }
 }
