@@ -4,6 +4,7 @@ import com.erste.wordcount.exception.AllowedPatternNullException;
 import com.erste.wordcount.exception.splitterNullException;
 import com.erste.wordcount.service.read.ReadService;
 import com.erste.wordcount.service.write.WriteService;
+import java.io.InputStream;
 
 public class CountServiceFromKeyboardToDisplay implements CountService {
 
@@ -29,8 +30,8 @@ public class CountServiceFromKeyboardToDisplay implements CountService {
       throw new splitterNullException();
     }
     System.out.println("Enter text: ");
-    String inputString = readServiceFromKeyboard.read();
-    String[] inputStringArray = inputString.split(splitterRegexPattern);
+    String[] inputStringArray = ReadService.convertInputStreamTOString(readServiceFromKeyboard.read())
+        .split(splitterRegexPattern);
     return filterNotAllowedWords(inputStringArray).size();
   }
 

@@ -13,11 +13,11 @@ public interface CountService {
   void setAllowedPattern(String allowedPattern);
 
   default List<String> filterNotAllowedWords(String[] inputArray) {
+    return filterNotCharacters(inputArray);
+  };
+
+  static List<String> filterNotCharacters(String[] inputArray) {
     return Arrays.stream(inputArray)
         .filter(s -> s.chars().allMatch(Character::isLetter)).collect(Collectors.toList());
-  }
-
-  ;
-
-
+  };
 }

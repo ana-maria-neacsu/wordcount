@@ -1,6 +1,9 @@
 package com.erste.wordcount.service.read;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 
@@ -13,8 +16,9 @@ public class ReadServiceFromKeyboard implements ReadService {
   }
 
   @Override
-  public String read() {
-    return new Scanner(inputStream).nextLine();
+  public InputStream read() {
+    String s = new Scanner(inputStream).nextLine();
+    return new ByteArrayInputStream(s.getBytes(StandardCharsets.UTF_8));
   }
 
 
