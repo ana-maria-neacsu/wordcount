@@ -1,23 +1,40 @@
 package com.erste.wordcount.service.read;
 
-import java.io.File;
+import com.erste.wordcount.exception.InputResourceNotFoundException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
-public class ReadFromFile implements ReadService{
+public class ReadFromFile implements ReadService {
 
-  private final String FILE_PATH=".";
+
+  private String filePath;
+  private FileInputStream fileInputStream;
 
   @Override
-  public InputStream read() {
+  public InputStream read() throws InputResourceNotFoundException, IOException {
 
     try {
-      FileInputStream fileInputStream=new FileInputStream("stopwords.txt");
+      fileInputStream = new FileInputStream(getFilePath());
       return fileInputStream;
+
     } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      throw new InputResourceNotFoundException();
     }
-    return null;
+
+
+  }
+
+  void closeTheStream() throws IOException {
+    fileInputStream.close();
+  }
+
+  public String getFilePath() {
+    return filePath;
+  }
+
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 }

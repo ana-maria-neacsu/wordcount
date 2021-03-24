@@ -1,6 +1,8 @@
 package com.erste.wordcount.service.read;
 
+import com.erste.wordcount.exception.InputResourceNotFoundException;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.stream.Collectors;
@@ -16,5 +18,5 @@ public interface ReadService {
 
   }
 
-  InputStream read();
+  InputStream read() throws InputResourceNotFoundException, IOException;
 }
