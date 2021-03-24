@@ -13,10 +13,9 @@ public class Main {
 
     ReadService readService = new ReadServiceFromKeyboard();
     WriteService writeService = new WriteServiceToDisplay();
-
     CountService countService = new CountServiceFromKeyboardToDisplay(readService, writeService);
-
     Long countedWords = countService.count();
+
     System.out.println(countedWords);
   }
 }

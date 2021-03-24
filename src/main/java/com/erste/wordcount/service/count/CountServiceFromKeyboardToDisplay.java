@@ -11,7 +11,6 @@ public class CountServiceFromKeyboardToDisplay implements CountService {
   private ReadService readServiceFromKeyboard;
   private WriteService writeServiceToDisplay;
   private String allowedRegexPattern = "[a-zA-Z]";
-  private String notAllowedRegexPattern = "^[`~!@#$%^&*()_+={}\\\\[\\\\]|\\\\\\\\:;“’<,>.?๐฿]*$";
   private String splitterRegexPattern = "\\s+";
 
 
