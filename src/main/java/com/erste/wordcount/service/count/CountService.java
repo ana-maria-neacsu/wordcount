@@ -1,6 +1,8 @@
 package com.erste.wordcount.service.count;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface CountService {
 
@@ -10,7 +12,12 @@ public interface CountService {
 
   void setAllowedPattern(String allowedPattern);
 
-  List<String> filterNotAllowedWords(String[] inputArray);
+  default List<String> filterNotAllowedWords(String[] inputArray) {
+    return Arrays.stream(inputArray)
+        .filter(s -> s.chars().allMatch(Character::isLetter)).collect(Collectors.toList());
+  }
+
+  ;
 
 
 }

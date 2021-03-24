@@ -14,9 +14,8 @@ public class ReadServiceFromKeyboard implements ReadService {
 
   @Override
   public String read() {
-    return  new Scanner(inputStream).next();
+    return new Scanner(inputStream).nextLine();
   }
-
 
 
 }

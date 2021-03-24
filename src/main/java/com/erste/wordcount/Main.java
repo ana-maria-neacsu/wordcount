@@ -11,12 +11,12 @@ public class Main {
 
   public static void main(String[] args) {
 
-    ReadService rs= new ReadServiceFromKeyboard();
-    rs.read();
-    WriteService ws=new WriteServiceToDisplay();
-    ws.write("test");
+    ReadService readService = new ReadServiceFromKeyboard();
+    WriteService writeService = new WriteServiceToDisplay();
 
-    CountService cs=new CountServiceFromKeyboardToDisplay(rs,ws);
-    cs.count();
+    CountService countService = new CountServiceFromKeyboardToDisplay(readService, writeService);
+
+    Long countedWords = countService.count();
+    System.out.println(countedWords);
   }
 }

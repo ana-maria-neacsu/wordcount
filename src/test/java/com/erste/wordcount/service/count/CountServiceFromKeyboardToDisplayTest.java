@@ -14,10 +14,6 @@ public class CountServiceFromKeyboardToDisplayTest {
   private CountService countService;
 
 
-  // @BeforeEach
-  public void setup() {
-
-  }
 
   @Test
   void count_when_givenSampleWithOneSpaceBetweenWords_returnCorrectNumber() {
@@ -37,21 +33,21 @@ public class CountServiceFromKeyboardToDisplayTest {
     Assertions.assertEquals(numberOfTheWords, 5);
   }
 
- // @Test
+  @Test
   void count_when_givenSampleStringHasNotAllowedChars_returnCorrectNumber() {
     mockDependencies("here ! ? is && a sampleString");
     writeService = new WriteServiceToDisplay();
     countService = new CountServiceFromKeyboardToDisplay(readService, writeService);
     Long numberOfTheWords = countService.count();
-    Assertions.assertEquals(numberOfTheWords, 5);
+    Assertions.assertEquals(4, numberOfTheWords);
   }
 
- // @Test
+ @Test
   public void filterNotAllowedWords_when_giveStringWithNotAllowedChars_returnFilteredArray() {
-    CountService countService = mockDependencies("! sample");
-    String[] sampleArray = {"sampleString", " stop!","shouldn'tBeCounted$", "!"};
+    CountService countService = mockDependencies("just to instantiate");
+    String[] sampleArray = {"correctString","!!!"," stop!","AnotherCorrectString"};
     List<String> strings = countService.filterNotAllowedWords(sampleArray);
-    Assertions.assertEquals(strings.size(),1);
+    Assertions.assertEquals(2,strings.size());
   }
 
   private CountService mockDependencies(String sampleString) {
