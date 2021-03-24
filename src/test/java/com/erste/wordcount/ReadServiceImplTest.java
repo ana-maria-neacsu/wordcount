@@ -11,15 +11,24 @@ public class ReadServiceImplTest {
   private ReadService readService;
 
   @BeforeEach
-  public void setup(){
-  readService =new ReadServiceFromKeyboard();
+  public void setup() {
+    readService = new ReadServiceFromKeyboard();
   }
 
   @Test
-  public void getInstance_when_callInstance_instanceNotNull() {
-    Assertions.assertNotNull(readService.getInstance());
+  public void getInstance_when_callInstance_return_instanceNotNull() {
+    Assertions.assertNotNull(readService.getInputInstance());
   }
 
+  @Test
+  public void getWelcomeMessage_when_call_printWelcomeMessage() {
+    String validMessage = "Enter text: ";
+    Assertions.assertEquals(readService.getWelcomeMessage(), validMessage);
+  }
 
-
+  @Test
+  public void read_when_call_returnCorrectString() {
+    String validMessage = "Enter text: ";
+    readService.read();
+  }
 }

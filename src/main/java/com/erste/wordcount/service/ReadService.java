@@ -6,7 +6,9 @@ import java.util.Scanner;
 public interface ReadService {
 
 
- Scanner read(InputStream in);
+ String read();
 
- Scanner getInstance();
+ Scanner getInputInstance();
+
+ String getWelcomeMessage();
 }
