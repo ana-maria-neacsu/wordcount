@@ -1,13 +1,16 @@
 package com.erste.wordcount.service;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Scanner;
 
 
 public class ReadServiceFromKeyboard implements ReadService {
 
-  private Scanner scanner;
+
   private InputStream inputStream;
+
+  private OutputStream outputStream;
 
   public ReadServiceFromKeyboard() {
     this.inputStream = System.in;
@@ -15,12 +18,14 @@ public class ReadServiceFromKeyboard implements ReadService {
 
   @Override
   public Scanner read(InputStream in) {
+    System.out.println();
+
     return null;
   }
 
   @Override
   public Scanner getInstance() {
-    return scanner = new Scanner(inputStream);
+    return new Scanner(inputStream);
   }
 
 
