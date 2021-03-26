@@ -9,3 +9,8 @@
 ## Iteration 2
 
 * The file "stopwords.txt" is located on the application's classpath
+
+## Iteration 3
+
+* Files given absolute paths
+* If the input file contains more than one line, lines are concatenated with a space in between
