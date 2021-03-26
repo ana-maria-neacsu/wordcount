@@ -8,7 +8,15 @@ public class WordCountApplication {
         System.out.print("Enter text: ");
         try (Scanner input = new Scanner(System.in)) {
             String sentence = input.nextLine();
-            int wordcount = (sentence.trim().isEmpty()) ? 0 : sentence.trim().split("\\s+").length;
+            int wordcount = 0;
+            if (!sentence.trim().isEmpty()) {
+                String[] words = sentence.trim().split("\\s+");
+                for (String word : words) {
+                    if (word.matches("[A-Za-z]+")) {
+                        wordcount++;
+                    }
+                }
+            }
             System.out.printf("Number of words: %d", wordcount);
         }
     }
