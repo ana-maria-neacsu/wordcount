@@ -26,7 +26,13 @@ public class WordCountApplication {
         outputSink.print("Enter text: ");
         String sentence = inputSource.getText();
         WordCountData wordCountData = wordCounter.countWords(sentence);
-        outputSink.print(String.format("Number of words: %d", wordCountData.getWordCount()));
+        outputSink.print(
+                String.format("Number of words: %d, unique: %d, average word length: %.2f",
+                        wordCountData.getWordCount(),
+                        wordCountData.getUniqueWords(),
+                        wordCountData.getAverageWordLength()
+                )
+        );
     }
 
     public static void main(String[] args) {

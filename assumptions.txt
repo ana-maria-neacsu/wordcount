@@ -24,3 +24,7 @@
 
 * A single hyphen is one word
 * Multiple hyphens are treated like whitespace(s)
+
+## Iteration 6
+
+* Calculate average word length down to 2 fractions

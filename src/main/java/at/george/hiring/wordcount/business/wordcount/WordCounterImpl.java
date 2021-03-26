@@ -2,11 +2,14 @@ package at.george.hiring.wordcount.business.wordcount;
 
 import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static java.math.RoundingMode.HALF_UP;
 
 public class WordCounterImpl implements WordCounter {
 
@@ -29,11 +32,16 @@ public class WordCounterImpl implements WordCounter {
                 .filter(this::filterStopWords)
                 .collect(Collectors.toList());
 
+        int totalWordLength = allWords.stream()
+                .mapToInt(String::length)
+                .sum();
+
         long uniqueWords = allWords.stream()
                 .distinct()
                 .count();
 
-        return new WordCountData(allWords.size(), uniqueWords);
+        BigDecimal averageWordLength = new BigDecimal(totalWordLength).divide(new BigDecimal(allWords.size()), HALF_UP);
+        return new WordCountData(allWords.size(), uniqueWords, averageWordLength);
     }
 
     private String removeDotOnWordEnd(String w) {

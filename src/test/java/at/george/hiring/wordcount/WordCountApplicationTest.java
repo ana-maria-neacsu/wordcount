@@ -5,6 +5,8 @@ import at.george.hiring.wordcount.input.InputSource;
 import at.george.hiring.wordcount.output.OutputSink;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class WordCountApplicationTest {
@@ -13,7 +15,7 @@ class WordCountApplicationTest {
     void GIVEN_aSentence_WHEN_countWords_THEN_returnWordCount() {
         TestInputSource testInputSource = new TestInputSource();
         TestOutputSink testOutputSink = new TestOutputSink();
-        new WordCountApplication(testInputSource, testOutputSink, s -> new WordCountData(5, 5)).run();
+        new WordCountApplication(testInputSource, testOutputSink, s -> new WordCountData(5, 5, BigDecimal.ONE)).run();
 
         assertEquals(1, testInputSource.counterMethodInvocation);
         assertEquals(2, testOutputSink.counterMethodInvocation);
