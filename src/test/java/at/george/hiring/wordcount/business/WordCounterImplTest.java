@@ -8,8 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +34,9 @@ class WordCounterImplTest {
     @ParameterizedTest
     @MethodSource("produceTestData")
     void GIVEN_aSentence_WHEN_countWords_THEN_returnNumberOfWords(String text, long expectedWordCount) {
-        assertEquals(expectedWordCount, new WordCounterImpl(testStopWordsLoader).countWords(text), "Counting is wrong");
+        WordCounterImpl wordCounter = new WordCounterImpl(testStopWordsLoader);
+        long actualWordCount = wordCounter.countWords(text);
+        assertEquals(expectedWordCount, actualWordCount, "Counting is wrong");
     }
 
     @Test
@@ -46,8 +46,8 @@ class WordCounterImplTest {
 
     static class TestStopWordLoader implements StopWordsLoader {
         @Override
-        public List<String> loadStopWords() {
-            return Collections.emptyList();
+        public boolean containsWord(String word) {
+            return false;
         }
     }
 

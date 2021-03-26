@@ -31,6 +31,6 @@ public class WordCounterImpl implements WordCounter {
     }
 
     private boolean filterStopWords(String w) {
-        return !stopWordsLoader.loadStopWords().contains(w);
+        return !stopWordsLoader.containsWord(w);
     }
 }
