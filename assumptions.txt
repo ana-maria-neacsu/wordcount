@@ -3,3 +3,4 @@
 ## Iteration 1
 
 * Words are separated by a single or multiple whitespaces
+* Empty input equals 0 words
