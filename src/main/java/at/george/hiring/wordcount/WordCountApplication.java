@@ -1,7 +1,9 @@
 package at.george.hiring.wordcount;
 
-import at.george.hiring.wordcount.business.WordCounter;
-import at.george.hiring.wordcount.business.WordCounterImpl;
+import at.george.hiring.wordcount.business.stopword.StopWordsClasspathLoaderImpl;
+import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
+import at.george.hiring.wordcount.business.wordcount.WordCounter;
+import at.george.hiring.wordcount.business.wordcount.WordCounterImpl;
 import at.george.hiring.wordcount.input.ConsoleInputSourceImpl;
 import at.george.hiring.wordcount.input.InputSource;
 import at.george.hiring.wordcount.output.ConsoleSinkImpl;
@@ -29,7 +31,8 @@ public class WordCountApplication {
     public static void main(String[] args) {
         InputSource inputSource = new ConsoleInputSourceImpl();
         OutputSink outputSink = new ConsoleSinkImpl();
-        WordCounter wordCounter = new WordCounterImpl();
+        StopWordsLoader stopWordsLoader = new StopWordsClasspathLoaderImpl();
+        WordCounter wordCounter = new WordCounterImpl(stopWordsLoader);
         new WordCountApplication(inputSource, outputSink, wordCounter).run();
     }
 }

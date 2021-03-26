@@ -5,3 +5,7 @@
 * Words are separated by a single or multiple whitespaces
 * Empty input equals 0 words
 * If the input is null the application throws an exception
+
+## Iteration 2
+
+* The file "stopwords.txt" is located on the application's classpath

@@ -1,13 +1,19 @@
 package at.george.hiring.wordcount.business;
 
-import org.junit.jupiter.api.Assertions;
+import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
+import at.george.hiring.wordcount.business.wordcount.WordCounterImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Stream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class WordCounterImplTest {
@@ -20,15 +26,30 @@ class WordCounterImplTest {
         );
     }
 
+    private StopWordsLoader testStopWordsLoader;
+
+    @BeforeEach
+    void setup() {
+        testStopWordsLoader = new TestStopWordLoader();
+    }
+
     @ParameterizedTest
     @MethodSource("produceTestData")
     void GIVEN_aSentence_WHEN_countWords_THEN_returnNumberOfWords(String text, long expectedWordCount) {
-        Assertions.assertEquals(expectedWordCount, new WordCounterImpl().countWords(text), "Counting is wrong");
+        assertEquals(expectedWordCount, new WordCounterImpl(testStopWordsLoader).countWords(text), "Counting is wrong");
     }
 
     @Test
     void GIVEN_null_WHEN_countWords_THEN_throwNullPointerException() {
-        Assertions.assertThrows(NullPointerException.class, () -> new WordCounterImpl().countWords(null));
+        assertThrows(NullPointerException.class, () -> new WordCounterImpl(testStopWordsLoader).countWords(null));
     }
+
+    static class TestStopWordLoader implements StopWordsLoader {
+        @Override
+        public List<String> loadStopWords() {
+            return Collections.emptyList();
+        }
+    }
+
 
 }

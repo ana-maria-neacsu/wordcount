@@ -1,4 +1,4 @@
-package at.george.hiring.wordcount.business;
+package at.george.hiring.wordcount.business.wordcount;
 
 public interface WordCounter {
 
