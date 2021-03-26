@@ -19,3 +19,8 @@
 
 * Words are separated by single or multiple whitespaces AND dashes
 * If a dot is on the end of a word the dot is removed before processing
+
+## Iteration 5
+
+* A single hyphen is one word
+* Multiple hyphens are treated like whitespace(s)

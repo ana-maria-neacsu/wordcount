@@ -27,9 +27,10 @@ class WordCounterImplTest {
                 arguments("Mary's lamb", 1L, 1L),
                 arguments("Mary's lamb.", 1L, 1L),
                 arguments("Mary   had  a     little lamb", 5L, 5L),
-                arguments("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 12L, 9L),
-                arguments("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-had-a-great-fall.", 12L, 9L),
-                arguments("Mary-Thomas had a little lamb.", 6L, 6L)
+                arguments("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", 10L, 8L),
+                arguments("Humpty-Dumpty-sat-on-a-wall. Humpty-Dumpty-had-a-great-fall.", 2L, 2L),
+                arguments("Mary-Thomas had a little lamb.", 5L, 5L),
+                arguments("Mary---Thomas had a little lamb.", 6L, 6L)
         );
     }
 

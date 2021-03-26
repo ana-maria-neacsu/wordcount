@@ -22,8 +22,9 @@ public class WordCounterImpl implements WordCounter {
     public WordCountData countWords(String text) {
         Objects.requireNonNull(text, "Text input must not be null");
 
-        List<String> allWords = Arrays.stream(text.trim().split("[\\s|\\-]+"))
+        List<String> allWords = Arrays.stream(text.trim().split("\\s|-{2,}"))
                 .map(this::removeDotOnWordEnd)
+                .map(this::removeHypens)
                 .filter(this::isWordValid)
                 .filter(this::filterStopWords)
                 .collect(Collectors.toList());
@@ -37,6 +38,10 @@ public class WordCounterImpl implements WordCounter {
 
     private String removeDotOnWordEnd(String w) {
         return (!w.trim().isEmpty() && w.charAt(w.length() - 1) == '.') ? w.substring(0, w.length() - 1) : w;
+    }
+
+    private String removeHypens(String w) {
+        return w.replaceAll("-", "");
     }
 
     private boolean isWordValid(String word) {
