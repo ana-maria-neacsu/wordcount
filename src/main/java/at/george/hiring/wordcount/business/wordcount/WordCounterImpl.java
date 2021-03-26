@@ -4,30 +4,29 @@ import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class WordCounterImpl implements WordCounter {
 
-    private StopWordsLoader stopWordsLoader;
+    private final StopWordsLoader stopWordsLoader;
+    private final Pattern isValidWordPattern;
 
     public WordCounterImpl(StopWordsLoader stopWordsLoader) {
         this.stopWordsLoader = stopWordsLoader;
+        this.isValidWordPattern = Pattern.compile("[A-Za-z]+");
     }
 
     public long countWords(String text) {
         Objects.requireNonNull(text, "Text input must not be null");
 
-        if (text.trim().isEmpty()) {
-            return 0L;
-        } else {
-            return Arrays.stream(text.trim().split("\\s+"))
-                    .filter(WordCounterImpl::isWordValid)
-                    .filter(this::filterStopWords)
-                    .count();
-        }
+        return Arrays.stream(text.trim().split("\\s+"))
+                .filter(this::isWordValid)
+                .filter(this::filterStopWords)
+                .count();
     }
 
-    private static boolean isWordValid(String word) {
-        return word.matches("[A-Za-z]+");
+    private boolean isWordValid(String word) {
+        return isValidWordPattern.matcher(word).matches();
     }
 
     private boolean filterStopWords(String w) {
