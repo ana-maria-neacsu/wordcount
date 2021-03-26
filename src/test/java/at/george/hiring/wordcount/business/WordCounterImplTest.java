@@ -20,7 +20,12 @@ class WordCounterImplTest {
         return Stream.of(
                 arguments("Mary had a little lamb", 5L),
                 arguments("", 0L),
-                arguments("Foo44bar", 0L)
+                arguments("Foo44bar", 0L),
+                arguments("Mary had a little lamb.", 4L),
+                arguments("Mary and Tom, her little brother, had a little lamb.", 7L),
+                arguments("Mary's lamb", 1L),
+                arguments("Mary's lamb.", 0L),
+                arguments("Mary   had  a     little lamb", 5L)
         );
     }
 
