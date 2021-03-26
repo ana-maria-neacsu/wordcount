@@ -22,7 +22,7 @@ public class WordCountApplication {
         this.wordCounter = wordCounter;
     }
 
-    public void run() {
+    public void run(String[] args) {
         outputSink.print("Enter text: ");
         String sentence = inputSource.getText();
         WordCountData wordCountData = wordCounter.countWords(sentence);
@@ -33,6 +33,12 @@ public class WordCountApplication {
                         wordCountData.getAverageWordLength()
                 )
         );
+
+        // TODO Redo this, don't check for "-index" here
+        if (args.length > 0 && args[0].startsWith("-index")) {
+            outputSink.print("\nIndex:\n");
+            wordCountData.getUniqueWordSet().forEach(w -> outputSink.print(w + "\n"));
+        }
     }
 
     public static void main(String[] args) {
@@ -40,6 +46,6 @@ public class WordCountApplication {
         OutputSink outputSink = new ConsoleSinkImpl();
         StopWordsLoader stopWordsLoader = new StopWordsClasspathLoaderImpl();
         WordCounter wordCounter = new WordCounterImpl(stopWordsLoader);
-        new WordCountApplication(inputSource, outputSink, wordCounter).run();
+        new WordCountApplication(inputSource, outputSink, wordCounter).run(args);
     }
 }

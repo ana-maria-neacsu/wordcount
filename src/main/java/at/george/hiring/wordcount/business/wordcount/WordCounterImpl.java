@@ -4,8 +4,10 @@ import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -34,15 +36,13 @@ public class WordCounterImpl implements WordCounter {
                 .mapToInt(String::length)
                 .sum();
 
-        long uniqueWords = allWords.stream()
-                .distinct()
-                .count();
+        Set<String> uniqueWordsSet = new HashSet<>(allWords);
 
         BigDecimal dividend = new BigDecimal(totalWordLength);
         BigDecimal divisor = new BigDecimal(allWords.size());
         BigDecimal averageWordLength = (allWords.isEmpty())? BigDecimal.ZERO : dividend.divide(divisor, 2, BigDecimal.ROUND_UP);
 
-        return new WordCountData(allWords.size(), uniqueWords, averageWordLength);
+        return new WordCountData(allWords.size(), uniqueWordsSet.size(), averageWordLength, uniqueWordsSet);
     }
 
     private String removeDotOnWordEnd(String w) {

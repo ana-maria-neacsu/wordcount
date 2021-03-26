@@ -28,3 +28,7 @@
 ## Iteration 6
 
 * Calculate average word length down to 2 fractions
+
+## Iteration 7
+
+* If the application is started with "-index" parameter you have to input the text using the console
