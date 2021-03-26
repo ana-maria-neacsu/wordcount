@@ -14,3 +14,8 @@
 
 * Files given absolute paths
 * If the input file contains more than one line, lines are concatenated with a space in between
+
+## Iteration 4
+
+* Words are separated by single or multiple whitespaces AND dashes
+* If a dot is on the end of a word the dot is removed before processing
