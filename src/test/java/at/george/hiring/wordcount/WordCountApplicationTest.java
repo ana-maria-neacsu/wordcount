@@ -19,7 +19,7 @@ class WordCountApplicationTest {
 
         assertEquals(1, testInputSource.counterMethodInvocation);
         assertEquals(2, testOutputSink.counterMethodInvocation);
-        assertEquals("Number of words: 5", testOutputSink.lastMessage);
+        assertEquals("Number of words: 5, unique: 5, average word length: 1,00", testOutputSink.lastMessage);
     }
 
     static class TestInputSource implements InputSource {

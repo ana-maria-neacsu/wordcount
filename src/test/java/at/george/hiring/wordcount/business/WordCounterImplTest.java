@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.math.BigDecimal;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,6 +35,14 @@ class WordCounterImplTest {
         );
     }
 
+    static Stream<Arguments> produceTestDataForAverageWordLength() {
+        return Stream.of(
+                arguments("Mary", new BigDecimal("4")),
+                arguments("", BigDecimal.ZERO),
+                arguments("Mary Tom", new BigDecimal("3.5"))
+        );
+    }
+
     private StopWordsLoader testStopWordsLoader;
 
     @BeforeEach
@@ -48,6 +57,14 @@ class WordCounterImplTest {
         WordCountData wordCountData = wordCounter.countWords(text);
         assertEquals(expectedWordCount, wordCountData.getWordCount(), "Counting is wrong");
         assertEquals(expectedUniqueWordCount, wordCountData.getUniqueWords(), "Counting unique words is wrong");
+    }
+
+    @ParameterizedTest
+    @MethodSource("produceTestDataForAverageWordLength")
+    void GIVEN_aSentence_WHEN_countWords_THEN_returnAverageWordLength(String text, BigDecimal averageWordLength) {
+        WordCounterImpl wordCounter = new WordCounterImpl(testStopWordsLoader);
+        WordCountData wordCountData = wordCounter.countWords(text);
+        assertEquals(averageWordLength.setScale(2), wordCountData.getAverageWordLength().setScale(2));
     }
 
     @Test

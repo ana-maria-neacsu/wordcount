@@ -9,8 +9,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static java.math.RoundingMode.HALF_UP;
-
 public class WordCounterImpl implements WordCounter {
 
     private final StopWordsLoader stopWordsLoader;
@@ -40,7 +38,10 @@ public class WordCounterImpl implements WordCounter {
                 .distinct()
                 .count();
 
-        BigDecimal averageWordLength = new BigDecimal(totalWordLength).divide(new BigDecimal(allWords.size()), HALF_UP);
+        BigDecimal dividend = new BigDecimal(totalWordLength);
+        BigDecimal divisor = new BigDecimal(allWords.size());
+        BigDecimal averageWordLength = (allWords.isEmpty())? BigDecimal.ZERO : dividend.divide(divisor, 2, BigDecimal.ROUND_UP);
+
         return new WordCountData(allWords.size(), uniqueWords, averageWordLength);
     }
 
