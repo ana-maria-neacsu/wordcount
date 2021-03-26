@@ -1,0 +1,5 @@
+# Assumptions
+
+## Iteration 1
+
+* Words are separated by a single or multiple whitespaces
