@@ -1,5 +1,6 @@
 package at.george.hiring.wordcount;
 
+import at.george.hiring.wordcount.business.wordcount.WordCountData;
 import at.george.hiring.wordcount.input.InputSource;
 import at.george.hiring.wordcount.output.OutputSink;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ class WordCountApplicationTest {
     void GIVEN_aSentence_WHEN_countWords_THEN_returnWordCount() {
         TestInputSource testInputSource = new TestInputSource();
         TestOutputSink testOutputSink = new TestOutputSink();
-        new WordCountApplication(testInputSource, testOutputSink, s -> 5).run();
+        new WordCountApplication(testInputSource, testOutputSink, s -> new WordCountData(5, 5)).run();
 
         assertEquals(1, testInputSource.counterMethodInvocation);
         assertEquals(2, testOutputSink.counterMethodInvocation);

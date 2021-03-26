@@ -1,6 +1,5 @@
 package at.george.hiring.wordcount.input;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -8,6 +7,9 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class FileInputSourceImplTest {
 
@@ -18,7 +20,12 @@ class FileInputSourceImplTest {
                 .collect(Collectors.joining(" "));
         FileInputSourceImpl fileInputSource = new FileInputSourceImpl("src/test/resources/testInputFile.txt");
         String actualText = fileInputSource.getText();
-        Assertions.assertEquals(expectedText, actualText );
+        assertEquals(expectedText, actualText);
+    }
+
+    @Test
+    void GIVEN_nonExistingInputFile_WHEN_getText_THAN_throwRuntimeException() {
+        assertThrows(RuntimeException.class, () -> new FileInputSourceImpl("/non-existing-file.txt"));
     }
 
 }

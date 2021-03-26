@@ -2,6 +2,7 @@ package at.george.hiring.wordcount;
 
 import at.george.hiring.wordcount.business.stopword.StopWordsClasspathLoaderImpl;
 import at.george.hiring.wordcount.business.stopword.StopWordsLoader;
+import at.george.hiring.wordcount.business.wordcount.WordCountData;
 import at.george.hiring.wordcount.business.wordcount.WordCounter;
 import at.george.hiring.wordcount.business.wordcount.WordCounterImpl;
 import at.george.hiring.wordcount.input.InputSource;
@@ -24,8 +25,8 @@ public class WordCountApplication {
     public void run() {
         outputSink.print("Enter text: ");
         String sentence = inputSource.getText();
-        long wordcount = wordCounter.countWords(sentence);
-        outputSink.print(String.format("Number of words: %d", wordcount));
+        WordCountData wordCountData = wordCounter.countWords(sentence);
+        outputSink.print(String.format("Number of words: %d", wordCountData.getWordCount()));
     }
 
     public static void main(String[] args) {

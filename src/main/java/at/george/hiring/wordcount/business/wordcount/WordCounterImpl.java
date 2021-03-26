@@ -18,6 +18,7 @@ public class WordCounterImpl implements WordCounter {
         this.isValidWordPattern = Pattern.compile("[A-Za-z]+");
     }
 
+    @Override
     public WordCountData countWords(String text) {
         Objects.requireNonNull(text, "Text input must not be null");
 
@@ -35,7 +36,7 @@ public class WordCounterImpl implements WordCounter {
     }
 
     private String removeDotOnWordEnd(String w) {
-        return (w.charAt(w.length() - 1) == '.') ? w.substring(0, w.length() - 1) : w;
+        return (!w.trim().isEmpty() && w.charAt(w.length() - 1) == '.') ? w.substring(0, w.length() - 1) : w;
     }
 
     private boolean isWordValid(String word) {

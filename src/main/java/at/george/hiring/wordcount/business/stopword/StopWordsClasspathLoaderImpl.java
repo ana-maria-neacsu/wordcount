@@ -13,12 +13,16 @@ public class StopWordsClasspathLoaderImpl implements StopWordsLoader {
     private final List<String> stopwords;
 
     public StopWordsClasspathLoaderImpl() {
+        this("/stopwords.txt");
+    }
+
+    public StopWordsClasspathLoaderImpl(String stopwordsFilename) {
         List<String> tmpStopwords = null;
         try {
             tmpStopwords = Files
-                    .lines(Paths.get(getClass().getResource("/stopwords.txt").toURI()))
+                    .lines(Paths.get(getClass().getResource(stopwordsFilename).toURI()))
                     .collect(Collectors.toList());
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException | URISyntaxException | NullPointerException e) {
             System.err.println("Unable to load stopwords file 'stopwords.txt' from classpath. Will assume 0 stopwords!");
         } finally {
             this.stopwords = (tmpStopwords != null) ? tmpStopwords : Collections.emptyList();

@@ -1,6 +1,7 @@
 package at.george.hiring.wordcount.business;
 
 import at.george.hiring.wordcount.business.stopword.StopWordsClasspathLoaderImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +26,7 @@ class StopWordsClasspathLoaderImplTest {
     }
 
     @Test
-    void GIVEN_aStopwordsFile_WHEN_loadStopWords_THEN_returnListWithStopWords() throws URISyntaxException, IOException {
+    void GIVEN_aStopwordsFile_WHEN_loadStopWords_THEN_returnTrueForEveryExpectedStopWord() {
         StopWordsClasspathLoaderImpl stopWordsClasspathLoader = new StopWordsClasspathLoaderImpl();
         for (String expectedStopWord : expectedStopWords) {
             assertTrue(
@@ -33,6 +34,12 @@ class StopWordsClasspathLoaderImplTest {
                     String.format("Word '%s' is missing in Stopwords!", expectedStopWord)
             );
         }
+    }
+
+    @Test
+    void GIVEN_noStopwordsFile_WHEN_loadStopWords_THEN_returnFalseForEveryContains() {
+        StopWordsClasspathLoaderImpl stopWordsClasspathLoader = new StopWordsClasspathLoaderImpl("/non-existing-file.txt");
+        Assertions.assertFalse(stopWordsClasspathLoader.containsWord(""));
     }
 
 }
