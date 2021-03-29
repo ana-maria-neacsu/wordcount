@@ -1,13 +1,15 @@
 package wordcounter;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 import wordcounter.exceptions.StopWordsProviderException;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class StopWordsProvider {
 
@@ -23,16 +25,18 @@ public class StopWordsProvider {
     public Set<String> getStopWords() {
         try {
             //read stop words from the file
-            URL fileUrl = getUrlForFile(filename);
-            Path path = Paths.get(fileUrl.toURI());
-            Set<String> stopWords = Files.lines(path).collect(Collectors.toCollection(HashSet::new));
-            return stopWords;
+            Path path = getPathForFilename(filename);
+            return Files.lines(path).collect(toCollection(HashSet::new));
         } catch (Exception e) {
             throw new StopWordsProviderException("Unable to read stop words.", e);
         }
     }
 
-    private URL getUrlForFile(String filename) {
-        return this.getClass().getClassLoader().getResource(filename);
+    /**
+     * NullPointerException in thrown in case a resource file couldn't be found
+     */
+    private Path getPathForFilename(String filename) throws URISyntaxException {
+        URL fileUrl = this.getClass().getClassLoader().getResource(filename);
+        return Paths.get(fileUrl.toURI());
     }
 }
