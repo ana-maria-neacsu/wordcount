@@ -5,6 +5,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 import wordcounter.InputProvider;
 import wordcounter.OutputConsole;
+import wordcounter.StopWordsProvider;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptySet;
@@ -17,9 +18,10 @@ public class WordCounterIntegrationTest {
         //given
         InputProvider inputProvider = new TestableInputProvider("Hello, honey. I am home");
         TestableOutputConsole outputConsole = new TestableOutputConsole();
+        StopWordsProvider stopWordsProvider = new TestableStopWordsProvider(emptySet());
 
         //when
-        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, emptySet());
+        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, stopWordsProvider);
         wordCounterApp.process();
 
         //then
@@ -32,15 +34,19 @@ public class WordCounterIntegrationTest {
         //given
         InputProvider inputProvider = new TestableInputProvider("Hello, honey. I am home");
         TestableOutputConsole outputConsole = new TestableOutputConsole();
-        Set<String> stopWords = new HashSet<>(asList("I", "am"));
+        StopWordsProvider stopWordsProvider = new TestableStopWordsProvider(createStopWordsSet("I", "am"));
 
         //when
-        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, stopWords);
+        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, stopWordsProvider);
         wordCounterApp.process();
 
         //then
         assertEquals("Enter text: ", getQuestionTextFromConsole(outputConsole));
         assertEquals("Number of words: 1", getResultTextFromConsole(outputConsole));
+    }
+
+    private HashSet<String> createStopWordsSet(String... stopWords) {
+        return new HashSet<>(asList(stopWords));
     }
 
     private String getResultTextFromConsole(TestableOutputConsole outputConsole) {
@@ -78,6 +84,21 @@ public class WordCounterIntegrationTest {
 
         public List<String> getLinesPrinted() {
             return linesPrinted;
+        }
+    }
+
+    private static class TestableStopWordsProvider extends StopWordsProvider {
+
+        private final Set<String> stopWords;
+
+        public TestableStopWordsProvider(Set<String> stopWords) {
+            super("");
+            this.stopWords = stopWords;
+        }
+
+        @Override
+        public Set<String> getStopWords() {
+            return stopWords;
         }
     }
 }

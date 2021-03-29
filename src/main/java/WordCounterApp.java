@@ -1,27 +1,29 @@
-import java.util.Collections;
-import java.util.Set;
 import wordcounter.InputProvider;
 import wordcounter.OutputConsole;
+import wordcounter.StopWordsProvider;
 import wordcounter.WordCounter;
 
 public class WordCounterApp {
 
+    private static final String STOP_WORDS_FILENAME = "stopwords.txt";
+
     private final InputProvider inputProvider;
     private final OutputConsole console;
-    private final Set<String> stopWords;
+    private final StopWordsProvider stopWordsProvider;
 
     public static void main(String[] args) {
         OutputConsole outputConsole = new OutputConsole();
         InputProvider inputProvider = new InputProvider();
+        StopWordsProvider stopWordsProvider = new StopWordsProvider(STOP_WORDS_FILENAME);
 
-        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, Collections.emptySet());
+        WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, stopWordsProvider);
         wordCounterApp.process();
     }
 
-    public WordCounterApp(InputProvider inputProvider, OutputConsole console, Set<String> stopWords) {
+    public WordCounterApp(InputProvider inputProvider, OutputConsole console, StopWordsProvider stopWordsProvider) {
         this.inputProvider = inputProvider;
         this.console = console;
-        this.stopWords = stopWords;
+        this.stopWordsProvider = stopWordsProvider;
     }
 
     public void process() {
@@ -30,7 +32,7 @@ public class WordCounterApp {
         String inputText = inputProvider.getInput();
 
         //process the input
-        WordCounter wordCounter = new WordCounter(inputText, stopWords);
+        WordCounter wordCounter = new WordCounter(inputText, stopWordsProvider.getStopWords());
         int count = wordCounter.count();
 
         //print out the result
