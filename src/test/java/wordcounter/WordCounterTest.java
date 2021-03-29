@@ -28,18 +28,38 @@ public class WordCounterTest {
     }
 
     @Test
-    public void should_return_1() {
+    public void should_return_1_for_regular_word() {
         assertEquals(1, wordCounter.count("word"));
     }
 
     @Test
-    public void should_return_2() {
+    public void should_return_2_for_2_regular_words() {
         assertEquals(2, wordCounter.count("word word"));
     }
 
     @Test
-    public void should_return_1_234() {
-        assertEquals(1, wordCounter.count("word2 word"));
+    public void should_return_0_for_a_number() {
+        assertEquals(0, wordCounter.count("123"));
+    }
+
+    @Test
+    public void should_return_0_for_a_special_character() {
+        assertEquals(0, wordCounter.count("!"));
+    }
+
+    @Test
+    public void should_return_0_for_a_word_containing_special_character() {
+        assertEquals(0, wordCounter.count("he!!o"));
+    }
+
+    @Test
+    public void should_return_0_for_a_word_containing_number() {
+        assertEquals(0, wordCounter.count("he11o"));
+    }
+
+    @Test
+    public void should_return_1_for_a_regular_word_and_two_irregular_ones() {
+        assertEquals(1, wordCounter.count("Hi he11o, Dav!d"));
     }
 
 }

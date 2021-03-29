@@ -1,10 +1,15 @@
 package wordcounter;
 
-import java.util.Objects;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static java.util.Arrays.stream;
+
 public class WordCounter {
+
+    private static final Pattern WORD_PATTERN = Pattern.compile("[a-zA-Z]+");
+    public static final String EMPTY_SPACES = "\\s+";
 
     /**
      * This method returns number of words found in a text.
@@ -16,19 +21,19 @@ public class WordCounter {
         if (text == null) {
             throw new IllegalArgumentException();
         }
-        //via regex
-        Pattern pattern = Pattern.compile("[a-zA-Z]");
 
-        String[] words = text.split("\\s+");
-        int totalCount = 0;
-        for (String word : words) {
-            Matcher matcher = pattern.matcher(word);
-            if (matcher.matches()) {
-                totalCount++;
-            }
-        }
-        return totalCount;
-        //final String[] words = text.split("");
-        //return words.length;
+        String[] words = text.split(EMPTY_SPACES);
+        return countCorrectWords(words);
+    }
+
+    private int countCorrectWords(String[] words) {
+        return stream(words)
+                .filter(this::isCorrectWord)
+                .mapToInt(w -> 1)
+                .sum();
+    }
+
+    private boolean isCorrectWord(String word) {
+        return WORD_PATTERN.matcher(word).matches();
     }
 }
