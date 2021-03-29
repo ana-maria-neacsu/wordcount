@@ -1,2 +1,5 @@
 Iteration 2
 - If stop words file is missing, the exception is thrown and the application is stopped
+
+Iteration 3
+- The provided filename refers to the file in the working directory
