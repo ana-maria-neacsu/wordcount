@@ -26,8 +26,8 @@ public class WordCounterApp {
         String inputText = inputProvider.getInput();
 
         //process the input
-        WordCounter wordCounter = new WordCounter();
-        int count = wordCounter.count(inputText);
+        WordCounter wordCounter = new WordCounter(inputText);
+        int count = wordCounter.count();
 
         //print out the result
         console.printLine("Number of words: " + count);
