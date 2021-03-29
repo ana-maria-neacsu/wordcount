@@ -1,0 +1,2 @@
+Iteration 2
+- If stop words file is missing, the exception is thrown and the application is stopped
