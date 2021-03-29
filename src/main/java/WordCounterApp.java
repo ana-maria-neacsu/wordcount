@@ -39,5 +39,4 @@ public class WordCounterApp {
         console.printLine("Number of words: " + count);
     }
 
-
 }
