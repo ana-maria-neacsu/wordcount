@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import wordcounter.ConsoleInputProvider;
 import wordcounter.InputProvider;
 import wordcounter.OutputConsole;
 import wordcounter.StopWordsProvider;
@@ -45,6 +46,11 @@ public class WordCounterIntegrationTest {
         assertEquals("Number of words: 1", getResultTextFromConsole(outputConsole));
     }
 
+    @Test
+    public void testInputFile() {
+        WordCounterApp.main(new String[]{"D:\\test\\mytext.txt"});
+    }
+
     private HashSet<String> createStopWordsSet(String... stopWords) {
         return new HashSet<>(asList(stopWords));
     }
@@ -59,7 +65,7 @@ public class WordCounterIntegrationTest {
         return outputConsole.getLinesPrinted().get(0);
     }
 
-    private static class TestableInputProvider extends InputProvider {
+    private static class TestableInputProvider extends ConsoleInputProvider {
 
         private final String inputText;
 

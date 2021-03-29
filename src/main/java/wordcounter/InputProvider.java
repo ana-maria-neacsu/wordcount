@@ -1,11 +1,6 @@
 package wordcounter;
 
-import java.util.Scanner;
+public interface InputProvider {
 
-public class InputProvider {
-
-    public String getInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
+    String getInput();
 }

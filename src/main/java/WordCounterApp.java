@@ -1,3 +1,5 @@
+import wordcounter.ConsoleInputProvider;
+import wordcounter.FileInputProvider;
 import wordcounter.InputProvider;
 import wordcounter.OutputConsole;
 import wordcounter.StopWordsProvider;
@@ -12,12 +14,23 @@ public class WordCounterApp {
     private final StopWordsProvider stopWordsProvider;
 
     public static void main(String[] args) {
+        //read args
+        //validateArguments();
+        String filename = args[0];
+        InputProvider inputProvider = getInputProvider(filename);
+
         OutputConsole outputConsole = new OutputConsole();
-        InputProvider inputProvider = new InputProvider();
         StopWordsProvider stopWordsProvider = new StopWordsProvider(STOP_WORDS_FILENAME);
 
         WordCounterApp wordCounterApp = new WordCounterApp(inputProvider, outputConsole, stopWordsProvider);
         wordCounterApp.process();
+    }
+
+    private static InputProvider getInputProvider(String filename) {
+        if (filename != null) {
+            return new FileInputProvider(filename);
+        }
+        return new ConsoleInputProvider();
     }
 
     public WordCounterApp(InputProvider inputProvider, OutputConsole console, StopWordsProvider stopWordsProvider) {
