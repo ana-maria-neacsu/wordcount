@@ -16,7 +16,7 @@ We expect you to work 3 hours on the example application which we soon will expl
 ### Remote-Pair-Programming Sessions
 You will collaborate in four sessions with George Backend Chapter team members. These sessions will be done remotely via Skype. You will receive more details about the Remote-Pair-Programming sessions via email after we have evaluated your homework.
 
-###Exercise: Word Count Kata
+### Exercise: Word Count Kata
 Please find the requirements for the Word Count Kata on the following [website](https://ccd-school.de/coding-dojo/#cd8). At the bottom of that page you will find all requirements split into 9 iterations. The goal of this exercise is not to finish as many iterations as possible. We will evaluate your solution based on quality over quantity. 
 
 Please focus on code quality by applying
