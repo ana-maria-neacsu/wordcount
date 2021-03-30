@@ -1,6 +1,4 @@
-# Coding Example
-
-## George Backend Chapter - Coding Challenge
+# George Backend Chapter - Coding Challenge
 Congratulations. You made it to our final recruiting stage which is a coding challenge. In this stage you have to show practical skills in the things which you discussed in the previous recruiting stage:
 - Object-Oriented Programming
 - Refactoring
