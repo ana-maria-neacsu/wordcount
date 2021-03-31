@@ -1,0 +1,11 @@
+iteration1:
+
+
+-- logic
+- base case from homepage
+- special characters ?
+
+-- ui
+- correct input
+- incorrect input
+- output

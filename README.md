@@ -43,3 +43,6 @@ Please use Java 8 or Kotlin as a programming language. No Framework is allowed f
 ### Questions
 In case this description triggers some questions on your side, please don’t hesitate to get in touch with us. Other than that, we recommend starting with this exercise as soon as possible after you have received it. We wish you good luck and are very much looking forward to your solution.
 
+### How to run jar
+
+java -cp wordcount-1.0-SNAPSHOT.jar Foo
