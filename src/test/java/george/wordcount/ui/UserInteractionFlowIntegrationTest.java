@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -51,7 +50,7 @@ class UserInteractionFlowIntegrationTest {
     @MethodSource("dataProviderFor_GIVEN_userInteractionFlow_started_WHEN_user_input_is_entered_THEN_output_is_as_expected")
     public void GIVEN_userInteractionFlow_started_WHEN_user_input_is_entered_THEN_output_is_as_expected(
             final String input,
-            final String expectedOutput) throws IOException, URISyntaxException {
+            final String expectedOutput) throws IOException {
         // GIVEN:
         final LinkedList<String> output = new LinkedList<>();
         final StopWordProvider stopWordProvider = new StopWordProvider();

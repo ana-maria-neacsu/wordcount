@@ -48,4 +48,4 @@ this will not run from inside intellij because of known input issue.
 
 
 
-java -cp wordcount-1.0-SNAPSHOT.jar george.wordcount.Application
+java -cp wordcount-1.0-SNAPSHOT.jar george.wordcount.EntryPoint

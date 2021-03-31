@@ -6,19 +6,29 @@ import george.wordcount.logic.WordCounter;
 import george.wordcount.ui.UserInteractionFlow;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.net.URISyntaxException;
 
 public class Application {
-    private static UserInteractionFlow wireUp() throws IOException, URISyntaxException {
+    private UserInteractionFlow wireUp() throws IOException {
         final StopWordProvider stopWordProvider = new StopWordProvider();
         final WordCounter wordCounter = new WordCounter(
                 stopWordProvider.provide()
         );
 
-        return new ConsoleUserInteractionFlow(wordCounter, System.out, System.in);
+        return new ConsoleUserInteractionFlow(wordCounter, getPrintStream(), getInputStream());
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    protected PrintStream getPrintStream() {
+        return System.out;
+    }
+
+    protected InputStream getInputStream() {
+        return System.in;
+    }
+
+    public void wireUpAndExecute() throws IOException, URISyntaxException {
         final UserInteractionFlow commandPrompt = wireUp();
 
         commandPrompt.doInteraction();

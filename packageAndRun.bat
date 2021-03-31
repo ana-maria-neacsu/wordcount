@@ -1,1 +1,1 @@
-mvn clean install && cd target && java -cp wordcount-1.0-SNAPSHOT.jar george.wordcount.Application && cd ..
+mvn clean install && cd target && java -cp wordcount-1.0-SNAPSHOT.jar george.wordcount.EntryPoint && cd ..

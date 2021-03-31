@@ -1,24 +1,30 @@
 package george.wordcount.libraries;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.LinkedList;
 import java.util.List;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class StopWordProvider {
     private static final String STOPWORDS_FILE_PATH = "stopwords.txt";
 
-    public List<String> provide() throws URISyntaxException, IOException {
-        final URL urlToResource =
-                StopWordProvider.class.getClassLoader().getResource(STOPWORDS_FILE_PATH);
-        final File resourceFile =
-                new File(urlToResource.toURI());
+    public List<String> provide() throws IOException {
+        final InputStream inputStream =
+                StopWordProvider.class.getClassLoader().getResourceAsStream(STOPWORDS_FILE_PATH);
 
-        return Files.readAllLines(resourceFile.toPath(), UTF_8);
+        return convertFromInputStream(inputStream);
+    }
+
+    private List<String> convertFromInputStream(final InputStream inputStream) throws IOException {
+        final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        final List<String> result = new LinkedList<>();
+
+        while (reader.ready()) {
+            result.add(reader.readLine());
+        }
+
+        return result;
     }
 }
