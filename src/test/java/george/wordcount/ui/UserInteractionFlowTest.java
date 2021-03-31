@@ -33,7 +33,7 @@ class UserInteractionFlowTest {
         }
     }
 
-    static Stream<Arguments> dataProviderFor_testThatComponentBIsUsed() {
+    static Stream<Arguments> dataProviderFor_GIVEN_userInteractionFlow_started_WHEN_user_input_is_entered_THEN_output_is_as_expected() {
         return Stream.of(
                 Arguments.of(null, "Number of words: 0"),
                 Arguments.of("", "Number of words: 0"),
@@ -45,7 +45,7 @@ class UserInteractionFlowTest {
     }
 
     @ParameterizedTest
-    @MethodSource("dataProviderFor_testThatComponentBIsUsed")
+    @MethodSource("dataProviderFor_GIVEN_userInteractionFlow_started_WHEN_user_input_is_entered_THEN_output_is_as_expected")
     public void GIVEN_userInteractionFlow_started_WHEN_user_input_is_entered_THEN_output_is_as_expected(
             final String input,
             final String expectedOutput) {

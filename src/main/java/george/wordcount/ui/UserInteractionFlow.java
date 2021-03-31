@@ -10,7 +10,7 @@ public abstract class UserInteractionFlow {
     }
 
     public void doInteraction() {
-        final String input = this.promptUserForString("Enter text:");
+        final String input = this.promptUserForString("Enter text: ");
         this.printText("Number of words: " + this.wordCounter.countWordsOf(input));
     }
 

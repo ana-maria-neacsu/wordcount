@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 class WordCounterTest {
     final private WordCounter classUnderTest = new WordCounter();
 
-    static Stream<Arguments> dataProviderFor_testThatComponentBIsUsed() {
+    static Stream<Arguments> dataProviderFor_GIVEN_simple_input_WHEN_countWordsOf_is_called_THEN_result_is_as_expected() {
         return Stream.of(
                 Arguments.of(null, 0),
                 Arguments.of("", 0),
@@ -32,7 +32,7 @@ class WordCounterTest {
     }
 
     @ParameterizedTest
-    @MethodSource("dataProviderFor_testThatComponentBIsUsed")
+    @MethodSource("dataProviderFor_GIVEN_simple_input_WHEN_countWordsOf_is_called_THEN_result_is_as_expected")
     public void GIVEN_simple_input_WHEN_countWordsOf_is_called_THEN_result_is_as_expected(
             final String input,
             final int expectedWordCount) {
