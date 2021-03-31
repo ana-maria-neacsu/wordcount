@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-class WordCounterTest {
+class SimpleWordCounterTest {
     static Stream<Arguments> dataProviderFor_GIVEN_simple_input_WHEN_countWordsOf_is_called_THEN_result_is_as_expected() {
         return Stream.of(
                 Arguments.of(null, 0),
@@ -40,7 +40,7 @@ class WordCounterTest {
             final String input,
             final int expectedWordCount) {
         // GIVEN:
-        final WordCounter classUnderTest = new WordCounter(emptyList());
+        final SimpleWordCounter classUnderTest = new SimpleWordCounter(emptyList());
 
         // WHEN:
         final int result = classUnderTest.countWordsOf(input);
@@ -71,7 +71,7 @@ class WordCounterTest {
             final List<String> stopWords,
             final int expectedWordCount) {
         // GIVEN:
-        final WordCounter classUnderTest = new WordCounter(stopWords);
+        final SimpleWordCounter classUnderTest = new SimpleWordCounter(stopWords);
 
         // WHEN:
         final int result = classUnderTest.countWordsOf(input);

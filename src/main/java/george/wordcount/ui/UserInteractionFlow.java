@@ -9,7 +9,7 @@ public abstract class UserInteractionFlow {
         this.wordCounter = wordCounter;
     }
 
-    public void doInteraction() {
+    public void doInteraction(final String[] args) {
         final String input = this.promptUserForString("Enter text: ");
         this.printText("Number of words: " + this.wordCounter.countWordsOf(input));
     }

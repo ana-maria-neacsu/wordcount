@@ -1,7 +1,7 @@
 package george.wordcount.ui;
 
 import george.wordcount.libraries.StopWordProvider;
-import george.wordcount.logic.WordCounter;
+import george.wordcount.logic.SimpleWordCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,8 +17,8 @@ class UserInteractionFlowIntegrationTest {
         private final String testInput;
         private final List<String> testOutput;
 
-        public TestableUserInteractionFlow(WordCounter wordCounter, String testInput, List<String> testOutput) {
-            super(wordCounter);
+        public TestableUserInteractionFlow(SimpleWordCounter simpleWordCounter, String testInput, List<String> testOutput) {
+            super(simpleWordCounter);
             this.testInput = testInput;
             this.testOutput = testOutput;
         }
@@ -54,12 +54,12 @@ class UserInteractionFlowIntegrationTest {
         // GIVEN:
         final LinkedList<String> output = new LinkedList<>();
         final StopWordProvider stopWordProvider = new StopWordProvider();
-        final WordCounter wordCounter = new WordCounter(stopWordProvider.provide());
+        final SimpleWordCounter simpleWordCounter = new SimpleWordCounter(stopWordProvider.provide());
         final UserInteractionFlow classUnderTest =
-                new TestableUserInteractionFlow(wordCounter, input, output);
+                new TestableUserInteractionFlow(simpleWordCounter, input, output);
 
         // WHEN:
-        classUnderTest.doInteraction();
+        classUnderTest.doInteraction(null);
 
         // THEN:
         Assertions.assertEquals(1, output.size(), "we only expect one output call");

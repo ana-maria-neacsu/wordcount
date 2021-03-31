@@ -1,6 +1,6 @@
 package george.wordcount.libraries;
 
-import george.wordcount.logic.WordCounter;
+import george.wordcount.logic.SimpleWordCounter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -33,10 +33,10 @@ class ConsoleUserInteractionFlowTest {
         final ByteArrayOutputStream outputReceiver = new ByteArrayOutputStream();
         final PrintStream printStream = new PrintStream(outputReceiver, true, UTF_8_NAME);
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes(UTF_8));
-        final ConsoleUserInteractionFlow classUnderTest = new ConsoleUserInteractionFlow(new WordCounter(emptyList()), printStream, inputStream);
+        final ConsoleUserInteractionFlow classUnderTest = new ConsoleUserInteractionFlow(new SimpleWordCounter(emptyList()), printStream, inputStream);
 
         // WHEN:
-        classUnderTest.doInteraction();
+        classUnderTest.doInteraction(null);
 
         // THEN:
         String data = outputReceiver.toString(UTF_8_NAME);
