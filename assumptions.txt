@@ -5,6 +5,7 @@ stopwords.txt is packaged in the jar
 stopwords.txt does not contain empty lines
 we assume that the file is always present in the jar and of valid format and content (UTF-8) - if not then the program is invalid and an exception may be thrown
 
-
+## iteration #3
+only valid file paths can be submitted to the program
 
 

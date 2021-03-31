@@ -10,8 +10,47 @@ public abstract class UserInteractionFlow {
     }
 
     public void doInteraction(final String[] args) {
-        final String input = this.promptUserForString("Enter text: ");
-        this.printText("Number of words: " + this.wordCounter.countWordsOf(input));
+        if (argumentsAreNotValid(args)) {
+            this.printText("Either no or one command line argument is allowed");
+            return;
+        }
+
+        final String text = retrieveInput(args);
+
+        this.printText("Number of words: " + this.wordCounter.countWordsOf(text));
+    }
+
+    private boolean argumentsAreNotValid(final String[] args) {
+        return countArguments(args) > 1;
+    }
+
+    private int countArguments(final String[] args) {
+        if (args == null) {
+            return 0;
+        }
+
+        return args.length;
+    }
+
+    private String retrieveInput(final String[] args) {
+        final boolean readInputFromConsole = countArguments(args) == 0;
+
+        if (readInputFromConsole) {
+            return readInputFromConsoleMode();
+        } else {
+            return readInputFromFile(args[0]);
+        }
+    }
+
+    private String readInputFromConsoleMode() {
+        return this.promptUserForString("Enter text: ");
+    }
+
+    private String readInputFromFile(final String filePath) {
+        // TODO:
+        // - implement FileContentProvider in libraries package
+        // - then call here and merge the lines into one string (replace line separators with whitespaces)
+        return "";
     }
 
     protected abstract void printText(String text);
