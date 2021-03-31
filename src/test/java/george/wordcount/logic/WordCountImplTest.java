@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 class WordCountImplTest {
-    final private WordCount classUnderTest = new WordCountImpl();
+    final private WordCount classUnderTest = new WordCountImpl(new WordValidatorImpl());
 
     static Stream<Arguments> dataProviderFor_testThatComponentBIsUsed() {
         return Stream.of(
