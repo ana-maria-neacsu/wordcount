@@ -1,21 +1,15 @@
 package george.wordcount;
 
-import george.wordcount.libraries.JavaConsoleInputOutput;
-import george.wordcount.ui.CommandPrompt;
-import george.wordcount.ui.CommandPromptImpl;
-import george.wordcount.ui.TextInputOutput;
+import george.wordcount.libraries.ConsoleUserInteractionFlow;
+import george.wordcount.ui.UserInteractionFlow;
 
 public class Application {
-    private static CommandPrompt wireUp() {
-        final TextInputOutput textInputOutput = new JavaConsoleInputOutput(System.console());
-
-        final CommandPrompt commandPrompt = new CommandPromptImpl(textInputOutput);
-
-        return commandPrompt;
+    private static UserInteractionFlow wireUp() {
+        return new ConsoleUserInteractionFlow(System.in, System.out);
     }
 
     public static void main(String[] args) {
-        final CommandPrompt commandPrompt = wireUp();
+        final UserInteractionFlow commandPrompt = wireUp();
 
         commandPrompt.doInteraction();
     }

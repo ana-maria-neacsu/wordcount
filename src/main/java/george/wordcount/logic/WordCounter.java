@@ -5,15 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WordCountImpl implements WordCount {
+public class WordCounter {
     private static final String WORD_SPLIT_REGEX = "\\s+";
-    private final WordValidator wordValidator;
+    private static final String VALID_WORD_REGEX = "[a-zA-Z]+";
 
-    public WordCountImpl(WordValidator wordValidator) {
-        this.wordValidator = wordValidator;
-    }
-
-    @Override
     public int countWordsOf(final String input) {
         final List<String> potentialWords = validateAndSplitIntoPotentialWords(input);
         final List<String> actualWords = validatePotentialWords(potentialWords);
@@ -31,7 +26,7 @@ public class WordCountImpl implements WordCount {
 
     private List<String> validatePotentialWords(final List<String> potentialWords) {
         return potentialWords.stream()
-                .filter(wordValidator::isValidWord)
+                .filter(potentialWord -> potentialWord.matches(VALID_WORD_REGEX))
                 .collect(Collectors.toList());
     }
 }

@@ -7,14 +7,19 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-class WordCountImplTest {
-    final private WordCount classUnderTest = new WordCountImpl(new WordValidatorImpl());
+class WordCounterTest {
+    final private WordCounter classUnderTest = new WordCounter();
 
     static Stream<Arguments> dataProviderFor_testThatComponentBIsUsed() {
         return Stream.of(
                 Arguments.of(null, 0),
                 Arguments.of("", 0),
+                Arguments.of("a", 1),
+                Arguments.of("z", 1),
                 Arguments.of("Hallo", 1),
+                Arguments.of("FooBar", 1),
+                Arguments.of("FooBar", 1),
+                Arguments.of("FooäBar", 0),
                 Arguments.of(" Hallo", 1),
                 Arguments.of("   Hallo", 1),
                 Arguments.of("Hallo ", 1),
