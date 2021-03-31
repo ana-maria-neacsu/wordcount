@@ -1,11 +1,14 @@
 package george.wordcount;
 
 import george.wordcount.libraries.ConsoleUserInteractionFlow;
+import george.wordcount.logic.WordCounter;
 import george.wordcount.ui.UserInteractionFlow;
 
 public class Application {
     private static UserInteractionFlow wireUp() {
-        return new ConsoleUserInteractionFlow(System.in, System.out);
+        final WordCounter wordCounter = new WordCounter();
+
+        return new ConsoleUserInteractionFlow(wordCounter, System.out, System.in);
     }
 
     public static void main(String[] args) {
