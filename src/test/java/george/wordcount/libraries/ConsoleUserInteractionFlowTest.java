@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import static java.lang.System.lineSeparator;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.emptyList;
 
 class ConsoleUserInteractionFlowTest {
     private final static String UTF_8_NAME = UTF_8.name();
@@ -32,7 +33,7 @@ class ConsoleUserInteractionFlowTest {
         final ByteArrayOutputStream outputReceiver = new ByteArrayOutputStream();
         final PrintStream printStream = new PrintStream(outputReceiver, true, UTF_8_NAME);
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes(UTF_8));
-        final ConsoleUserInteractionFlow classUnderTest = new ConsoleUserInteractionFlow(new WordCounter(), printStream, inputStream);
+        final ConsoleUserInteractionFlow classUnderTest = new ConsoleUserInteractionFlow(new WordCounter(emptyList()), printStream, inputStream);
 
         // WHEN:
         classUnderTest.doInteraction();

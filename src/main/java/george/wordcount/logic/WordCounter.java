@@ -8,6 +8,11 @@ import java.util.stream.Collectors;
 public class WordCounter {
     private static final String WORD_SPLIT_REGEX = "\\s+";
     private static final String VALID_WORD_REGEX = "[a-zA-Z]+";
+    private final List<String> stopWords;
+
+    public WordCounter(List<String> stopWords) {
+        this.stopWords = stopWords;
+    }
 
     public int countWordsOf(final String input) {
         final List<String> potentialWords = validateAndSplitIntoPotentialWords(input);
