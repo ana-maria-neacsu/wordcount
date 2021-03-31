@@ -43,7 +43,7 @@ class UserInteractionFlowIntegrationTest {
                 Arguments.of("Hallo", "Number of words: 1"),
                 Arguments.of("FooäBar", "Number of words: 0"),
                 Arguments.of(" This is test  ", "Number of words: 3"),
-                Arguments.of("Mary had a little lamb", "Number of words: 5")
+                Arguments.of("Mary had a little lamb", "Number of words: 4")
         );
     }
 

@@ -31,7 +31,16 @@ public class WordCounter {
 
     private List<String> validatePotentialWords(final List<String> potentialWords) {
         return potentialWords.stream()
-                .filter(potentialWord -> potentialWord.matches(VALID_WORD_REGEX))
+                .filter(this::isValidWordUsingOnlyLetters)
+                .filter(this::isNotAStopWord)
                 .collect(Collectors.toList());
+    }
+
+    private boolean isNotAStopWord(final String input) {
+        return !stopWords.contains(input);
+    }
+
+    private boolean isValidWordUsingOnlyLetters(final String input) {
+        return input.matches(VALID_WORD_REGEX);
     }
 }
