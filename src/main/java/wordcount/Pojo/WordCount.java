@@ -18,6 +18,7 @@ public class WordCount implements IWordCount {
 	
 	public WordCount(String text) {
 		this.listOfWords = new ArrayList<String>();
+		this.stopWords = new ArrayList<String>();
 		this.setText(text);
 	}
 	
@@ -52,13 +53,11 @@ public class WordCount implements IWordCount {
 	public void setText(String text) {
 		this.text = text;
 		splitTextWords();
-		this.stopWords = new ArrayList<String>();
 	}
 	
 	@Override
 	public void setText(ArrayList<String> words) {
 		this.listOfWords = words;
-		this.stopWords = new ArrayList<String>();
 	}
 	
 	@Override
