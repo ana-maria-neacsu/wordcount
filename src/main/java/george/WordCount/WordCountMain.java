@@ -42,7 +42,8 @@ public class WordCountMain
 
 		CountWordsDTO countWordsDTO = wordCount.count();
 		outputWriter.WriteLine("Count of words without stop words: " +  countWordsDTO.getTotalWordsCount());   
-		outputWriter.WriteLine("Count of words: " +  countWordsDTO.getTotalWordsCount() + ", unique: " + countWordsDTO.getUniqueWordsCount());
+		outputWriter.WriteLine("Count of words: " +  countWordsDTO.getTotalWordsCount() + ","
+				+ " unique: " + countWordsDTO.getUniqueWordsCount() + ", average word length: " + countWordsDTO.getAverageWordLength());
 	}
 	
 }

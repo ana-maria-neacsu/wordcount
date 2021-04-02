@@ -46,11 +46,17 @@ public class WordCount implements IWordCount {
 
 		Map<String, Long> countDuplicatedGroups = validWords.stream()
 				.collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+		
+		int countWordsLength = validWords.stream()
+				.mapToInt(w -> w.length())
+				.sum();
+		
+		float averageWordLength =  countWordsLength / countValidWords;
 
 		long countDuplicatedWords = countDuplicatedGroups.entrySet().stream()
 				.filter(map -> map.getValue().intValue() > 1).count();
 
-		CountWordsDTO countWordsDTO = new CountWordsDTO(countValidWords, countDuplicatedWords);
+		CountWordsDTO countWordsDTO = new CountWordsDTO(countValidWords, countDuplicatedWords, averageWordLength);
 
 		return countWordsDTO;
 	}
@@ -71,12 +77,15 @@ public class WordCount implements IWordCount {
 
 	@Override
 	public void setText(ArrayList<String> words) {
-		this.listOfWords = words;
+		ArrayList<String> newWords = new ArrayList<String>();
+		words.forEach((word) -> newWords.add(TextFilterExtension.FilterText(word)));
+		this.listOfWords = newWords;
 	}
 
 	@Override
-	public void setText(ArrayList<String> words, String stopWordsFileName) {
-		this.listOfWords = words;
+	public void setText(ArrayList<String> words, String stopWordsFileName) {	
+		this.listOfWords = words;	
+		words.forEach((word) -> word = TextFilterExtension.FilterText(word));
 		textReader = new TextReader(stopWordsFileName);
 		this.stopWords = textReader.read();
 	}

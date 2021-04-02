@@ -4,11 +4,18 @@ public class CountWordsDTO {
 
 	private long countDuplicatedWords;
 	private long countTotalWords;
+	private float averageWordLength;
 	
 	public CountWordsDTO() {}
 	public CountWordsDTO(long countTotalWords, long countDuplicatedWords) {
 		this.countTotalWords = countTotalWords;
 		this.countDuplicatedWords = countDuplicatedWords;
+	}
+	
+	public CountWordsDTO(long countTotalWords, long countDuplicatedWords, float averageWordLength) {
+		this.countTotalWords = countTotalWords;
+		this.countDuplicatedWords = countDuplicatedWords;
+		this.averageWordLength = averageWordLength;
 	}
 	
 	public long getCountDuplicatedWords() {
@@ -30,5 +37,13 @@ public class CountWordsDTO {
 	public long getUniqueWordsCount() {
 		long countUniqueWords = this.countTotalWords - this.countDuplicatedWords;
 		return countUniqueWords;
+	}
+	
+	public float getAverageWordLength() {
+		return averageWordLength;
+	}
+	
+	public void setAverageWordLength(float averageWordLength) {
+		this.averageWordLength = averageWordLength;
 	}
 }

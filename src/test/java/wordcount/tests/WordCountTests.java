@@ -84,4 +84,21 @@ public class WordCountTests {
 	}
 	
 	
+	@Test
+	public void countAverageWordLengthFromText() {
+	
+		String stopWordsFileName = "src/test/resources/testStopWords.txt";
+		String inputFile = "src/test/resources/testInput.txt";
+		WordCount wordCount = new WordCount();
+		ITextReader textReader = new TextReader(inputFile);
+		
+		ArrayList<String> words = textReader.read();
+		wordCount.setText(words, stopWordsFileName);
+		
+		CountWordsDTO countWordsDTO = wordCount.count();
+		
+		assertTrue(countWordsDTO.getAverageWordLength() > 0);
+	}
+	
+	
 }
