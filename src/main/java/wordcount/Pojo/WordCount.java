@@ -51,7 +51,10 @@ public class WordCount implements IWordCount {
 				.mapToDouble(w -> w.length())
 				.sum();
 		
-		double averageWordLength =  countWordsLength / countValidWords;
+		double averageWordLength = 0;
+		if(countWordsLength != 0 && countValidWords != 0) {
+			averageWordLength = countWordsLength / countValidWords;
+		}
 
 		long countDuplicatedWords = countDuplicatedGroups.entrySet().stream()
 				.filter(map -> map.getValue().intValue() > 1).count();
