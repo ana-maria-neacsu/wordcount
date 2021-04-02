@@ -7,3 +7,9 @@ Iteration 4
 
 I should replace the ". " and "-" with " ".
 If the last character of the text contains a "." I can remove it.
+
+Iteration 5
+
+I integrated in the letter only regex, the possibility to take words which also contain a hyphen
+Before:"^[a-zA-Z]+$"
+After:"^[a-zA-Z\\-]+$"

@@ -10,7 +10,7 @@ public class WordCount implements IWordCount {
 
 	private String text;
 	private ArrayList<String> listOfWords;
-	private static final String ONLY_LETTERS_REGEX = "^[a-zA-Z]+$";
+	private static final String ONLY_LETTERS_REGEX = "^[a-zA-Z\\-]+$";
 	private ITextReader textReader;
 	private ArrayList<String> stopWords;
 
