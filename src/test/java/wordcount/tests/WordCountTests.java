@@ -22,7 +22,7 @@ public class WordCountTests {
 		
 		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(countWordsDTO.getCountTotalWords() == expectedCount);
+		assertTrue(countWordsDTO.getTotalWordsCount() == expectedCount);
 	}
 	
 	
@@ -35,7 +35,7 @@ public class WordCountTests {
 		
 		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(countWordsDTO.getCountTotalWords() == expectedCount);
+		assertTrue(countWordsDTO.getTotalWordsCount() == expectedCount);
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class WordCountTests {
 		WordCount wordCount = new WordCount(text, stopWordsFileName);
 		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(countWordsDTO.getCountTotalWords() == expectedCount);
+		assertTrue(countWordsDTO.getTotalWordsCount() == expectedCount);
 	}
 	
 	
@@ -66,7 +66,7 @@ public class WordCountTests {
 		
 		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(countWordsDTO.getCountTotalWords() == expectedCount);
+		assertTrue(countWordsDTO.getTotalWordsCount() == expectedCount);
 	}
 	
 	
@@ -80,7 +80,7 @@ public class WordCountTests {
 		
 		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(countWordsDTO.getCountTotalWords() > countWordsDTO.getCountUniqueWords());
+		assertTrue(countWordsDTO.getTotalWordsCount() > countWordsDTO.getUniqueWordsCount());
 	}
 	
 	

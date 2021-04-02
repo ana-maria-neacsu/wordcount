@@ -1,10 +1,8 @@
 package george.WordCount;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import wordcount.Pojo.CountWordsDTO;
 import wordcount.Pojo.IInputReader;
 import wordcount.Pojo.ITextReader;
 import wordcount.Pojo.IWordCount;
@@ -23,28 +21,27 @@ public class WordCountMain
 	
 	public static void main(String args[]) {
 		
-
 		wordCount = new WordCount();
 		inputReader = new InputReader();
 		
+		System.out.println("Please enter a filename: ");
 		String fileName = inputReader.readLine();
 		
 		if(!fileName.isEmpty()){
-			
 			textReader = new TextReader(fileName);
 			ArrayList<String> words = textReader.read();
 			wordCount.setText(words);
 		}else {
+			System.out.println("Please enter a text: ");
 			String text = inputReader.readLine();
+		    wordCount.setStopWordsReader(STOP_WORDS_FILENAME);
 	        wordCount.setText(text);
 		}
 
-	    System.out.println("Count of words without special characters: " +  wordCount.count());
-	        
-	    wordCount.setStopWordsReader(STOP_WORDS_FILENAME);
-	    System.out.println("Count of words without stop words: " +  wordCount.count());
+		CountWordsDTO countWordsDTO = wordCount.count();
+	    System.out.println("Count of words without stop words: " +  countWordsDTO.getTotalWordsCount());
 	    
-		
+	    System.out.println("Count of words: " +  countWordsDTO.getTotalWordsCount() + ", unique: " + countWordsDTO.getUniqueWordsCount());
 	}
 	
 }

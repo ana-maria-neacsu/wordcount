@@ -19,7 +19,7 @@ public class CountWordsDTO {
 		this.countDuplicatedWords = countDuplicatedWords;
 	}
 	
-	public long getCountTotalWords() {
+	public long getTotalWordsCount() {
 		return countTotalWords;
 	}
 	
@@ -27,7 +27,7 @@ public class CountWordsDTO {
 		this.countTotalWords = countWords;
 	}
 	
-	public long getCountUniqueWords() {
+	public long getUniqueWordsCount() {
 		long countUniqueWords = this.countTotalWords - this.countDuplicatedWords;
 		return countUniqueWords;
 	}

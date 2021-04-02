@@ -34,24 +34,20 @@ public class WordCount implements IWordCount {
 	}
 
 	public CountWordsDTO count() {
-		
-		
+
 		List<String> validWords = listOfWords.stream()
-				.filter((word) -> word.matches(ONLY_LETTERS_REGEX) && !stopWords.contains(word))
+				.filter((word) -> word.matches(ONLY_LETTERS_REGEX) && !this.stopWords.contains(word))
 				.collect(Collectors.toList());
-		
+
 		long countValidWords = validWords.stream().count();
 
-		long countDuplicatedWords = listOfWords.stream()
-				.filter((word) -> listOfWords.contains(word))
-				.count();
-		
-		Map<String, Long> counts = validWords.stream()
-				   .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
+		Map<String, Long> countDuplicatedGroups = validWords.stream()
+				.collect(Collectors.groupingBy(word -> word, Collectors.counting()));
 
-		long countUniqueWords = countValidWords - countDuplicatedWords;
+		long countDuplicatedWords = countDuplicatedGroups.entrySet().stream()
+				.filter(map -> map.getValue().intValue() > 1).count();
 
-		CountWordsDTO countWordsDTO = new CountWordsDTO(countValidWords, countUniqueWords);
+		CountWordsDTO countWordsDTO = new CountWordsDTO(countValidWords, countDuplicatedWords);
 
 		return countWordsDTO;
 	}
@@ -83,10 +79,7 @@ public class WordCount implements IWordCount {
 	}
 
 	private void splitTextWords() {
-		text = text.replace(". ", " ");
-		text = text.replace("-", " ");
-		text = text.replace(".", "");
-		
+		text = TextFilterExtension.FilterText(text);
 		String[] wordsArray = text.split(" ");
 		List<String> arrayOfWords = Arrays.asList(wordsArray);
 		this.listOfWords.addAll(arrayOfWords);
