@@ -3,6 +3,8 @@ package wordcount.Pojo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextReader implements ITextReader {
@@ -21,13 +23,15 @@ public class TextReader implements ITextReader {
 	
 	public ArrayList<String> read() {
 		
-		ArrayList<String> stopWords = new ArrayList<String>();
+		ArrayList<String> words = new ArrayList<String>();
 		while(this.textScanner.hasNextLine()) {
-			String stopWord = this.textScanner.nextLine();
-			stopWords.add(stopWord);
+			String line = this.textScanner.nextLine();
+			List<String> wordList = Arrays.asList(line.split(" "));
+			
+			words.addAll(wordList);
 		}
 		
-		return stopWords;
+		return words;
 	}
 	
 	
