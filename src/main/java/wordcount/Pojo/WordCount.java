@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import george.WordCount.Interfaces.ITextReader;
+import george.WordCount.Interfaces.IWordCount;
+
 public class WordCount implements IWordCount {
 
 	private String text;

@@ -1,6 +1,8 @@
-package wordcount.Pojo;
+package george.WordCount.Interfaces;
 
 import java.util.ArrayList;
+
+import wordcount.Pojo.CountWordsDTO;
 
 public interface IWordCount {
 	

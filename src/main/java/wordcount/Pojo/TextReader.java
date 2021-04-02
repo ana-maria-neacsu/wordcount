@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import george.WordCount.Interfaces.ITextReader;
+
 public class TextReader implements ITextReader {
 	
 	private File textFile;

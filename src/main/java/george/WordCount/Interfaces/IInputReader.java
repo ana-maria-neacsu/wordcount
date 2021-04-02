@@ -1,4 +1,4 @@
-package wordcount.Pojo;
+package george.WordCount.Interfaces;
 
 public interface IInputReader {
 

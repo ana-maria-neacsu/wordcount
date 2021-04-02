@@ -2,7 +2,7 @@ package wordcount.tests;
 
 import org.junit.jupiter.api.Test;
 
-import wordcount.Pojo.ITextReader;
+import george.WordCount.Interfaces.ITextReader;
 import wordcount.Pojo.TextReader;
 
 import static org.junit.jupiter.api.Assertions.*;

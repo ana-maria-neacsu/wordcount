@@ -2,8 +2,8 @@ package wordcount.tests;
 
 import org.junit.jupiter.api.Test;
 
+import george.WordCount.Interfaces.*;
 import wordcount.Pojo.CountWordsDTO;
-import wordcount.Pojo.ITextReader;
 import wordcount.Pojo.TextReader;
 import wordcount.Pojo.WordCount;
 

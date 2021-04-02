@@ -2,10 +2,8 @@ package george.WordCount;
 
 import java.util.ArrayList;
 
+import george.WordCount.Interfaces.*;
 import wordcount.Pojo.CountWordsDTO;
-import wordcount.Pojo.IInputReader;
-import wordcount.Pojo.ITextReader;
-import wordcount.Pojo.IWordCount;
 import wordcount.Pojo.InputReader;
 import wordcount.Pojo.TextReader;
 import wordcount.Pojo.WordCount;
