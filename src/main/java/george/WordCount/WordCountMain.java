@@ -11,7 +11,8 @@ public class WordCountMain
 {
 	
 	private static IWordCount wordCount;
-
+	private static final String STOP_WORDS_FILENAME = "src/test/resources/stopWords.txt";
+	
 	public static void main(String args[]) {
 		
 
@@ -27,7 +28,11 @@ public class WordCountMain
 				e.printStackTrace();
 			}
 	        
-	        System.out.println(wordCount.count());
+	        System.out.println("Count of words without special characters: " +  wordCount.count());
+	        
+	  //   wordCount.setTextReader(STOP_WORDS_FILENAME);
+	    // System.out.println("Count of words without stop words: " +  wordCount.count());
+	    
 		
 	}
 	

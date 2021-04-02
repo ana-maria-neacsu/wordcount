@@ -29,4 +29,16 @@ public class WordCountTests {
 		assertTrue(wordCount.count() == expectedCount);
 	}
 	
+	@Test
+	public void countWordsWithoutStopWords() {
+	
+		long expectedCount = 4;
+		String fileName = "src/test/resources/testStopWords.txt";
+		String text = "Mary had a little lamb";
+		WordCount wordCount = new WordCount(text, fileName);
+		
+		assertTrue(wordCount.count() == expectedCount);
+	}
+	
+	
 }
