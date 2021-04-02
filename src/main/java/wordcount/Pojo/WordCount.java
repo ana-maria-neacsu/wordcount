@@ -17,13 +17,10 @@ public class WordCount implements IWordCount {
 	
 	public WordCount(String text) {
 		this.setText(text);
-		splitTextWords();
-		this.stopWords = new ArrayList<String>();
 	}
 	
 	public WordCount(String text, String fileName) {
 		this.setText(text);
-		splitTextWords();
 		
 		textReader = new TextReader(fileName);
 		this.stopWords = textReader.read();
@@ -52,6 +49,7 @@ public class WordCount implements IWordCount {
 	public void setText(String text) {
 		this.text = text;
 		splitTextWords();
+		this.stopWords = new ArrayList<String>();
 	}
 	
 	private void splitTextWords() {

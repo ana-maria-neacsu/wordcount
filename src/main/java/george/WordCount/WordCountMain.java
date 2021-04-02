@@ -11,7 +11,7 @@ public class WordCountMain
 {
 	
 	private static IWordCount wordCount;
-	private static final String STOP_WORDS_FILENAME = "src/test/resources/stopWords.txt";
+	private static final String STOP_WORDS_FILENAME = "src/main/resources/stopWords.txt";
 	
 	public static void main(String args[]) {
 		
@@ -30,8 +30,8 @@ public class WordCountMain
 	        
 	        System.out.println("Count of words without special characters: " +  wordCount.count());
 	        
-	  //   wordCount.setTextReader(STOP_WORDS_FILENAME);
-	    // System.out.println("Count of words without stop words: " +  wordCount.count());
+	    wordCount.setTextReader(STOP_WORDS_FILENAME);
+	    System.out.println("Count of words without stop words: " +  wordCount.count());
 	    
 		
 	}
