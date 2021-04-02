@@ -1,0 +1,5 @@
+Iteration 1
+
+Delimitation: " " (space)
+Contains: a-zA-Z characters
+
