@@ -2,6 +2,7 @@ package wordcount.tests;
 
 import org.junit.jupiter.api.Test;
 
+import wordcount.Pojo.CountWordsDTO;
 import wordcount.Pojo.ITextReader;
 import wordcount.Pojo.TextReader;
 import wordcount.Pojo.WordCount;
@@ -19,7 +20,9 @@ public class WordCountTests {
 		String text = "Mary had a little lamb";
 		WordCount wordCount = new WordCount(text);
 		
-		assertTrue(wordCount.count() == expectedCount);
+		CountWordsDTO countWordsDTO = wordCount.count();
+		
+		assertTrue(countWordsDTO.getCountWords() == expectedCount);
 	}
 	
 	
@@ -30,7 +33,9 @@ public class WordCountTests {
 		String text = "Mary had 3little lamb$";
 		WordCount wordCount = new WordCount(text);
 		
-		assertTrue(wordCount.count() == expectedCount);
+		CountWordsDTO countWordsDTO = wordCount.count();
+		
+		assertTrue(countWordsDTO.getCountWords() == expectedCount);
 	}
 	
 	@Test
@@ -40,8 +45,9 @@ public class WordCountTests {
 		String stopWordsFileName = "src/test/resources/testStopWords.txt";
 		String text = "Mary had a little lamb";
 		WordCount wordCount = new WordCount(text, stopWordsFileName);
+		CountWordsDTO countWordsDTO = wordCount.count();
 		
-		assertTrue(wordCount.count() == expectedCount);
+		assertTrue(countWordsDTO.getCountWords() == expectedCount);
 	}
 	
 	
@@ -58,7 +64,23 @@ public class WordCountTests {
 		ArrayList<String> words = textReader.read();
 		wordCount.setText(words, stopWordsFileName);
 		
-		assertTrue(wordCount.count() == expectedCount);
+		CountWordsDTO countWordsDTO = wordCount.count();
+		
+		assertTrue(countWordsDTO.getCountWords() == expectedCount);
+	}
+	
+	
+	@Test
+	public void countUniqueWordsFromText() {
+	
+		String stopWordsFileName = "src/test/resources/testStopWords.txt";
+
+		String text = "Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.";
+		WordCount wordCount = new WordCount(text, stopWordsFileName);
+		
+		CountWordsDTO countWordsDTO = wordCount.count();
+		
+		assertTrue(countWordsDTO.getCountWords() > countWordsDTO.getCountUniqueWords());
 	}
 	
 	

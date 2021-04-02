@@ -31,13 +31,23 @@ public class WordCount implements IWordCount {
 	}
 	
 	
-	public long count() {
+	public CountWordsDTO count() {
 		long countValidWords = listOfWords.stream()
 				  .filter((word) -> word.matches(ONLY_LETTERS_REGEX)
 						  && !stopWords.contains(word))
 				  .count();
 		
-		return countValidWords;
+		long countDuplicatedWords = listOfWords.stream()
+				  .filter((word) -> word.matches(ONLY_LETTERS_REGEX)
+						  && !stopWords.contains(word) 
+						  && listOfWords.contains(word))
+				  .count();
+		
+		long countUniqueWords = countValidWords - countDuplicatedWords;
+		
+		CountWordsDTO countWordsDTO = new CountWordsDTO(countValidWords, countUniqueWords);
+		
+		return countWordsDTO;
 	}
 	
 	public void setStopWordsReader(String fileName) {
