@@ -2,11 +2,13 @@ package wordcount.Pojo;
 
 import java.util.stream.Stream;
 
-public class WordCount {
+public class WordCount implements IWordCount {
 
 	private String text;
 	private String[] listOfWords;
 	private static final String ONLY_LETTERS_REGEX = "^[a-zA-Z]+$";
+	
+	public WordCount() {}
 	
 	public WordCount(String text) {
 		this.setText(text);
