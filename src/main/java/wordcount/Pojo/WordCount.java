@@ -47,11 +47,11 @@ public class WordCount implements IWordCount {
 		Map<String, Long> countDuplicatedGroups = validWords.stream()
 				.collect(Collectors.groupingBy(word -> word, Collectors.counting()));
 		
-		int countWordsLength = validWords.stream()
-				.mapToInt(w -> w.length())
+		double countWordsLength = validWords.stream()
+				.mapToDouble(w -> w.length())
 				.sum();
 		
-		float averageWordLength =  countWordsLength / countValidWords;
+		double averageWordLength =  countWordsLength / countValidWords;
 
 		long countDuplicatedWords = countDuplicatedGroups.entrySet().stream()
 				.filter(map -> map.getValue().intValue() > 1).count();
