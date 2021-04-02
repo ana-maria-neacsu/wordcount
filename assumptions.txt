@@ -13,3 +13,7 @@ Iteration 5
 I integrated in the letter only regex, the possibility to take words which also contain a hyphen
 Before:"^[a-zA-Z]+$"
 After:"^[a-zA-Z\\-]+$"
+
+Iteration 6
+
+Does not have a file example, so I used the Humpty Dumpty example taken from a local file (src/main/resources/humpty_dumpty.txt)
