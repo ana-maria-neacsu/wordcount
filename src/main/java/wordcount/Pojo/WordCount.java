@@ -1,28 +1,26 @@
 package wordcount.Pojo;
 
+import java.util.stream.Stream;
+
 public class WordCount {
 
 	private String text;
-	private int count;
 	private String[] listOfWords;
 	private static final String ONLY_LETTERS_REGEX = "^[a-zA-Z]+$";
 	
 	public WordCount(String text) {
 		this.setText(text);
-		this.count = 0;
 		splitTextWords();
 	}
 	
-	public int count() {
-
-		for(String word : listOfWords){
-			Boolean hasOnlyLetters = word.matches(ONLY_LETTERS_REGEX);
-			if(hasOnlyLetters)
-				count++;
-		}
+	public long count() {
+		long countValidWords = Stream.of(listOfWords)
+				  .filter((word) -> word.matches(ONLY_LETTERS_REGEX))
+				  .count();
 		
-		return count;
+		return countValidWords;
 	}
+
 
 	public String getText() {
 		return text;

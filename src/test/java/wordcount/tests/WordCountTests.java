@@ -11,7 +11,7 @@ public class WordCountTests {
 	@Test
 	public void simpleCountWords() {
 	
-		int expectedCount = 5;
+		long expectedCount = 5;
 		String text = "Mary had a little lamb";
 		WordCount wordCount = new WordCount(text);
 		
@@ -22,7 +22,7 @@ public class WordCountTests {
 	@Test
 	public void countWordsWithSpecialCharacters() {
 	
-		int expectedCount = 2;
+		long expectedCount = 2;
 		String text = "Mary had 3little lamb$";
 		WordCount wordCount = new WordCount(text);
 		
