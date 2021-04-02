@@ -3,3 +3,7 @@ Iteration 1
 Delimitation: " " (space)
 Contains: a-zA-Z characters
 
+Iteration 4
+
+I should replace the ". " and "-" with " ".
+If the last character of the text contains a "." I can remove it.

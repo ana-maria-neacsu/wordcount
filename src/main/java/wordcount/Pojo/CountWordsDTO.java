@@ -2,25 +2,33 @@ package wordcount.Pojo;
 
 public class CountWordsDTO {
 
-	private long countUniqueWords;
-	private long countWords;
+	private long countDuplicatedWords;
+	private long countTotalWords;
 	
 	public CountWordsDTO() {}
-	public CountWordsDTO(long countWords, long countUniqueWords) {
-		this.countWords = countWords;
-		this.countUniqueWords = countUniqueWords;
+	public CountWordsDTO(long countTotalWords, long countDuplicatedWords) {
+		this.countTotalWords = countTotalWords;
+		this.countDuplicatedWords = countDuplicatedWords;
+	}
+	
+	public long getCountDuplicatedWords() {
+		return countDuplicatedWords;
+	}
+	
+	public void setCountDuplicatedWords(long countDuplicatedWords) {
+		this.countDuplicatedWords = countDuplicatedWords;
+	}
+	
+	public long getCountTotalWords() {
+		return countTotalWords;
+	}
+	
+	public void setCountTotalWords(long countWords) {
+		this.countTotalWords = countWords;
 	}
 	
 	public long getCountUniqueWords() {
+		long countUniqueWords = this.countTotalWords - this.countDuplicatedWords;
 		return countUniqueWords;
-	}
-	public void setCountUniqueWords(long countUniqueWords) {
-		this.countUniqueWords = countUniqueWords;
-	}
-	public long getCountWords() {
-		return countWords;
-	}
-	public void setCountWords(long countWords) {
-		this.countWords = countWords;
 	}
 }
