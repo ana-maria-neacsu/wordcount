@@ -1,12 +1,14 @@
 # George Backend Chapter - Coding Challenge
-Congratulations. You made it to our final recruiting stage which is a coding challenge. In this stage you have to show practical skills in the things which you discussed in the previous recruiting stage:
+Congratulations. You made it to our next recruiting stage which is a coding challenge. In this stage you have to show practical skills in the things which you discussed in the previous recruiting stage:
 - Object-Oriented Programming
 - Refactoring
 - Automated Testing (Developer Tests)
 
 This stage is split into two parts
-- Home Assignment (expected effort: 3 hours)
-- Remote-Pair-Programming Sessions (4 hours)
+1. Home Assignment (expected effort: 3 hours)
+2. Remote-Pair-Programming Sessions (4 hours)
+
+__Please note__: The home assignment is the precondition for the Remote-Pair-Programming Sessions. Only if we are happy with part 1 you will be invited to part 2 of our coding challenge stage. 
 
 ### Home Assignment 
 We expect you to work 3 hours on the example application which we soon will explain to you in more detail. Of course, we can't prevent you from putting more hours in which we for sure don't expect. Please, as soon as you have finished the home assignment (3 hours of work) let us know, so that we can start with the evaluation.
