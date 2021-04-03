@@ -18,18 +18,18 @@ public class CLIApplication {
 
     public static void main(String[] args) {
         CLIApplication cliApplication = new CLIApplication();
-        long numWords;
+        WordCountResult wordCountResult;
         if (args.length == 0) {
-            numWords = cliApplication.readFromUser();
+            wordCountResult = cliApplication.readFromUser();
         } else if (args.length == 1) {
-            numWords = cliApplication.readFromFile(args[0]);
+            wordCountResult = cliApplication.readFromFile(args[0]);
         } else {
             throw new IllegalArgumentException("Please only supply at most 1 argument - the filename of the words!");
         }
-        System.out.println("Number of words: " + numWords);
+        System.out.println("Number of words: " + wordCountResult.getNumWords() + ", unique: " + wordCountResult.getNumUniqueWords());
     }
 
-    private long readFromFile(String filename) {
+    private WordCountResult readFromFile(String filename) {
         List<String> words;
         try {
             words = this.resourceProvider.fetchFromFile(filename);
@@ -39,7 +39,7 @@ public class CLIApplication {
         return wordCounter.countWords(words.stream());
     }
 
-    public long readFromUser() {
+    public WordCountResult readFromUser() {
         System.out.print("Enter text: ");
         try (Scanner scanner = new Scanner(System.in)) {
             String text = scanner.nextLine();

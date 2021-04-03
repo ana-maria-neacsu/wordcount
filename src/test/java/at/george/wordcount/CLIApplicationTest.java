@@ -19,7 +19,9 @@ public class CLIApplicationTest {
         try {
             InputStream mockedInput = new ByteArrayInputStream("Mary had a little lamb".getBytes(Charset.defaultCharset()));
             System.setIn(mockedInput);
-            assertEquals(4, new CLIApplication().readFromUser());
+            WordCountResult wordCountResult = new CLIApplication().readFromUser();
+            assertEquals(4, wordCountResult.getNumWords());
+            assertEquals(4, wordCountResult.getNumUniqueWords());
         } finally {
             System.setIn(originalIn);
         }
@@ -31,7 +33,9 @@ public class CLIApplicationTest {
         try {
             InputStream mockedInput = new ByteArrayInputStream("Mary had a little lamb".getBytes(Charset.defaultCharset()));
             System.setIn(mockedInput);
-            assertEquals(2, new CLIApplication(new AlternativeResourceProvider()).readFromUser());
+            WordCountResult wordCountResult = new CLIApplication(new AlternativeResourceProvider()).readFromUser();
+            assertEquals(2, wordCountResult.getNumWords());
+            assertEquals(2, wordCountResult.getNumUniqueWords());
         } finally {
             System.setIn(originalIn);
         }
