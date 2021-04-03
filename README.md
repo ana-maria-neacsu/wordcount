@@ -31,6 +31,8 @@ In the George Backend Chapter you have to work in feature branches for each task
 
 For each iteration, please create a branch with the following pattern: `firstname_lastname_iteration_nr_homeassignment`. Your first iteration must branch off `master`, or in case you want to use Kotlin, please branch of `kotlin_maven_baseline`. Your branches won't be merged back to master. Every new branch must branch of the previous branch.
 
+For the Remote-Pair-Programming Sessions please replace ``homeassignment`` with the first name of the team member who is going to work with you.
+
 ### Assumptions 
 In case the requirements are ambiguous, please write down your assumptions into the project's `assumptions.txt` file. Please always create a section for each iteration and put your assumptions under this section. The reason for this is, so that we can follow certain design decisions in your code which you came up with based on your assumptions.
 
