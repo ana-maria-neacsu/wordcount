@@ -25,3 +25,7 @@ Assumption that 'mytext.txt' (or any other file) is included in the resources or
 # Iteration 5
 
 Made an mistake in iteration 4 and handled dash-separated words incorrectly.
+
+# Iteration 6
+
+Will only print up to 2 digits after the decimal point.

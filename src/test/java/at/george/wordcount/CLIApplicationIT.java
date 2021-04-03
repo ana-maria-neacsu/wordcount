@@ -24,7 +24,7 @@ public class CLIApplicationIT {
 
             CLIApplication.main(new String[]{});
 
-            assertEquals("Enter text: Number of words: 5, unique: 5", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
+            assertEquals("Enter text: Number of words: 5, unique: 5; average word length: 4.40 characters", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
         } finally {
             System.setIn(originalIn);
             System.setOut(originalOut);
@@ -40,7 +40,7 @@ public class CLIApplicationIT {
 
             CLIApplication.main(new String[]{"mytext.txt"});
 
-            assertEquals("Number of words: 4, unique: 4", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
+            assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
         } finally {
             System.setOut(originalOut);
         }

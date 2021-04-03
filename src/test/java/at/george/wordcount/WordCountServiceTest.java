@@ -3,10 +3,12 @@ package at.george.wordcount;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class WordCountServiceTest {
 
@@ -31,7 +33,7 @@ public class WordCountServiceTest {
 
     @Test
     public void verifyThatNullArgumentDoesReturnZero() {
-        assertEquals(0, wordCounter.countWords((String)null).getNumWords());
+        assertEquals(0, wordCounter.countWords((String) null).getNumWords());
     }
 
     @Test
@@ -73,5 +75,11 @@ public class WordCountServiceTest {
     public void verifyHyphenWordCountBehaviour() {
         assertEquals(1, wordCounter.countWords("Humpty-Dumpty").getNumWords());
         assertEquals(4, wordCounter.countWords("Humpty-Dumpty - what a name").getNumWords());
+    }
+
+    @Test
+    public void verifyAvgWordLengthBehaviour() {
+        assertEquals(BigDecimal.valueOf(51).divide(BigDecimal.valueOf(10), 2, RoundingMode.HALF_UP), wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getAvgWordLength());
+        assertEquals(BigDecimal.valueOf(49).divide(BigDecimal.valueOf(3), 2, RoundingMode.HALF_UP), wordCounter.countWords("Thisissuchalongword that Icannotbelieveitmakessense").getAvgWordLength());
     }
 }

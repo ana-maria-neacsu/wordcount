@@ -26,7 +26,9 @@ public class CLIApplication {
         } else {
             throw new IllegalArgumentException("Please only supply at most 1 argument - the filename of the words!");
         }
-        System.out.println("Number of words: " + wordCountResult.getNumWords() + ", unique: " + wordCountResult.getNumUniqueWords());
+        System.out.println("Number of words: " + wordCountResult.getNumWords() +
+                ", unique: " + wordCountResult.getNumUniqueWords() + "; " +
+                "average word length: " + wordCountResult.getAvgWordLength() + " characters");
     }
 
     private WordCountResult readFromFile(String filename) {
