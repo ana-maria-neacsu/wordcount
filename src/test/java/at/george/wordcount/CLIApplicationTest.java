@@ -5,9 +5,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -36,6 +34,21 @@ public class CLIApplicationTest {
             WordCountResult wordCountResult = new CLIApplication(new AlternativeResourceProvider()).readFromUser();
             assertEquals(2, wordCountResult.getNumWords());
             assertEquals(2, wordCountResult.getNumUniqueWords());
+        } finally {
+            System.setIn(originalIn);
+        }
+    }
+
+    @Test
+    public void verifyReadFromUserWithDictionary() {
+        InputStream originalIn = System.in;
+        try {
+            InputStream mockedInput = new ByteArrayInputStream("Mary had a little lamb".getBytes(Charset.defaultCharset()));
+            System.setIn(mockedInput);
+            WordCountResult wordCountResult = new CLIApplication(new ResourceProvider(), Optional.of("dict.txt")).readFromUser();
+            assertEquals(4, wordCountResult.getNumWords());
+            assertEquals(4, wordCountResult.getNumUniqueWords());
+            assertEquals(new TreeSet<>(Arrays.asList("Mary*", "had", "little", "lamb*")), wordCountResult.getSortedWords());
         } finally {
             System.setIn(originalIn);
         }

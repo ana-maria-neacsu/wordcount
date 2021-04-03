@@ -8,7 +8,7 @@ import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class WordCountServiceTest {
 
@@ -81,5 +81,32 @@ public class WordCountServiceTest {
     public void verifyAvgWordLengthBehaviour() {
         assertEquals(BigDecimal.valueOf(51).divide(BigDecimal.valueOf(10), 2, RoundingMode.HALF_UP), wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getAvgWordLength());
         assertEquals(BigDecimal.valueOf(49).divide(BigDecimal.valueOf(3), 2, RoundingMode.HALF_UP), wordCounter.countWords("Thisissuchalongword that Icannotbelieveitmakessense").getAvgWordLength());
+    }
+
+    @Test
+    public void verifyIsKnownBehaviour() {
+        wordCounter = new WordCountService(new HashSet<>(), new HashSet<>(Arrays.asList("this", "is", "works", "that")));
+        assertTrue(wordCounter.isKnown("this"));
+        assertTrue(wordCounter.isKnown("is"));
+        assertFalse(wordCounter.isKnown("awesome"));
+        assertTrue(wordCounter.isKnown("that"));
+        assertFalse(wordCounter.isKnown("works!"));
+    }
+
+    @Test
+    public void verifyMarkUnknownBehaviour() {
+        wordCounter = new WordCountService(new HashSet<>(), new HashSet<>(Arrays.asList("this", "is", "works", "that")));
+        assertEquals("this", wordCounter.markUnknown("this"));
+        assertEquals("is", wordCounter.markUnknown("is"));
+        assertEquals("awesome*", wordCounter.markUnknown("awesome"));
+        assertEquals("that", wordCounter.markUnknown("that"));
+        assertEquals("works!*", wordCounter.markUnknown("works!"));
+
+        wordCounter = new WordCountService(new HashSet<>(), new HashSet<>());
+        assertEquals("this", wordCounter.markUnknown("this"));
+        assertEquals("is", wordCounter.markUnknown("is"));
+        assertEquals("awesome", wordCounter.markUnknown("awesome"));
+        assertEquals("that", wordCounter.markUnknown("that"));
+        assertEquals("works!", wordCounter.markUnknown("works!"));
     }
 }

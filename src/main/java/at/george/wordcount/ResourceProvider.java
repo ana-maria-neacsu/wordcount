@@ -21,6 +21,10 @@ public class ResourceProvider {
         return new HashSet<>(fetchFromFile("/stopwords.txt"));
     }
 
+    public Set<String> fetchDictionary(String dictPath) {
+        return new HashSet<>(fetchFromFile(dictPath));
+    }
+
     public List<String> fetchFromFile(String filename) {
         Objects.requireNonNull(filename, "filename must be provided!");
         try (InputStream stopwords = ResourceProvider.class.getResourceAsStream(filename)) {

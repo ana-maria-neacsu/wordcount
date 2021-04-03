@@ -62,6 +62,22 @@ public class CLIApplicationIT {
         }
     }
 
+    @Test
+    public void verifyFileInputWithIndexOptionAndDictionaryCLIBehaviour() {
+        PrintStream originalOut = System.out;
+        try {
+            ByteArrayOutputStream captureOut = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(captureOut));
+
+            CLIApplication.main(new String[]{"-index", "mytext.txt", "-dictionary=dict.txt"});
+
+            assertEquals("Number of words: 4, unique: 4; average word length: 4.25 characters\nIndex (unknown: 2):\nMary*\nhad\nlamb*\nlittle",
+                    new String(captureOut.toByteArray(), Charset.defaultCharset()).trim().replace("\r", ""));
+        } finally {
+            System.setOut(originalOut);
+        }
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void verifyArgumentVerificationCLIBehaviour() {
         CLIApplication.main(new String[]{"mytext.txt", "doesnotwork!"});
