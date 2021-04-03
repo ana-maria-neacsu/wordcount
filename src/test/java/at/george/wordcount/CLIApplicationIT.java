@@ -24,7 +24,7 @@ public class CLIApplicationIT {
 
             CLIApplication.main(new String[]{});
 
-            assertEquals("Enter text: Number of words: 6", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
+            assertEquals("Enter text: Number of words: 5", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
         } finally {
             System.setIn(originalIn);
             System.setOut(originalOut);

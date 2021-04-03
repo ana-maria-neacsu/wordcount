@@ -1,3 +1,5 @@
+# Iteration 1
+
 The following spacing characters will be accepted and handled:
 * Whitespace
 * Tab
@@ -9,3 +11,9 @@ Testing will be done with default input character encoding.
 
 Only Words (A-Za-z) will be counted, other substrings consisting only of other characters will be not counted as words!
 Strings containing a letter (A-Za-z) will be regarded as words (e.g. "What?", "$cool") only containing those (e.g. "§$€") do not count.
+
+# Iteration 2
+
+Assumption that 'stopwords.txt' is included in the resources!
+
+Words are case sensetive and therefore "A" will be a different word from "a".
