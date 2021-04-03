@@ -31,7 +31,7 @@ public class WordCountServiceTest {
 
     @Test
     public void verifyThatNullArgumentDoesReturnZero() {
-        assertEquals(0, wordCounter.countWords(null));
+        assertEquals(0, wordCounter.countWords((String)null));
     }
 
     @Test

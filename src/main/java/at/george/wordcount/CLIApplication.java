@@ -1,5 +1,6 @@
 package at.george.wordcount;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class CLIApplication {
@@ -16,15 +17,33 @@ public class CLIApplication {
     }
 
     public static void main(String[] args) {
-        new CLIApplication().readFromUser();
+        CLIApplication cliApplication = new CLIApplication();
+        long numWords;
+        if (args.length == 0) {
+            numWords = cliApplication.readFromUser();
+        } else if (args.length == 1) {
+            numWords = cliApplication.readFromFile(args[0]);
+        } else {
+            throw new IllegalArgumentException("Please only supply at most 1 argument - the filename of the words!");
+        }
+        System.out.println("Number of words: " + numWords);
     }
 
-    public void readFromUser() {
+    private long readFromFile(String filename) {
+        List<String> words;
+        try {
+            words = this.resourceProvider.fetchFromFile(filename);
+        } catch (ResourceProvider.ResourceNotFoundException iae) {
+            words = this.resourceProvider.fetchFromFile("/" + filename);
+        }
+        return wordCounter.countWords(words.stream());
+    }
+
+    public long readFromUser() {
         System.out.print("Enter text: ");
         try (Scanner scanner = new Scanner(System.in)) {
             String text = scanner.nextLine();
-            long numWords = wordCounter.countWords(text);
-            System.out.println("Number of words: " + numWords);
+            return wordCounter.countWords(text);
         }
     }
 }

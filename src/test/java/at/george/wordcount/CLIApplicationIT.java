@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class CLIApplicationIT {
 
     @Test
-    public void verifyMainCLIBehaviour() {
+    public void verifyUserInputCLIBehaviour() {
         InputStream originalIn = System.in;
         PrintStream originalOut = System.out;
         try {
@@ -29,5 +29,25 @@ public class CLIApplicationIT {
             System.setIn(originalIn);
             System.setOut(originalOut);
         }
+    }
+
+    @Test
+    public void verifyFileInputCLIBehaviour() {
+        PrintStream originalOut = System.out;
+        try {
+            ByteArrayOutputStream captureOut = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(captureOut));
+
+            CLIApplication.main(new String[]{"mytext.txt"});
+
+            assertEquals("Number of words: 4", new String(captureOut.toByteArray(), Charset.defaultCharset()).trim());
+        } finally {
+            System.setOut(originalOut);
+        }
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void verifyArgumentVerificationCLIBehaviour() {
+        CLIApplication.main(new String[]{"mytext.txt", "doesnotwork!"});
     }
 }

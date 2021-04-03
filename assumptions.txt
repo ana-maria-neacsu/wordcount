@@ -17,3 +17,7 @@ Strings containing a letter (A-Za-z) will be regarded as words (e.g. "What?", "$
 Assumption that 'stopwords.txt' is included in the resources!
 
 Words are case sensetive and therefore "A" will be a different word from "a".
+
+# Iteration 3
+
+Assumption that 'mytext.txt' (or any other file) is included in the resources or the full path is supplied!
