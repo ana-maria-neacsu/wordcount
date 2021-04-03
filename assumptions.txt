@@ -29,3 +29,7 @@ Made an mistake in iteration 4 and handled dash-separated words incorrectly.
 # Iteration 6
 
 Will only print up to 2 digits after the decimal point.
+
+# Iteration 7
+
+Assuming that it's valid to supply multiple times the '-index' option and that this option may be on any position in the argument list!

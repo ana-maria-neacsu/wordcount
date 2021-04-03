@@ -17,18 +17,24 @@ public class CLIApplication {
     }
 
     public static void main(String[] args) {
+        CLICallArguments callArgs = CLICallArguments.fromArgs(args);
         CLIApplication cliApplication = new CLIApplication();
+
         WordCountResult wordCountResult;
-        if (args.length == 0) {
+        if (!callArgs.getInputFile().isPresent()) {
             wordCountResult = cliApplication.readFromUser();
-        } else if (args.length == 1) {
-            wordCountResult = cliApplication.readFromFile(args[0]);
         } else {
-            throw new IllegalArgumentException("Please only supply at most 1 argument - the filename of the words!");
+            wordCountResult = cliApplication.readFromFile(callArgs.getInputFile().get());
         }
+
         System.out.println("Number of words: " + wordCountResult.getNumWords() +
                 ", unique: " + wordCountResult.getNumUniqueWords() + "; " +
                 "average word length: " + wordCountResult.getAvgWordLength() + " characters");
+
+        if (callArgs.isIndex()) {
+            System.out.println("Index:");
+            wordCountResult.getSortedWords().forEach(System.out::println);
+        }
     }
 
     private WordCountResult readFromFile(String filename) {

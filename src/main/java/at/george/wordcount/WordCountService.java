@@ -19,13 +19,14 @@ public class WordCountService {
 
     public WordCountResult countWords(String text) {
         if (text == null || text.trim().length() == 0) {
-            return new WordCountResult(0, 0, BigDecimal.ZERO);
+            return new WordCountResult(0, 0, BigDecimal.ZERO, new TreeSet<>());
         }
         return countWords(Arrays.stream(text.trim().split(WORD_DELIMITER)));
     }
 
     public WordCountResult countWords(Stream<String> words) {
         Objects.requireNonNull(words, "'words' may not be null!");
+
         Set<String> uniqueWords = new HashSet<>();
         AtomicLong wordLength = new AtomicLong(0); // Using AtomicLong for mutable long access
         long numWords = words
@@ -35,12 +36,13 @@ public class WordCountService {
                 .peek(uniqueWords::add)
                 .peek(word -> wordLength.addAndGet(word.length()))
                 .count();
+
         BigDecimal avgWordLength;
         if (numWords == 0) {
             avgWordLength = new BigDecimal(0);
         } else {
             avgWordLength = new BigDecimal(wordLength.get()).divide(new BigDecimal(numWords), 2, RoundingMode.HALF_UP);
         }
-        return new WordCountResult(numWords, uniqueWords.size(), avgWordLength);
+        return new WordCountResult(numWords, uniqueWords.size(), avgWordLength, new TreeSet<>(uniqueWords));
     }
 }
