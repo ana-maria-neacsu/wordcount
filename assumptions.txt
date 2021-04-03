@@ -21,3 +21,7 @@ Words are case sensetive and therefore "A" will be a different word from "a".
 # Iteration 3
 
 Assumption that 'mytext.txt' (or any other file) is included in the resources or the full path is supplied!
+
+# Iteration 5
+
+Made an mistake in iteration 4 and handled dash-separated words incorrectly.

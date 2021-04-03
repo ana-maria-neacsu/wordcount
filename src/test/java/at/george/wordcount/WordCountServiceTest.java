@@ -68,4 +68,10 @@ public class WordCountServiceTest {
         assertEquals(7, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getNumUniqueWords());
         assertEquals(8, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getNumWords());
     }
+
+    @Test
+    public void verifyHyphenWordCountBehaviour() {
+        assertEquals(1, wordCounter.countWords("Humpty-Dumpty").getNumWords());
+        assertEquals(4, wordCounter.countWords("Humpty-Dumpty - what a name").getNumWords());
+    }
 }
