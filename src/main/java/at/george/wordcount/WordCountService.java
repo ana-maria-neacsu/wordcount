@@ -49,7 +49,7 @@ public class WordCountService {
                 .peek(uniqueWords::add)
                 .peek(word -> wordLength.addAndGet(word.length()))
                 .peek(word -> {
-                    if (this.isKnown(word)) {
+                    if (!this.isKnown(word)) {
                         numUnknown.incrementAndGet();
                     }
                 })

@@ -109,4 +109,11 @@ public class WordCountServiceTest {
         assertEquals("that", wordCounter.markUnknown("that"));
         assertEquals("works!", wordCounter.markUnknown("works!"));
     }
+
+    @Test
+    public void verifyDictionaryUnknownCountBehaviour() {
+        wordCounter = new WordCountService(new HashSet<>(), new HashSet<>(Arrays.asList("sat", "is", "had", "this")));
+        assertEquals(8, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.").getNumUnknown());
+        assertEquals(1, wordCounter.countWords("this is sat sad").getNumUnknown());
+    }
 }

@@ -8,9 +8,9 @@ public class WordCountResult {
     private final long numUniqueWords;
     private final BigDecimal avgWordLength;
     private final TreeSet<String> sortedWords;
-    private final Long numUnknown;
+    private final long numUnknown;
 
-    public WordCountResult(long numWords, long numUniqueWords, BigDecimal avgWordLength, TreeSet<String> sortedWords, Long numUnknown) {
+    public WordCountResult(long numWords, long numUniqueWords, BigDecimal avgWordLength, TreeSet<String> sortedWords, long numUnknown) {
         this.numWords = numWords;
         this.numUniqueWords = numUniqueWords;
         this.avgWordLength = avgWordLength;
@@ -34,7 +34,7 @@ public class WordCountResult {
         return sortedWords;
     }
 
-    public Long getNumUnknown() {
+    public long getNumUnknown() {
         return numUnknown;
     }
 }
