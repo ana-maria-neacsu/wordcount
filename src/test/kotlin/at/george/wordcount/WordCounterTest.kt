@@ -33,9 +33,9 @@ class WordCounterTest {
     @Test
     fun `should return the right number of unique words`() {
         val text = listOf("Marry", "had", "a", "little", "lamb", "Marry", "had", "a")
-        val result = wordCounter.count(text, listOf("on", "off", "the", "a")).numberOfUniqueWords
+        val result = wordCounter.count(text, listOf("on", "off", "the", "a")).uniqueWords
 
-        assertEquals(4, result)
+        assertEquals(listOf("Marry", "had", "little", "lamb"), result)
     }
 
     @Test

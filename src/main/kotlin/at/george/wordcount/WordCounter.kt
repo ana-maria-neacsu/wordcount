@@ -8,7 +8,7 @@ class WordCounter {
 
         return CountResult(
                 numberOfWords = uniquesWords.count(),
-                numberOfUniqueWords = distinctWords.count(),
+                uniqueWords = distinctWords,
                 avgWordLength = distinctWords.map { it.length }.average()
         )
     }
@@ -16,6 +16,6 @@ class WordCounter {
 
 data class CountResult(
         val numberOfWords: Int,
-        val numberOfUniqueWords: Int,
+        val uniqueWords: List<String>,
         val avgWordLength: Double
 )
