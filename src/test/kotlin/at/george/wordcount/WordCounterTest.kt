@@ -9,7 +9,7 @@ class WordCounterTest {
 
     @Test
     fun `null text should return 0`() {
-        val text = null
+        val text = emptyList<String>()
         val result = wordCounter.count(text, emptyList())
 
         assertEquals(0, result)
@@ -17,7 +17,7 @@ class WordCounterTest {
 
     @Test
     fun `should return right number of words`() {
-        val text = "Marry had a little lamb"
+        val text = listOf("Marry", "had", "a", "little", "lamb")
         val result = wordCounter.count(text, emptyList())
 
         assertEquals(5, result)
@@ -25,7 +25,7 @@ class WordCounterTest {
 
     @Test
     fun `should not count words that include signs`() {
-        val text = "Marry & had a li(ttle lamb"
+        val text = listOf("Marry", "&", "had", "a", "lit(tle", "lamb")
         val result = wordCounter.count(text, emptyList())
 
         assertEquals(4, result)
@@ -33,9 +33,9 @@ class WordCounterTest {
 
     @Test
     fun `should not count the words passed into the list`() {
-        val text = "Marry had a little lamb and a duck but also the dog"
+        val text = listOf("Marry", "had", "a", "little", "lamb", "the")
         val result = wordCounter.count(text, listOf("on", "off", "the", "a"))
 
-        assertEquals(9, result)
+        assertEquals(4, result)
     }
 }
