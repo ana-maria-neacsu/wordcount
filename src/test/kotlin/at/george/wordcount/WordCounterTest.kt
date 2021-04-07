@@ -9,7 +9,7 @@ class WordCounterTest {
     @Test
     fun `null text should return 0`() {
         val text = emptyList<String>()
-        val result = wordCounter.count(text, emptyList()).numberOfWords
+        val result = wordCounter.count(text).numberOfWords
 
         assertEquals(0, result)
     }
@@ -17,7 +17,7 @@ class WordCounterTest {
     @Test
     fun `should return right number of words`() {
         val text = listOf("Marry", "had", "a", "little", "lamb")
-        val result = wordCounter.count(text, emptyList()).numberOfWords
+        val result = wordCounter.count(text).numberOfWords
 
         assertEquals(5, result)
     }
@@ -36,5 +36,13 @@ class WordCounterTest {
         val result = wordCounter.count(text, listOf("on", "off", "the", "a")).numberOfUniqueWords
 
         assertEquals(4, result)
+    }
+
+    @Test
+    fun `should return the right average word length`() {
+        val text = listOf("Marry", "had", "a", "little", "lamb")
+        val result = wordCounter.count(text).avgWordLength
+
+        assertEquals(3.8, result)
     }
 }

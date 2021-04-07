@@ -16,5 +16,7 @@ fun main(args: Array<String>) {
     val wordCounter = WordCounter()
     val countResult = wordCounter.count(words, exceptionWords)
 
-    println("Number of words: ${countResult.numberOfWords}, unique: ${countResult.numberOfUniqueWords}")
+    println("Number of words: ${countResult.numberOfWords}, " +
+            "unique: ${countResult.numberOfUniqueWords}; " +
+            "average word length: ${countResult.avgWordLength} characters")
 }
