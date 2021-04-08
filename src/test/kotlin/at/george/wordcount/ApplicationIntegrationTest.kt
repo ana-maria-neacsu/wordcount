@@ -11,12 +11,17 @@ class ApplicationIntegrationTest {
     private val stopWordsFile = resourceFile("/stopwords.txt")
 
     private val testConsole = TestConsole()
+    private val wordReader = WordReader()
+
     private val application = Application(
             console = testConsole,
             stopWordsFile = stopWordsFile,
-            wordReader = WordReader(),
+            wordReader = wordReader,
             wordCounter = WordCounter(),
-            indexer = Indexer()
+            indexReporterFactory = IndexReporterFactory(
+                    wordReader = wordReader,
+                    console = testConsole
+            )
     )
 
     @Test
@@ -81,7 +86,7 @@ class ApplicationIntegrationTest {
     }
 
     @Test
-    fun `user should be allowed to enter several texts`(){
+    fun `user should be allowed to enter several texts`() {
         val args = emptyArray<String>()
         testConsole.prepareResponse(mutableListOf("User test input line", "Mary has a little lamb", ""))
         application.run(args)
@@ -93,7 +98,6 @@ class ApplicationIntegrationTest {
                 "Number of words: 4, unique: 4; average word length: 4.25 characters",
                 "Enter text: "
         )
-
     }
 
     private fun resourceFile(resource: String) =
