@@ -28,12 +28,18 @@ class Application(
         val parsedArgs = Args.from(args)
         val exceptionWords = wordReader.readFromFile(stopWordsFile)
 
-        val words = if (parsedArgs.file == null) {
-            wordReader.readFromLine(console.prompt("Enter text: "))
+        if (parsedArgs.file == null) {
+            var userInput = console.prompt("Enter text: ")
+            while (!userInput.isNullOrEmpty()) {
+                printResult(wordReader.readFromLine(userInput), exceptionWords, parsedArgs)
+                userInput = console.prompt("Enter text: ")
+            }
         } else {
-            wordReader.readFromFile(parsedArgs.file)
+            printResult(wordReader.readFromFile(parsedArgs.file), exceptionWords, parsedArgs)
         }
+    }
 
+    private fun printResult(words: List<String>, exceptionWords: List<String>, parsedArgs: Args ) {
         val countResult = wordCounter.count(words, exceptionWords)
 
         console.println("Number of words: ${countResult.numberOfWords}, " +
@@ -55,5 +61,7 @@ class Application(
                 }
             }
         }
+
+        println()
     }
 }

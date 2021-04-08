@@ -22,29 +22,34 @@ class ApplicationIntegrationTest {
     @Test
     fun `should print user input words, unique words and avg word length, but no index`() {
         val args = emptyArray<String>()
+        testConsole.prepareResponse(mutableListOf("User test input line", ""))
         application.run(args)
 
         testConsole.assertPrintedLines(
                 "Enter text: ",
-                "Number of words: 4, unique: 4; average word length: 4.25 characters"
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                "Enter text: "
         )
     }
 
     @Test
     fun `should print user input words, unique words and avg word length and the index`() {
         val args = arrayOf("-index")
+        testConsole.prepareResponse(mutableListOf("User test input line", ""))
         application.run(args)
 
         testConsole.assertPrintedLines(
                 "Enter text: ",
                 "Number of words: 4, unique: 4; average word length: 4.25 characters",
-                "Index:\nUser\ntest\ninput\nline"
+                "Index:\nUser\ntest\ninput\nline",
+                "Enter text: "
         )
     }
 
     @Test
     fun `should print user input words, unique words and avg word length and the index and dictionary`() {
         val args = arrayOf("-index", "-dictionary=$dictionaryFile")
+        testConsole.prepareResponse(mutableListOf("User test input line", ""))
         application.run(args)
 
         testConsole.assertPrintedLines(
@@ -54,13 +59,15 @@ class ApplicationIntegrationTest {
                 "User*",
                 "test*",
                 "input*",
-                "line*"
+                "line*",
+                "Enter text: "
         )
     }
 
     @Test
     fun `should use words from file and display together with index and dictionary`() {
         val args = arrayOf("$wordsFile", "-index", "-dictionary=$dictionaryFile")
+        testConsole.prepareResponse(mutableListOf("User test input line", ""))
         application.run(args)
 
         testConsole.assertPrintedLines(
@@ -71,6 +78,22 @@ class ApplicationIntegrationTest {
                 "little",
                 "lamb"
         )
+    }
+
+    @Test
+    fun `user should be allowed to enter several texts`(){
+        val args = emptyArray<String>()
+        testConsole.prepareResponse(mutableListOf("User test input line", "Mary has a little lamb", ""))
+        application.run(args)
+
+        testConsole.assertPrintedLines(
+                "Enter text: ",
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                "Enter text: ",
+                "Number of words: 4, unique: 4; average word length: 4.25 characters",
+                "Enter text: "
+        )
+
     }
 
     private fun resourceFile(resource: String) =

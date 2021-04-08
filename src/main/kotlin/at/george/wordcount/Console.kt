@@ -1,14 +1,14 @@
 package at.george.wordcount
 
 interface Console {
-    fun prompt(message: String): String
+    fun prompt(message: String): String?
     fun println(message: String)
 }
 
 class ConsoleImpl : Console {
-    override fun prompt(message: String): String {
+    override fun prompt(message: String): String? {
         print(message)
-        return readLine() ?: ""
+        return readLine()
     }
 
     override fun println(message: String) {
