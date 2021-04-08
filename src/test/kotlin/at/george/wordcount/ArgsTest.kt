@@ -22,6 +22,11 @@ internal class ArgsTest {
     }
 
     @Test
+    fun `parse dictionary file from args`() {
+        assertEquals(Args(dict = File("myFile.txt")), Args.from(arrayOf("-dictionary=myFile.txt")))
+    }
+
+    @Test
     fun `parse file and index from args`() {
         assertEquals(
                 Args(file = File("myFile.txt"), printIndex = true),
@@ -32,8 +37,8 @@ internal class ArgsTest {
     @Test
     fun `parse file and index from args independent of order`() {
         assertEquals(
-                Args(file = File("myFile.txt"), printIndex = true),
-                Args.from(arrayOf("-index", "myFile.txt"))
+                Args(file = File("myFile.txt"), printIndex = true, dict = File("dict.txt")),
+                Args.from(arrayOf("-index", "myFile.txt", "-dictionary=dict.txt"))
         )
     }
 }

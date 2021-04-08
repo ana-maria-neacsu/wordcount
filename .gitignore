@@ -27,3 +27,7 @@ hs_err_pid*
 
 #Ignore target
 target
+
+dictionary.txt
+myText.txt
+stopwords.txt
